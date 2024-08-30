@@ -1,6 +1,6 @@
 ﻿namespace RabbitMQClient
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         ///  Required designer variable.
@@ -41,7 +41,7 @@
             // 
             // buttonSend
             // 
-            buttonSend.Location = new Point(219, 205);
+            buttonSend.Location = new Point(219, 260);
             buttonSend.Name = "buttonSend";
             buttonSend.Size = new Size(75, 23);
             buttonSend.TabIndex = 0;
@@ -52,7 +52,7 @@
             // labelRoutingKey
             // 
             labelRoutingKey.AutoSize = true;
-            labelRoutingKey.Location = new Point(11, 58);
+            labelRoutingKey.Location = new Point(11, 113);
             labelRoutingKey.Name = "labelRoutingKey";
             labelRoutingKey.Size = new Size(74, 15);
             labelRoutingKey.TabIndex = 1;
@@ -60,14 +60,14 @@
             // 
             // textBoxRoutingKey
             // 
-            textBoxRoutingKey.Location = new Point(91, 55);
+            textBoxRoutingKey.Location = new Point(91, 110);
             textBoxRoutingKey.Name = "textBoxRoutingKey";
             textBoxRoutingKey.Size = new Size(203, 23);
             textBoxRoutingKey.TabIndex = 2;
             // 
             // textBoxExchange
             // 
-            textBoxExchange.Location = new Point(91, 84);
+            textBoxExchange.Location = new Point(91, 81);
             textBoxExchange.Name = "textBoxExchange";
             textBoxExchange.Size = new Size(203, 23);
             textBoxExchange.TabIndex = 4;
@@ -75,7 +75,7 @@
             // labelExchange
             // 
             labelExchange.AutoSize = true;
-            labelExchange.Location = new Point(11, 87);
+            labelExchange.Location = new Point(11, 84);
             labelExchange.Name = "labelExchange";
             labelExchange.Size = new Size(61, 15);
             labelExchange.TabIndex = 3;
@@ -99,7 +99,7 @@
             // 
             // textBoxMessage
             // 
-            textBoxMessage.Location = new Point(91, 133);
+            textBoxMessage.Location = new Point(91, 188);
             textBoxMessage.Multiline = true;
             textBoxMessage.Name = "textBoxMessage";
             textBoxMessage.Size = new Size(203, 53);
@@ -109,7 +109,7 @@
             // labelMessage
             // 
             labelMessage.AutoSize = true;
-            labelMessage.Location = new Point(11, 136);
+            labelMessage.Location = new Point(11, 191);
             labelMessage.Name = "labelMessage";
             labelMessage.Size = new Size(56, 15);
             labelMessage.TabIndex = 8;
