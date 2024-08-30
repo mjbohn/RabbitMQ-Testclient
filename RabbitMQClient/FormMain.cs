@@ -13,18 +13,18 @@ namespace RabbitMQClient
         {
             InitializeComponent();
             cfg = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+            InitTextBoxes();
 
-            textBoxServer.Text = cfg.AppSettings.Settings["Server"].Value;
-            textBoxLogin.Text = cfg.AppSettings.Settings["Login"].Value;
-            textBoxPassword.Text = cfg.AppSettings.Settings["Password"].Value;
-            if (cfg.AppSettings.Settings["Queue"] != null)
-            {
-                textBoxQueue.Text = cfg.AppSettings.Settings["Queue"].Value;
-            }
-            else
-            {
-                textBoxQueue.Text = string.Empty;
-            }
+        }
+
+        private void InitTextBoxes()
+        {
+            textBoxServer.Text = cfg.AppSettings.Settings["Server"] != null ? cfg.AppSettings.Settings["Server"].Value : string.Empty;
+            textBoxLogin.Text = cfg.AppSettings.Settings["Login"] != null ? cfg.AppSettings.Settings["Login"].Value : string.Empty;
+            textBoxPassword.Text = cfg.AppSettings.Settings["Password"] != null ? cfg.AppSettings.Settings["Password"].Value : string.Empty;
+            textBoxQueue.Text = cfg.AppSettings.Settings["Queue"] != null ? cfg.AppSettings.Settings["Queue"].Value : string.Empty;
+            textBoxExchange.Text = cfg.AppSettings.Settings["Exchange"] != null ? cfg.AppSettings.Settings["Exchange"].Value : string.Empty;
+            textBoxRoutingKey.Text = cfg.AppSettings.Settings["RoutingKey"] != null ? cfg.AppSettings.Settings["RoutingKey"].Value : string.Empty;
         }
 
         private void button1_Click(object sender, EventArgs e)
