@@ -1,4 +1,6 @@
 using RabbitMQ.Client;
+using System.Configuration;
+using System.Reflection;
 using System.Text;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -6,9 +8,23 @@ namespace RabbitMQClient
 {
     public partial class FormMain : Form
     {
+        Configuration cfg = null;
         public FormMain()
         {
             InitializeComponent();
+            cfg = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+
+            textBoxServer.Text = cfg.AppSettings.Settings["Server"].Value;
+            textBoxLogin.Text = cfg.AppSettings.Settings["Login"].Value;
+            textBoxPassword.Text = cfg.AppSettings.Settings["Password"].Value;
+            if (cfg.AppSettings.Settings["Queue"] != null)
+            {
+                textBoxQueue.Text = cfg.AppSettings.Settings["Queue"].Value;
+            }
+            else
+            {
+                textBoxQueue.Text = string.Empty;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,7 +44,7 @@ namespace RabbitMQClient
             using IModel? channel = connection.CreateModel();
 
 
-            channel.QueueDeclare("lala",false,false,false,null);
+            channel.QueueDeclare("lala", false, false, false, null);
 
             //QueueDeclareOk qdo = channel.QueueDeclare(queue: textBoxQueue.Text,
             //                     durable: true,
@@ -36,7 +52,7 @@ namespace RabbitMQClient
             //                     autoDelete: false,
             //                     arguments: null);
 
-            //const string message = "Hello World!";
+
             byte[]? body = Encoding.UTF8.GetBytes(textBoxMessage.Text);
 
 
@@ -44,15 +60,30 @@ namespace RabbitMQClient
                                  routingKey: textBoxRoutingKey.Text,
                                  basicProperties: null,
                                  body: body);
-             
+
             //MessageBox.Show($" [x] Sent {message}");
 
 
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void WriteChangeToConfigFile(object sender, EventArgs e)
         {
+            TextBox? tb = sender as TextBox;
+            if (tb != null && tb.Tag != null)
+            {
+                //ConfigurationManager.AppSettings.Set(tb.Tag.ToString(), tb.Text);
+                //ConfigurationManager.AppSettings["Server"] = tb.Text;
+                if (cfg.AppSettings.Settings[tb.Tag.ToString()] != null)
+                {
+                    cfg.AppSettings.Settings[tb.Tag.ToString()].Value = tb.Text;
+                }
+                else
+                {
+                    cfg.AppSettings.Settings.Add(tb.Tag.ToString(), tb.Text);
+                }
 
+                cfg.Save();
+            }
         }
     }
 }

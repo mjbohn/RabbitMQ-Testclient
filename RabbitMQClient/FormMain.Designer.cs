@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             buttonSend = new Button();
             labelRoutingKey = new Label();
             textBoxRoutingKey = new TextBox();
@@ -37,11 +38,19 @@
             labelQueue = new Label();
             textBoxMessage = new TextBox();
             labelMessage = new Label();
+            panel1 = new Panel();
+            textBoxPassword = new TextBox();
+            textBoxLogin = new TextBox();
+            textBoxServer = new TextBox();
+            labelPassword = new Label();
+            labelLogin = new Label();
+            labelServer = new Label();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // buttonSend
             // 
-            buttonSend.Location = new Point(219, 260);
+            buttonSend.Location = new Point(401, 392);
             buttonSend.Name = "buttonSend";
             buttonSend.Size = new Size(75, 23);
             buttonSend.TabIndex = 0;
@@ -52,7 +61,7 @@
             // labelRoutingKey
             // 
             labelRoutingKey.AutoSize = true;
-            labelRoutingKey.Location = new Point(11, 113);
+            labelRoutingKey.Location = new Point(193, 245);
             labelRoutingKey.Name = "labelRoutingKey";
             labelRoutingKey.Size = new Size(74, 15);
             labelRoutingKey.TabIndex = 1;
@@ -60,22 +69,24 @@
             // 
             // textBoxRoutingKey
             // 
-            textBoxRoutingKey.Location = new Point(91, 110);
+            textBoxRoutingKey.Location = new Point(273, 242);
             textBoxRoutingKey.Name = "textBoxRoutingKey";
             textBoxRoutingKey.Size = new Size(203, 23);
             textBoxRoutingKey.TabIndex = 2;
             // 
             // textBoxExchange
             // 
-            textBoxExchange.Location = new Point(91, 81);
+            textBoxExchange.Location = new Point(273, 213);
             textBoxExchange.Name = "textBoxExchange";
             textBoxExchange.Size = new Size(203, 23);
             textBoxExchange.TabIndex = 4;
+            textBoxExchange.Tag = "Exchange";
+            textBoxExchange.TextChanged += WriteChangeToConfigFile;
             // 
             // labelExchange
             // 
             labelExchange.AutoSize = true;
-            labelExchange.Location = new Point(11, 84);
+            labelExchange.Location = new Point(193, 216);
             labelExchange.Name = "labelExchange";
             labelExchange.Size = new Size(61, 15);
             labelExchange.TabIndex = 3;
@@ -83,15 +94,17 @@
             // 
             // textBoxQueue
             // 
-            textBoxQueue.Location = new Point(91, 12);
+            textBoxQueue.Location = new Point(273, 144);
             textBoxQueue.Name = "textBoxQueue";
             textBoxQueue.Size = new Size(203, 23);
             textBoxQueue.TabIndex = 6;
+            textBoxQueue.Tag = "Queue";
+            textBoxQueue.TextChanged += WriteChangeToConfigFile;
             // 
             // labelQueue
             // 
             labelQueue.AutoSize = true;
-            labelQueue.Location = new Point(11, 15);
+            labelQueue.Location = new Point(193, 147);
             labelQueue.Name = "labelQueue";
             labelQueue.Size = new Size(45, 15);
             labelQueue.TabIndex = 5;
@@ -99,7 +112,7 @@
             // 
             // textBoxMessage
             // 
-            textBoxMessage.Location = new Point(91, 188);
+            textBoxMessage.Location = new Point(273, 320);
             textBoxMessage.Multiline = true;
             textBoxMessage.Name = "textBoxMessage";
             textBoxMessage.Size = new Size(203, 53);
@@ -109,17 +122,84 @@
             // labelMessage
             // 
             labelMessage.AutoSize = true;
-            labelMessage.Location = new Point(11, 191);
+            labelMessage.Location = new Point(193, 323);
             labelMessage.Name = "labelMessage";
             labelMessage.Size = new Size(56, 15);
             labelMessage.TabIndex = 8;
             labelMessage.Text = "Message:";
             // 
-            // Form1
+            // panel1
+            // 
+            panel1.Controls.Add(textBoxPassword);
+            panel1.Controls.Add(textBoxLogin);
+            panel1.Controls.Add(textBoxServer);
+            panel1.Controls.Add(labelPassword);
+            panel1.Controls.Add(labelLogin);
+            panel1.Controls.Add(labelServer);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(800, 37);
+            panel1.TabIndex = 9;
+            // 
+            // textBoxPassword
+            // 
+            textBoxPassword.Location = new Point(561, 6);
+            textBoxPassword.Name = "textBoxPassword";
+            textBoxPassword.Size = new Size(190, 23);
+            textBoxPassword.TabIndex = 5;
+            textBoxPassword.Tag = "Password";
+            // 
+            // textBoxLogin
+            // 
+            textBoxLogin.Location = new Point(299, 6);
+            textBoxLogin.Name = "textBoxLogin";
+            textBoxLogin.Size = new Size(190, 23);
+            textBoxLogin.TabIndex = 4;
+            textBoxLogin.Tag = "Login";
+            // 
+            // textBoxServer
+            // 
+            textBoxServer.Location = new Point(57, 6);
+            textBoxServer.Name = "textBoxServer";
+            textBoxServer.Size = new Size(190, 23);
+            textBoxServer.TabIndex = 3;
+            textBoxServer.Tag = "Server";
+            textBoxServer.TextChanged += WriteChangeToConfigFile;
+            // 
+            // labelPassword
+            // 
+            labelPassword.AutoSize = true;
+            labelPassword.Location = new Point(495, 9);
+            labelPassword.Name = "labelPassword";
+            labelPassword.Size = new Size(60, 15);
+            labelPassword.TabIndex = 2;
+            labelPassword.Text = "Password:";
+            // 
+            // labelLogin
+            // 
+            labelLogin.AutoSize = true;
+            labelLogin.Location = new Point(253, 9);
+            labelLogin.Name = "labelLogin";
+            labelLogin.Size = new Size(40, 15);
+            labelLogin.TabIndex = 1;
+            labelLogin.Text = "Login:";
+            // 
+            // labelServer
+            // 
+            labelServer.AutoSize = true;
+            labelServer.Location = new Point(12, 9);
+            labelServer.Name = "labelServer";
+            labelServer.Size = new Size(42, 15);
+            labelServer.TabIndex = 0;
+            labelServer.Text = "Server:";
+            // 
+            // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(panel1);
             Controls.Add(labelMessage);
             Controls.Add(textBoxMessage);
             Controls.Add(textBoxQueue);
@@ -129,10 +209,11 @@
             Controls.Add(textBoxRoutingKey);
             Controls.Add(labelRoutingKey);
             Controls.Add(buttonSend);
-            Name = "Form1";
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
-            FormClosing += Form1_FormClosing;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -148,5 +229,12 @@
         private Label labelQueue;
         private TextBox textBoxMessage;
         private Label labelMessage;
+        private Panel panel1;
+        private TextBox textBoxPassword;
+        private TextBox textBoxLogin;
+        private TextBox textBoxServer;
+        private Label labelPassword;
+        private Label labelLogin;
+        private Label labelServer;
     }
 }
