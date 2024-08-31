@@ -83,22 +83,19 @@ namespace RabbitMQClient
             consumer.Received += (sender, args) =>
             {
                 var body = args.Body.ToArray();
-                string message =Encoding.UTF8.GetString(body);
+                string message = Encoding.UTF8.GetString(body);
                 BeginInvoke(() => { textBoxReceivedMessage.Text = message; });
             };
 
-            channel.BasicConsume(queue: "q.articles.update",autoAck: true,consumer);   
+            channel.BasicConsume(queue: "q.articles.update", autoAck: true, consumer);
 
         }
 
-        private void Consumer_Received1(object? sender, BasicDeliverEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
-        private void Consumer_Received(object? sender, BasicDeliverEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            FormConsumer fc = new FormConsumer();
+            fc.Show();
         }
     }
 }

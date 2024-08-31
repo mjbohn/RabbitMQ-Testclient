@@ -47,6 +47,7 @@
             labelServer = new Label();
             buttonFetch = new Button();
             textBoxReceivedMessage = new TextBox();
+            button1 = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -144,7 +145,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1021, 37);
+            panel1.Size = new Size(1014, 37);
             panel1.TabIndex = 9;
             // 
             // textBoxPassword
@@ -221,11 +222,22 @@
             textBoxReceivedMessage.Size = new Size(203, 115);
             textBoxReceivedMessage.TabIndex = 11;
             // 
+            // button1
+            // 
+            button1.Location = new Point(720, 441);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 12;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1021, 539);
+            ClientSize = new Size(1014, 541);
+            Controls.Add(button1);
             Controls.Add(textBoxReceivedMessage);
             Controls.Add(buttonFetch);
             Controls.Add(panel1);
@@ -239,6 +251,7 @@
             Controls.Add(labelRoutingKey);
             Controls.Add(buttonSend);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             panel1.ResumeLayout(false);
@@ -267,5 +280,6 @@
         private Label labelServer;
         private Button buttonFetch;
         private TextBox textBoxReceivedMessage;
+        private Button button1;
     }
 }
