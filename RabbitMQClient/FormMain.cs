@@ -27,31 +27,16 @@ namespace RabbitMQClient
             textBoxRoutingKey.Text = cfg.AppSettings.Settings["RoutingKey"] != null ? cfg.AppSettings.Settings["RoutingKey"].Value : string.Empty;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonSend_Click(object sender, EventArgs e)
         {
-            Init_Queue();
-        }
-
-        private void Init_Queue()
-        {
-            var factory = new ConnectionFactory
+            ConnectionFactory? factory = new ConnectionFactory
             {
-                HostName = "rabbit.michael-bohn.net",
-                UserName = "csc",
-                Password = "1im2bribm"
+                HostName = textBoxServer.Text,
+                UserName = textBoxLogin.Text,
+                Password = textBoxPassword.Text
             };
             using IConnection? connection = factory.CreateConnection();
             using IModel? channel = connection.CreateModel();
-
-
-            channel.QueueDeclare("lala", false, false, false, null);
-
-            //QueueDeclareOk qdo = channel.QueueDeclare(queue: textBoxQueue.Text,
-            //                     durable: true,
-            //                     exclusive: false,
-            //                     autoDelete: false,
-            //                     arguments: null);
-
 
             byte[]? body = Encoding.UTF8.GetBytes(textBoxMessage.Text);
 
@@ -60,19 +45,13 @@ namespace RabbitMQClient
                                  routingKey: textBoxRoutingKey.Text,
                                  basicProperties: null,
                                  body: body);
-
-            //MessageBox.Show($" [x] Sent {message}");
-
-
         }
-
+               
         private void WriteChangeToConfigFile(object sender, EventArgs e)
         {
             TextBox? tb = sender as TextBox;
             if (tb != null && tb.Tag != null)
             {
-                //ConfigurationManager.AppSettings.Set(tb.Tag.ToString(), tb.Text);
-                //ConfigurationManager.AppSettings["Server"] = tb.Text;
                 if (cfg.AppSettings.Settings[tb.Tag.ToString()] != null)
                 {
                     cfg.AppSettings.Settings[tb.Tag.ToString()].Value = tb.Text;

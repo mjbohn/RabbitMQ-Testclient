@@ -56,7 +56,7 @@
             buttonSend.TabIndex = 0;
             buttonSend.Text = "Send";
             buttonSend.UseVisualStyleBackColor = true;
-            buttonSend.Click += button1_Click;
+            buttonSend.Click += buttonSend_Click;
             // 
             // labelRoutingKey
             // 
@@ -114,17 +114,17 @@
             // 
             // textBoxMessage
             // 
-            textBoxMessage.Location = new Point(90, 196);
+            textBoxMessage.Location = new Point(90, 147);
             textBoxMessage.Multiline = true;
             textBoxMessage.Name = "textBoxMessage";
-            textBoxMessage.Size = new Size(203, 53);
+            textBoxMessage.Size = new Size(203, 115);
             textBoxMessage.TabIndex = 7;
             textBoxMessage.Text = "Hello World!";
             // 
             // labelMessage
             // 
             labelMessage.AutoSize = true;
-            labelMessage.Location = new Point(10, 199);
+            labelMessage.Location = new Point(10, 150);
             labelMessage.Name = "labelMessage";
             labelMessage.Size = new Size(56, 15);
             labelMessage.TabIndex = 8;
@@ -132,6 +132,7 @@
             // 
             // panel1
             // 
+            panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(textBoxPassword);
             panel1.Controls.Add(textBoxLogin);
             panel1.Controls.Add(textBoxServer);
