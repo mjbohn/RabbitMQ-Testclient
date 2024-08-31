@@ -1,4 +1,5 @@
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Configuration;
 using System.Reflection;
 using System.Text;
@@ -46,7 +47,7 @@ namespace RabbitMQClient
                                  basicProperties: null,
                                  body: body);
         }
-               
+
         private void WriteChangeToConfigFile(object sender, EventArgs e)
         {
             TextBox? tb = sender as TextBox;
@@ -63,6 +64,41 @@ namespace RabbitMQClient
 
                 cfg.Save();
             }
+        }
+
+        private void buttonFetch_Click(object sender, EventArgs e)
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.ClientProvidedName = "Client #1";
+            factory.HostName = textBoxServer.Text;
+            factory.UserName = "client1";
+            factory.Password = textBoxPassword.Text;
+
+            IConnection clientconnection = factory.CreateConnection();
+            IModel channel = clientconnection.CreateModel();
+            channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
+
+            var consumer = new EventingBasicConsumer(channel);
+
+            consumer.Received += (sender, args) =>
+            {
+                var body = args.Body.ToArray();
+                string message =Encoding.UTF8.GetString(body);
+                BeginInvoke(() => { textBoxReceivedMessage.Text = message; });
+            };
+
+            channel.BasicConsume(queue: "q.articles.update",autoAck: true,consumer);   
+
+        }
+
+        private void Consumer_Received1(object? sender, BasicDeliverEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Consumer_Received(object? sender, BasicDeliverEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

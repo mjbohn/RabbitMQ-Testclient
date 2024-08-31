@@ -45,6 +45,8 @@
             labelPassword = new Label();
             labelLogin = new Label();
             labelServer = new Label();
+            buttonFetch = new Button();
+            textBoxReceivedMessage = new TextBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -201,11 +203,31 @@
             labelServer.TabIndex = 0;
             labelServer.Text = "Server:";
             // 
+            // buttonFetch
+            // 
+            buttonFetch.Location = new Point(586, 268);
+            buttonFetch.Name = "buttonFetch";
+            buttonFetch.Size = new Size(75, 23);
+            buttonFetch.TabIndex = 10;
+            buttonFetch.Text = "Fetch";
+            buttonFetch.UseVisualStyleBackColor = true;
+            buttonFetch.Click += buttonFetch_Click;
+            // 
+            // textBoxReceivedMessage
+            // 
+            textBoxReceivedMessage.Location = new Point(586, 147);
+            textBoxReceivedMessage.Multiline = true;
+            textBoxReceivedMessage.Name = "textBoxReceivedMessage";
+            textBoxReceivedMessage.Size = new Size(203, 115);
+            textBoxReceivedMessage.TabIndex = 11;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1021, 539);
+            Controls.Add(textBoxReceivedMessage);
+            Controls.Add(buttonFetch);
             Controls.Add(panel1);
             Controls.Add(labelMessage);
             Controls.Add(textBoxMessage);
@@ -243,5 +265,7 @@
         private Label labelPassword;
         private Label labelLogin;
         private Label labelServer;
+        private Button buttonFetch;
+        private TextBox textBoxReceivedMessage;
     }
 }
