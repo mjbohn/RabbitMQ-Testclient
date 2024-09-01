@@ -27,9 +27,9 @@ namespace RabbitMQClient
             buttonStop.Enabled = true;
 
             
-            factory.ClientProvidedName = "Client #1";
+            factory.ClientProvidedName = textBoxClientName.Text;
             factory.HostName = textBoxServer.Text;
-            factory.UserName = "client1";
+            factory.UserName = textBoxLogin.Text;
             factory.Password = textBoxPassword.Text;
 
             IConnection clientconnection = factory.CreateConnection();
@@ -47,7 +47,7 @@ namespace RabbitMQClient
                 BeginInvoke( () => { rtbReceivedMessages.AppendText(message); });
             };
 
-            channel.BasicConsume(queue: "q.articles.update", autoAck: true, consumer);
+            channel.BasicConsume(queue: textBoxQueue.Text, autoAck: true, consumer);
 
 
 

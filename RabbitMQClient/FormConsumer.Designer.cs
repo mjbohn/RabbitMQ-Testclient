@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConsumer));
             panel1 = new Panel();
+            textBoxClientName = new TextBox();
+            labelClientName = new Label();
             textBoxQueue = new TextBox();
             labelQueue = new Label();
             textBoxPassword = new TextBox();
@@ -52,6 +54,8 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(textBoxClientName);
+            panel1.Controls.Add(labelClientName);
             panel1.Controls.Add(textBoxQueue);
             panel1.Controls.Add(labelQueue);
             panel1.Controls.Add(textBoxPassword);
@@ -63,8 +67,27 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1014, 37);
+            panel1.Size = new Size(1014, 68);
             panel1.TabIndex = 10;
+            // 
+            // textBoxClientName
+            // 
+            textBoxClientName.Location = new Point(299, 38);
+            textBoxClientName.Name = "textBoxClientName";
+            textBoxClientName.PlaceholderText = "Client #42";
+            textBoxClientName.Size = new Size(190, 23);
+            textBoxClientName.TabIndex = 9;
+            textBoxClientName.Tag = "";
+            // 
+            // labelClientName
+            // 
+            labelClientName.AutoSize = true;
+            labelClientName.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelClientName.Location = new Point(218, 41);
+            labelClientName.Name = "labelClientName";
+            labelClientName.Size = new Size(75, 15);
+            labelClientName.TabIndex = 8;
+            labelClientName.Text = "ClientName:";
             // 
             // textBoxQueue
             // 
@@ -148,7 +171,7 @@
             panel2.Controls.Add(buttonStop);
             panel2.Controls.Add(buttonStart);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 37);
+            panel2.Location = new Point(0, 68);
             panel2.Name = "panel2";
             panel2.Size = new Size(1014, 37);
             panel2.TabIndex = 11;
@@ -180,9 +203,9 @@
             // 
             rtbReceivedMessages.BackColor = Color.Wheat;
             rtbReceivedMessages.Dock = DockStyle.Fill;
-            rtbReceivedMessages.Location = new Point(0, 74);
+            rtbReceivedMessages.Location = new Point(0, 105);
             rtbReceivedMessages.Name = "rtbReceivedMessages";
-            rtbReceivedMessages.Size = new Size(1014, 467);
+            rtbReceivedMessages.Size = new Size(1014, 436);
             rtbReceivedMessages.TabIndex = 12;
             rtbReceivedMessages.Text = "";
             // 
@@ -246,5 +269,7 @@
         private Button buttonStop;
         private CheckBox checkBoxAddLF;
         private Panel panel3;
+        private TextBox textBoxClientName;
+        private Label labelClientName;
     }
 }
