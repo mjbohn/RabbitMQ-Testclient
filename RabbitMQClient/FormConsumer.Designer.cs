@@ -186,7 +186,7 @@
             buttonStop.TabIndex = 1;
             buttonStop.Text = "Stop";
             buttonStop.UseVisualStyleBackColor = false;
-            buttonStop.Click += buttonStop_Click;
+            buttonStop.Click += ButtonStop_Click;
             // 
             // buttonStart
             // 
@@ -197,7 +197,7 @@
             buttonStart.TabIndex = 0;
             buttonStart.Text = "Start";
             buttonStart.UseVisualStyleBackColor = false;
-            buttonStart.Click += buttonStart_Click;
+            buttonStart.Click += ButtonStart_Click;
             // 
             // rtbReceivedMessages
             // 
