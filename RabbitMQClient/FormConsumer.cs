@@ -163,5 +163,11 @@ namespace RabbitMQClient
             checkBoxAutoAck.Checked = config.AutoAck;
             numericUpDownPrefetch.Value = config.Prefetch;
         }
+
+        private void FormConsumer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _channel.Close();
+            _clientconnection.Close();
+        }
     }
 }

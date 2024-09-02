@@ -214,6 +214,7 @@
             rtbReceivedMessages.Dock = DockStyle.Fill;
             rtbReceivedMessages.Location = new Point(0, 129);
             rtbReceivedMessages.Name = "rtbReceivedMessages";
+            rtbReceivedMessages.ReadOnly = true;
             rtbReceivedMessages.Size = new Size(1014, 412);
             rtbReceivedMessages.TabIndex = 12;
             rtbReceivedMessages.Text = "";
@@ -292,14 +293,14 @@
             // saveProfileToolStripMenuItem
             // 
             saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
-            saveProfileToolStripMenuItem.Size = new Size(180, 22);
+            saveProfileToolStripMenuItem.Size = new Size(137, 22);
             saveProfileToolStripMenuItem.Text = "&Save Profile";
             saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
             // 
             // loadProfileToolStripMenuItem
             // 
             loadProfileToolStripMenuItem.Name = "loadProfileToolStripMenuItem";
-            loadProfileToolStripMenuItem.Size = new Size(180, 22);
+            loadProfileToolStripMenuItem.Size = new Size(137, 22);
             loadProfileToolStripMenuItem.Text = "&Load Profile";
             loadProfileToolStripMenuItem.Click += loadProfileToolStripMenuItem_Click;
             // 
@@ -316,6 +317,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormConsumer";
             Text = "Consumer";
+            FormClosing += FormConsumer_FormClosing;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
