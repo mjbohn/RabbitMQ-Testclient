@@ -13,19 +13,24 @@ namespace RabbitMQClient
         public FormMain()
         {
             InitializeComponent();
-            cfg = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
-            InitTextBoxes();
-
+            //cfg = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
         }
 
-        private void InitTextBoxes()
+        private void InitTextBoxes(PublisherConfig config)
         {
-            textBoxServer.Text = cfg.AppSettings.Settings["Server"] != null ? cfg.AppSettings.Settings["Server"].Value : string.Empty;
-            textBoxLogin.Text = cfg.AppSettings.Settings["Login"] != null ? cfg.AppSettings.Settings["Login"].Value : string.Empty;
-            textBoxPassword.Text = cfg.AppSettings.Settings["Password"] != null ? cfg.AppSettings.Settings["Password"].Value : string.Empty;
-            textBoxQueue.Text = cfg.AppSettings.Settings["Queue"] != null ? cfg.AppSettings.Settings["Queue"].Value : string.Empty;
-            textBoxExchange.Text = cfg.AppSettings.Settings["Exchange"] != null ? cfg.AppSettings.Settings["Exchange"].Value : string.Empty;
-            textBoxRoutingKey.Text = cfg.AppSettings.Settings["RoutingKey"] != null ? cfg.AppSettings.Settings["RoutingKey"].Value : string.Empty;
+            //textBoxServer.Text = cfg.AppSettings.Settings["Server"] != null ? cfg.AppSettings.Settings["Server"].Value : string.Empty;
+            //textBoxLogin.Text = cfg.AppSettings.Settings["Login"] != null ? cfg.AppSettings.Settings["Login"].Value : string.Empty;
+            //textBoxPassword.Text = cfg.AppSettings.Settings["Password"] != null ? cfg.AppSettings.Settings["Password"].Value : string.Empty;
+            //textBoxQueue.Text = cfg.AppSettings.Settings["Queue"] != null ? cfg.AppSettings.Settings["Queue"].Value : string.Empty;
+            //textBoxExchange.Text = cfg.AppSettings.Settings["Exchange"] != null ? cfg.AppSettings.Settings["Exchange"].Value : string.Empty;
+            //textBoxRoutingKey.Text = cfg.AppSettings.Settings["RoutingKey"] != null ? cfg.AppSettings.Settings["RoutingKey"].Value : string.Empty;
+
+            textBoxServer.Text = config.Server;
+            textBoxLogin.Text = config.Login;
+            textBoxPassword.Text = config.Password;
+            textBoxQueue.Text = config.Queue;
+            textBoxExchange.Text = config.Exchange;
+            textBoxRoutingKey.Text = config.RoutingKey;
         }
 
         private void buttonSend_Click(object sender, EventArgs e)
@@ -46,24 +51,6 @@ namespace RabbitMQClient
                                  routingKey: textBoxRoutingKey.Text,
                                  basicProperties: null,
                                  body: body);
-        }
-
-        private void WriteChangeToConfigFile(object sender, EventArgs e)
-        {
-            TextBox? tb = sender as TextBox;
-            if (tb != null && tb.Tag != null)
-            {
-                if (cfg.AppSettings.Settings[tb.Tag.ToString()] != null)
-                {
-                    cfg.AppSettings.Settings[tb.Tag.ToString()].Value = tb.Text;
-                }
-                else
-                {
-                    cfg.AppSettings.Settings.Add(tb.Tag.ToString(), tb.Text);
-                }
-
-                cfg.Save();
-            }
         }
 
         private void buttonFetch_Click(object sender, EventArgs e)
@@ -96,6 +83,48 @@ namespace RabbitMQClient
         {
             FormConsumer fc = new FormConsumer();
             fc.Show();
+        }
+
+        private void saveProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PublisherConfig config = new PublisherConfig
+            {
+                Server = textBoxServer.Text,
+                Login = textBoxLogin.Text,
+                Password = textBoxPassword.Text,
+                Queue = textBoxQueue.Text,
+                Exchange = textBoxExchange.Text,
+                RoutingKey = textBoxRoutingKey.Text
+            };
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Producer Profile(*.pcon)|*.pcon|All Files|*.*";
+            sfd.RestoreDirectory = true;
+            sfd.Title = "Safe producer configuratiom";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                JsonFileConfigHandler jfch = new JsonFileConfigHandler(config, sfd.FileName);
+                jfch.WriteConfig();
+            }
+        }
+
+        private void loadProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Producer Profile(*.pcon)|*.pcon|All Files|*.*";
+            ofd.RestoreDirectory = true;
+            ofd.Title = "Select producer configuration";
+            ofd.Multiselect = false;
+            ofd.DefaultExt = "pcon";
+
+            PublisherConfig config = new PublisherConfig();
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                JsonFileConfigHandler jfch = new JsonFileConfigHandler(ofd.FileName);
+                config = jfch.ReadConfig<PublisherConfig>();
+                InitTextBoxes(config);
+            }
         }
     }
 }
