@@ -7,9 +7,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace RabbitMQClient
 {
-    public partial class FormMain : Form
+    public partial class FormProducer : Form
     {
-        public FormMain()
+        public FormProducer()
         {
             InitializeComponent();
         }

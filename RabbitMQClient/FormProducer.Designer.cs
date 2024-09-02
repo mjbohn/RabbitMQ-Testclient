@@ -1,6 +1,6 @@
 ﻿namespace RabbitMQClient
 {
-    partial class FormMain
+    partial class FormProducer
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProducer));
             buttonSend = new Button();
             labelRoutingKey = new Label();
             textBoxRoutingKey = new TextBox();

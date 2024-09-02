@@ -166,8 +166,15 @@ namespace RabbitMQClient
 
         private void FormConsumer_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _channel.Close();
-            _clientconnection.Close();
+            if (_channel != null && _channel.IsOpen)
+            {
+                _channel.Close(); 
+            }
+
+            if (_clientconnection != null &&  _clientconnection.IsOpen)
+            {
+                _clientconnection.Close(); 
+            }
         }
     }
 }
