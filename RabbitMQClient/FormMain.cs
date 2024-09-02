@@ -9,22 +9,13 @@ namespace RabbitMQClient
 {
     public partial class FormMain : Form
     {
-        Configuration cfg = null;
         public FormMain()
         {
             InitializeComponent();
-            //cfg = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
         }
 
-        private void InitTextBoxes(PublisherConfig config)
+        private void SetProperties(PublisherConfig config)
         {
-            //textBoxServer.Text = cfg.AppSettings.Settings["Server"] != null ? cfg.AppSettings.Settings["Server"].Value : string.Empty;
-            //textBoxLogin.Text = cfg.AppSettings.Settings["Login"] != null ? cfg.AppSettings.Settings["Login"].Value : string.Empty;
-            //textBoxPassword.Text = cfg.AppSettings.Settings["Password"] != null ? cfg.AppSettings.Settings["Password"].Value : string.Empty;
-            //textBoxQueue.Text = cfg.AppSettings.Settings["Queue"] != null ? cfg.AppSettings.Settings["Queue"].Value : string.Empty;
-            //textBoxExchange.Text = cfg.AppSettings.Settings["Exchange"] != null ? cfg.AppSettings.Settings["Exchange"].Value : string.Empty;
-            //textBoxRoutingKey.Text = cfg.AppSettings.Settings["RoutingKey"] != null ? cfg.AppSettings.Settings["RoutingKey"].Value : string.Empty;
-
             textBoxServer.Text = config.Server;
             textBoxLogin.Text = config.Login;
             textBoxPassword.Text = config.Password;
@@ -111,19 +102,19 @@ namespace RabbitMQClient
         private void loadProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
+            PublisherConfig config = new PublisherConfig();
+
             ofd.Filter = "Producer Profile(*.pcon)|*.pcon|All Files|*.*";
             ofd.RestoreDirectory = true;
             ofd.Title = "Select producer configuration";
             ofd.Multiselect = false;
             ofd.DefaultExt = "pcon";
 
-            PublisherConfig config = new PublisherConfig();
-
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 JsonFileConfigHandler jfch = new JsonFileConfigHandler(ofd.FileName);
                 config = jfch.ReadConfig<PublisherConfig>();
-                InitTextBoxes(config);
+                SetProperties(config);
             }
         }
     }

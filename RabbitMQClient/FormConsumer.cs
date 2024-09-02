@@ -50,7 +50,7 @@ namespace RabbitMQClient
                 MessageBox.Show(sb.ToString(), "BrokerUnreachableExeption", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 TextBoxesEnabled(true);
                 btn.Enabled = true;
-                buttonStop.Enabled= false;
+                buttonStop.Enabled = false;
                 return;
             }
             _channel = _clientconnection.CreateModel();
@@ -106,6 +106,62 @@ namespace RabbitMQClient
             _clientconnection.Close();
 
             TextBoxesEnabled(true);
+        }
+
+        private void saveProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConsumerConfig config = new ConsumerConfig
+            {
+                Server = textBoxServer.Text,
+                Login = textBoxLogin.Text,
+                Password = textBoxPassword.Text,
+                Queue = textBoxQueue.Text,
+                ClientName = textBoxClientName.Text,
+                AddLineFeed = checkBoxAddLF.Checked,
+                AutoAck = checkBoxAutoAck.Checked,
+                Prefetch = numericUpDownPrefetch.Value
+            };
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Consumer Profile(*.ccon)|*.ccon|All Files|*.*";
+            sfd.RestoreDirectory = true;
+            sfd.Title = "Safe consumer configuratiom";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                JsonFileConfigHandler jfch = new JsonFileConfigHandler(config, sfd.FileName);
+                jfch.WriteConfig();
+            }
+        }
+
+        private void loadProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ConsumerConfig config = new ConsumerConfig();
+
+            ofd.Filter = "Consumer Profile(*.ccon)|*.ccon|All Files|*.*";
+            ofd.RestoreDirectory = true;
+            ofd.Title = "Select consumer configuration";
+            ofd.Multiselect = false;
+            ofd.DefaultExt = "ccon";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                JsonFileConfigHandler jfch = new JsonFileConfigHandler(ofd.FileName);
+                config = jfch.ReadConfig<ConsumerConfig>();
+                SetProperties(config);
+            }
+        }
+
+        private void SetProperties(ConsumerConfig config)
+        {
+            textBoxServer.Text = config.Server;
+            textBoxLogin.Text = config.Login;
+            textBoxPassword.Text = config.Password;
+            textBoxQueue.Text = config.Queue;
+            textBoxClientName.Text = config.ClientName;
+            checkBoxAddLF.Checked = config.AddLineFeed;
+            checkBoxAutoAck.Checked = config.AutoAck;
+            numericUpDownPrefetch.Value = config.Prefetch;
         }
     }
 }

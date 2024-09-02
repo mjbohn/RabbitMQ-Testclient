@@ -46,9 +46,18 @@
             rtbReceivedMessages = new RichTextBox();
             checkBoxAddLF = new CheckBox();
             panel3 = new Panel();
+            labelPrefetch = new Label();
+            numericUpDownPrefetch = new NumericUpDown();
+            checkBoxAutoAck = new CheckBox();
+            menuStrip1 = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            saveProfileToolStripMenuItem = new ToolStripMenuItem();
+            loadProfileToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPrefetch).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -65,7 +74,7 @@
             panel1.Controls.Add(labelLogin);
             panel1.Controls.Add(labelServer);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
+            panel1.Location = new Point(0, 24);
             panel1.Name = "panel1";
             panel1.Size = new Size(1014, 68);
             panel1.TabIndex = 10;
@@ -171,7 +180,7 @@
             panel2.Controls.Add(buttonStop);
             panel2.Controls.Add(buttonStart);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 68);
+            panel2.Location = new Point(0, 92);
             panel2.Name = "panel2";
             panel2.Size = new Size(1014, 37);
             panel2.TabIndex = 11;
@@ -203,9 +212,9 @@
             // 
             rtbReceivedMessages.BackColor = Color.Wheat;
             rtbReceivedMessages.Dock = DockStyle.Fill;
-            rtbReceivedMessages.Location = new Point(0, 105);
+            rtbReceivedMessages.Location = new Point(0, 129);
             rtbReceivedMessages.Name = "rtbReceivedMessages";
-            rtbReceivedMessages.Size = new Size(1014, 436);
+            rtbReceivedMessages.Size = new Size(1014, 412);
             rtbReceivedMessages.TabIndex = 12;
             rtbReceivedMessages.Text = "";
             // 
@@ -225,12 +234,74 @@
             // panel3
             // 
             panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(labelPrefetch);
+            panel3.Controls.Add(numericUpDownPrefetch);
+            panel3.Controls.Add(checkBoxAutoAck);
             panel3.Controls.Add(checkBoxAddLF);
             panel3.Dock = DockStyle.Bottom;
             panel3.Location = new Point(0, 501);
             panel3.Name = "panel3";
             panel3.Size = new Size(1014, 40);
             panel3.TabIndex = 13;
+            // 
+            // labelPrefetch
+            // 
+            labelPrefetch.AutoSize = true;
+            labelPrefetch.Location = new Point(153, 9);
+            labelPrefetch.Name = "labelPrefetch";
+            labelPrefetch.Size = new Size(51, 15);
+            labelPrefetch.TabIndex = 5;
+            labelPrefetch.Text = "prefetch";
+            // 
+            // numericUpDownPrefetch
+            // 
+            numericUpDownPrefetch.Location = new Point(210, 7);
+            numericUpDownPrefetch.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDownPrefetch.Name = "numericUpDownPrefetch";
+            numericUpDownPrefetch.Size = new Size(45, 23);
+            numericUpDownPrefetch.TabIndex = 4;
+            numericUpDownPrefetch.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // checkBoxAutoAck
+            // 
+            checkBoxAutoAck.AutoSize = true;
+            checkBoxAutoAck.CheckAlign = ContentAlignment.MiddleRight;
+            checkBoxAutoAck.Location = new Point(76, 8);
+            checkBoxAutoAck.Name = "checkBoxAutoAck";
+            checkBoxAutoAck.Size = new Size(71, 19);
+            checkBoxAutoAck.TabIndex = 3;
+            checkBoxAutoAck.Text = "auto ack";
+            checkBoxAutoAck.UseVisualStyleBackColor = true;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(1014, 24);
+            menuStrip1.TabIndex = 14;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveProfileToolStripMenuItem, loadProfileToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(37, 20);
+            fileToolStripMenuItem.Text = "&File";
+            // 
+            // saveProfileToolStripMenuItem
+            // 
+            saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
+            saveProfileToolStripMenuItem.Size = new Size(180, 22);
+            saveProfileToolStripMenuItem.Text = "&Save Profile";
+            saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
+            // 
+            // loadProfileToolStripMenuItem
+            // 
+            loadProfileToolStripMenuItem.Name = "loadProfileToolStripMenuItem";
+            loadProfileToolStripMenuItem.Size = new Size(180, 22);
+            loadProfileToolStripMenuItem.Text = "&Load Profile";
+            loadProfileToolStripMenuItem.Click += loadProfileToolStripMenuItem_Click;
             // 
             // FormConsumer
             // 
@@ -241,6 +312,7 @@
             Controls.Add(rtbReceivedMessages);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormConsumer";
             Text = "Consumer";
@@ -249,7 +321,11 @@
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPrefetch).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -271,5 +347,12 @@
         private Panel panel3;
         private TextBox textBoxClientName;
         private Label labelClientName;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem saveProfileToolStripMenuItem;
+        private ToolStripMenuItem loadProfileToolStripMenuItem;
+        private CheckBox checkBoxAutoAck;
+        private Label labelPrefetch;
+        private NumericUpDown numericUpDownPrefetch;
     }
 }
