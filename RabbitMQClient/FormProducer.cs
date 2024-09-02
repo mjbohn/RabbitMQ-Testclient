@@ -44,37 +44,6 @@ namespace RabbitMQClient
                                  body: body);
         }
 
-        private void buttonFetch_Click(object sender, EventArgs e)
-        {
-            ConnectionFactory factory = new ConnectionFactory();
-            factory.ClientProvidedName = "Client #1";
-            factory.HostName = textBoxServer.Text;
-            factory.UserName = "client1";
-            factory.Password = textBoxPassword.Text;
-
-            IConnection clientconnection = factory.CreateConnection();
-            IModel channel = clientconnection.CreateModel();
-            channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
-
-            var consumer = new EventingBasicConsumer(channel);
-
-            consumer.Received += (sender, args) =>
-            {
-                var body = args.Body.ToArray();
-                string message = Encoding.UTF8.GetString(body);
-                BeginInvoke(() => { textBoxReceivedMessage.Text = message; });
-            };
-
-            channel.BasicConsume(queue: "q.articles.update", autoAck: true, consumer);
-
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            FormConsumer fc = new FormConsumer();
-            fc.Show();
-        }
 
         private void saveProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -116,6 +85,21 @@ namespace RabbitMQClient
                 config = jfch.ReadConfig<PublisherConfig>();
                 SetProperties(config);
             }
+        }
+
+        private void textBoxRoutingKey_TextChanged(object sender, EventArgs e)
+        {
+            ChangeFormTitle();
+        }
+
+        private void ChangeFormTitle()
+        {
+            this.Text = $"Producer | {textBoxExchange.Text} | {textBoxRoutingKey.Text}";
+        }
+
+        private void textBoxExchange_TextChanged(object sender, EventArgs e)
+        {
+            ChangeFormTitle();
         }
     }
 }
