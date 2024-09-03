@@ -87,7 +87,7 @@
             textBoxClientName.Name = "textBoxClientName";
             textBoxClientName.PlaceholderText = "Client #42";
             textBoxClientName.Size = new Size(190, 23);
-            textBoxClientName.TabIndex = 9;
+            textBoxClientName.TabIndex = 4;
             textBoxClientName.Tag = "";
             // 
             // labelClientName
@@ -106,8 +106,9 @@
             textBoxQueue.Name = "textBoxQueue";
             textBoxQueue.PlaceholderText = "Queue Name";
             textBoxQueue.Size = new Size(190, 23);
-            textBoxQueue.TabIndex = 7;
+            textBoxQueue.TabIndex = 3;
             textBoxQueue.Tag = "";
+            textBoxQueue.TextChanged += textBoxQueue_TextChanged;
             // 
             // labelQueue
             // 
@@ -125,7 +126,7 @@
             textBoxPassword.Name = "textBoxPassword";
             textBoxPassword.PasswordChar = '*';
             textBoxPassword.Size = new Size(190, 23);
-            textBoxPassword.TabIndex = 5;
+            textBoxPassword.TabIndex = 2;
             textBoxPassword.Tag = "";
             // 
             // textBoxLogin
@@ -134,7 +135,7 @@
             textBoxLogin.Name = "textBoxLogin";
             textBoxLogin.PlaceholderText = "User Name";
             textBoxLogin.Size = new Size(190, 23);
-            textBoxLogin.TabIndex = 4;
+            textBoxLogin.TabIndex = 1;
             textBoxLogin.Tag = "";
             // 
             // textBoxServer
@@ -143,8 +144,9 @@
             textBoxServer.Name = "textBoxServer";
             textBoxServer.PlaceholderText = "RabbitMQ Server";
             textBoxServer.Size = new Size(190, 23);
-            textBoxServer.TabIndex = 3;
+            textBoxServer.TabIndex = 0;
             textBoxServer.Tag = "";
+            textBoxServer.TextChanged += textBoxServer_TextChanged;
             // 
             // labelPassword
             // 
@@ -195,6 +197,7 @@
             buttonStop.Name = "buttonStop";
             buttonStop.Size = new Size(75, 23);
             buttonStop.TabIndex = 1;
+            buttonStop.TabStop = false;
             buttonStop.Text = "Stop";
             buttonStop.UseVisualStyleBackColor = false;
             buttonStop.Click += ButtonStop_Click;
@@ -206,6 +209,7 @@
             buttonStart.Name = "buttonStart";
             buttonStart.Size = new Size(75, 23);
             buttonStart.TabIndex = 0;
+            buttonStart.TabStop = false;
             buttonStart.Text = "Start";
             buttonStart.UseVisualStyleBackColor = false;
             buttonStart.Click += ButtonStart_Click;
@@ -219,6 +223,7 @@
             rtbReceivedMessages.ReadOnly = true;
             rtbReceivedMessages.Size = new Size(1014, 412);
             rtbReceivedMessages.TabIndex = 12;
+            rtbReceivedMessages.TabStop = false;
             rtbReceivedMessages.Text = "";
             // 
             // checkBoxAddLF
@@ -231,6 +236,7 @@
             checkBoxAddLF.Name = "checkBoxAddLF";
             checkBoxAddLF.Size = new Size(67, 19);
             checkBoxAddLF.TabIndex = 2;
+            checkBoxAddLF.TabStop = false;
             checkBoxAddLF.Text = "add '\\n'";
             checkBoxAddLF.UseVisualStyleBackColor = true;
             // 
@@ -263,6 +269,7 @@
             numericUpDownPrefetch.Name = "numericUpDownPrefetch";
             numericUpDownPrefetch.Size = new Size(45, 23);
             numericUpDownPrefetch.TabIndex = 4;
+            numericUpDownPrefetch.TabStop = false;
             numericUpDownPrefetch.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // checkBoxAutoAck
@@ -273,6 +280,7 @@
             checkBoxAutoAck.Name = "checkBoxAutoAck";
             checkBoxAutoAck.Size = new Size(71, 19);
             checkBoxAutoAck.TabIndex = 3;
+            checkBoxAutoAck.TabStop = false;
             checkBoxAutoAck.Text = "auto ack";
             checkBoxAutoAck.UseVisualStyleBackColor = true;
             // 
@@ -295,26 +303,26 @@
             // saveProfileToolStripMenuItem
             // 
             saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
-            saveProfileToolStripMenuItem.Size = new Size(180, 22);
+            saveProfileToolStripMenuItem.Size = new Size(137, 22);
             saveProfileToolStripMenuItem.Text = "&Save Profile";
             saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
             // 
             // loadProfileToolStripMenuItem
             // 
             loadProfileToolStripMenuItem.Name = "loadProfileToolStripMenuItem";
-            loadProfileToolStripMenuItem.Size = new Size(180, 22);
+            loadProfileToolStripMenuItem.Size = new Size(137, 22);
             loadProfileToolStripMenuItem.Text = "&Load Profile";
             loadProfileToolStripMenuItem.Click += loadProfileToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(177, 6);
+            toolStripSeparator1.Size = new Size(134, 6);
             // 
             // closeToolStripMenuItem
             // 
             closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            closeToolStripMenuItem.Size = new Size(180, 22);
+            closeToolStripMenuItem.Size = new Size(137, 22);
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 

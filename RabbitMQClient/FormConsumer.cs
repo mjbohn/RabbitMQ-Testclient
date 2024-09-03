@@ -181,5 +181,22 @@ namespace RabbitMQClient
         {
             Close();
         }
+
+        private void textBoxQueue_TextChanged(object sender, EventArgs e)
+        {
+            ChangeFormTitle();
+        }
+
+        private void textBoxServer_TextChanged(object sender, EventArgs e)
+        {
+            ChangeFormTitle();
+        }
+
+        private void ChangeFormTitle()
+        {
+            this.Text = $"Consumer | {textBoxServer.Text} | {textBoxQueue.Text} | ";
+        }
+
+        
     }
 }

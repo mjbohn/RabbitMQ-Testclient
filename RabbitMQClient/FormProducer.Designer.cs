@@ -48,10 +48,10 @@
             fileToolStripMenuItem = new ToolStripMenuItem();
             saveProfileToolStripMenuItem = new ToolStripMenuItem();
             loadProfileToolStripMenuItem = new ToolStripMenuItem();
-            saveFileDialog1 = new SaveFileDialog();
-            panel2 = new Panel();
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
+            saveFileDialog1 = new SaveFileDialog();
+            panel2 = new Panel();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
@@ -62,7 +62,7 @@
             buttonSend.Location = new Point(834, 4);
             buttonSend.Name = "buttonSend";
             buttonSend.Size = new Size(102, 23);
-            buttonSend.TabIndex = 0;
+            buttonSend.TabIndex = 6;
             buttonSend.Text = "Send";
             buttonSend.UseVisualStyleBackColor = true;
             buttonSend.Click += buttonSend_Click;
@@ -81,7 +81,7 @@
             textBoxRoutingKey.Location = new Point(594, 4);
             textBoxRoutingKey.Name = "textBoxRoutingKey";
             textBoxRoutingKey.Size = new Size(190, 23);
-            textBoxRoutingKey.TabIndex = 2;
+            textBoxRoutingKey.TabIndex = 5;
             textBoxRoutingKey.Tag = "RoutingKey";
             textBoxRoutingKey.TextChanged += textBoxRoutingKey_TextChanged;
             // 
@@ -108,8 +108,9 @@
             textBoxQueue.Location = new Point(58, 6);
             textBoxQueue.Name = "textBoxQueue";
             textBoxQueue.Size = new Size(190, 23);
-            textBoxQueue.TabIndex = 6;
+            textBoxQueue.TabIndex = 3;
             textBoxQueue.Tag = "Queue";
+            textBoxQueue.Visible = false;
             // 
             // labelQueue
             // 
@@ -119,6 +120,7 @@
             labelQueue.Size = new Size(45, 15);
             labelQueue.TabIndex = 5;
             labelQueue.Text = "Queue:";
+            labelQueue.Visible = false;
             // 
             // textBoxMessage
             // 
@@ -129,7 +131,8 @@
             textBoxMessage.Multiline = true;
             textBoxMessage.Name = "textBoxMessage";
             textBoxMessage.Size = new Size(1014, 443);
-            textBoxMessage.TabIndex = 7;
+            textBoxMessage.TabIndex = 0;
+            textBoxMessage.TabStop = false;
             textBoxMessage.Text = "Hello World!";
             // 
             // panel1
@@ -153,7 +156,7 @@
             textBoxPassword.Name = "textBoxPassword";
             textBoxPassword.PasswordChar = '*';
             textBoxPassword.Size = new Size(190, 23);
-            textBoxPassword.TabIndex = 5;
+            textBoxPassword.TabIndex = 2;
             textBoxPassword.Tag = "Password";
             // 
             // textBoxLogin
@@ -161,7 +164,7 @@
             textBoxLogin.Location = new Point(319, 6);
             textBoxLogin.Name = "textBoxLogin";
             textBoxLogin.Size = new Size(190, 23);
-            textBoxLogin.TabIndex = 4;
+            textBoxLogin.TabIndex = 1;
             textBoxLogin.Tag = "Login";
             textBoxLogin.Text = "Login";
             // 
@@ -170,7 +173,7 @@
             textBoxServer.Location = new Point(57, 6);
             textBoxServer.Name = "textBoxServer";
             textBoxServer.Size = new Size(190, 23);
-            textBoxServer.TabIndex = 3;
+            textBoxServer.TabIndex = 0;
             textBoxServer.Tag = "Server";
             // 
             // labelPassword
@@ -219,16 +222,28 @@
             // saveProfileToolStripMenuItem
             // 
             saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
-            saveProfileToolStripMenuItem.Size = new Size(180, 22);
+            saveProfileToolStripMenuItem.Size = new Size(137, 22);
             saveProfileToolStripMenuItem.Text = "&Save Profile";
             saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
             // 
             // loadProfileToolStripMenuItem
             // 
             loadProfileToolStripMenuItem.Name = "loadProfileToolStripMenuItem";
-            loadProfileToolStripMenuItem.Size = new Size(180, 22);
+            loadProfileToolStripMenuItem.Size = new Size(137, 22);
             loadProfileToolStripMenuItem.Text = "&Load Profile";
             loadProfileToolStripMenuItem.Click += loadProfileToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(134, 6);
+            // 
+            // closeToolStripMenuItem
+            // 
+            closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            closeToolStripMenuItem.Size = new Size(137, 22);
+            closeToolStripMenuItem.Text = "close";
+            closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
             // panel2
             // 
@@ -244,18 +259,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1014, 37);
             panel2.TabIndex = 14;
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(177, 6);
-            // 
-            // closeToolStripMenuItem
-            // 
-            closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            closeToolStripMenuItem.Size = new Size(180, 22);
-            closeToolStripMenuItem.Text = "close";
-            closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
             // FormProducer
             // 
