@@ -295,7 +295,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveProfileToolStripMenuItem, loadProfileToolStripMenuItem, toolStripSeparator1, closeToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { loadProfileToolStripMenuItem, saveProfileToolStripMenuItem, toolStripSeparator1, closeToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(37, 20);
             fileToolStripMenuItem.Text = "&File";
@@ -303,26 +303,29 @@
             // saveProfileToolStripMenuItem
             // 
             saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
-            saveProfileToolStripMenuItem.Size = new Size(137, 22);
+            saveProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
+            saveProfileToolStripMenuItem.Size = new Size(179, 22);
             saveProfileToolStripMenuItem.Text = "&Save Profile";
             saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
             // 
             // loadProfileToolStripMenuItem
             // 
             loadProfileToolStripMenuItem.Name = "loadProfileToolStripMenuItem";
-            loadProfileToolStripMenuItem.Size = new Size(137, 22);
+            loadProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.L;
+            loadProfileToolStripMenuItem.Size = new Size(179, 22);
             loadProfileToolStripMenuItem.Text = "&Load Profile";
             loadProfileToolStripMenuItem.Click += loadProfileToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(134, 6);
+            toolStripSeparator1.Size = new Size(176, 6);
             // 
             // closeToolStripMenuItem
             // 
             closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            closeToolStripMenuItem.Size = new Size(137, 22);
+            closeToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.X;
+            closeToolStripMenuItem.Size = new Size(179, 22);
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 

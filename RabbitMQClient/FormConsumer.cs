@@ -37,6 +37,7 @@ namespace RabbitMQClient
             factory.UserName = textBoxLogin.Text;
             factory.Password = textBoxPassword.Text;
 
+            // try to connect
             try
             {
                 _clientconnection = factory.CreateConnection();
@@ -53,10 +54,11 @@ namespace RabbitMQClient
                 buttonStop.Enabled = false;
                 return;
             }
-            _channel = _clientconnection.CreateModel();
-            _channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
 
-            var consumer = new EventingBasicConsumer(_channel);
+            _channel = _clientconnection.CreateModel();
+            _channel.BasicQos(prefetchSize: 0, prefetchCount: (ushort)numericUpDownPrefetch.Value, global: false);
+
+            EventingBasicConsumer? consumer = new EventingBasicConsumer(_channel);
 
             consumer.Received += (sender, args) =>
             {
@@ -69,7 +71,7 @@ namespace RabbitMQClient
 
             try
             {
-                _channel.BasicConsume(queue: textBoxQueue.Text, autoAck: true, consumer);
+                _channel.BasicConsume(queue: textBoxQueue.Text, autoAck: checkBoxAutoAck.Checked, consumer);
             }
             catch (Exception ex)
             {
@@ -86,16 +88,6 @@ namespace RabbitMQClient
 
 
         }
-
-        private void TextBoxesEnabled(bool v)
-        {
-            textBoxServer.Enabled = v;
-            textBoxLogin.Enabled = v;
-            textBoxPassword.Enabled = v;
-            textBoxQueue.Enabled = v;
-            textBoxClientName.Enabled = v;
-        }
-
         private void ButtonStop_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
@@ -107,7 +99,8 @@ namespace RabbitMQClient
 
             TextBoxesEnabled(true);
         }
-
+        
+        #region handle_config
         private void saveProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ConsumerConfig config = new ConsumerConfig
@@ -132,7 +125,6 @@ namespace RabbitMQClient
                 jfch.WriteConfig();
             }
         }
-
         private void loadProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -151,7 +143,22 @@ namespace RabbitMQClient
                 SetProperties(config);
             }
         }
+        #endregion
+        
+        #region helper
+         private void TextBoxesEnabled(bool value)
+        {
+            textBoxServer.Enabled = value;
+            textBoxLogin.Enabled = value;
+            textBoxPassword.Enabled = value;
+            textBoxQueue.Enabled = value;
+            textBoxClientName.Enabled = value;
 
+            checkBoxAutoAck.Enabled = value;
+
+            numericUpDownPrefetch.Enabled = value;
+            labelPrefetch.Enabled = value;
+        }
         private void SetProperties(ConsumerConfig config)
         {
             textBoxServer.Text = config.Server;
@@ -197,6 +204,6 @@ namespace RabbitMQClient
             this.Text = $"Consumer | {textBoxServer.Text} | {textBoxQueue.Text} | ";
         }
 
-        
+        #endregion
     }
 }
