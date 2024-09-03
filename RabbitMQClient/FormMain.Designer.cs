@@ -52,7 +52,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(275, 24);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -66,8 +66,9 @@
             // closeToolStripMenuItem
             // 
             closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            closeToolStripMenuItem.Size = new Size(101, 22);
+            closeToolStripMenuItem.Size = new Size(180, 22);
             closeToolStripMenuItem.Text = "close";
+            closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
             // buttonCreateConsumer
             // 
@@ -83,7 +84,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(275, 86);
             Controls.Add(buttonCreateConsumer);
             Controls.Add(buttonCreateProducer);
             Controls.Add(menuStrip1);
@@ -91,6 +92,7 @@
             MainMenuStrip = menuStrip1;
             MaximizeBox = false;
             Name = "FormMain";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "RabbitMQ Testclient";
             FormClosing += FormMain_FormClosing;
             menuStrip1.ResumeLayout(false);

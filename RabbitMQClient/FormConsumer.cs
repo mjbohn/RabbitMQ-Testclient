@@ -168,13 +168,18 @@ namespace RabbitMQClient
         {
             if (_channel != null && _channel.IsOpen)
             {
-                _channel.Close(); 
+                _channel.Close();
             }
 
-            if (_clientconnection != null &&  _clientconnection.IsOpen)
+            if (_clientconnection != null && _clientconnection.IsOpen)
             {
-                _clientconnection.Close(); 
+                _clientconnection.Close();
             }
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

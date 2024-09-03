@@ -50,6 +50,8 @@
             loadProfileToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
             panel2 = new Panel();
+            toolStripSeparator1 = new ToolStripSeparator();
+            closeToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
@@ -209,7 +211,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveProfileToolStripMenuItem, loadProfileToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveProfileToolStripMenuItem, loadProfileToolStripMenuItem, toolStripSeparator1, closeToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(37, 20);
             fileToolStripMenuItem.Text = "&File";
@@ -217,14 +219,14 @@
             // saveProfileToolStripMenuItem
             // 
             saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
-            saveProfileToolStripMenuItem.Size = new Size(137, 22);
+            saveProfileToolStripMenuItem.Size = new Size(180, 22);
             saveProfileToolStripMenuItem.Text = "&Save Profile";
             saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
             // 
             // loadProfileToolStripMenuItem
             // 
             loadProfileToolStripMenuItem.Name = "loadProfileToolStripMenuItem";
-            loadProfileToolStripMenuItem.Size = new Size(137, 22);
+            loadProfileToolStripMenuItem.Size = new Size(180, 22);
             loadProfileToolStripMenuItem.Text = "&Load Profile";
             loadProfileToolStripMenuItem.Click += loadProfileToolStripMenuItem_Click;
             // 
@@ -242,6 +244,18 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1014, 37);
             panel2.TabIndex = 14;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(177, 6);
+            // 
+            // closeToolStripMenuItem
+            // 
+            closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            closeToolStripMenuItem.Size = new Size(180, 22);
+            closeToolStripMenuItem.Text = "close";
+            closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
             // FormProducer
             // 
@@ -291,5 +305,7 @@
         private ToolStripMenuItem loadProfileToolStripMenuItem;
         private SaveFileDialog saveFileDialog1;
         private Panel panel2;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem closeToolStripMenuItem;
     }
 }
