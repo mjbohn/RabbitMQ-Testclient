@@ -46,8 +46,8 @@
             labelServer = new Label();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
-            saveProfileToolStripMenuItem = new ToolStripMenuItem();
             loadProfileToolStripMenuItem = new ToolStripMenuItem();
+            saveProfileToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
@@ -219,14 +219,6 @@
             fileToolStripMenuItem.Size = new Size(37, 20);
             fileToolStripMenuItem.Text = "&File";
             // 
-            // saveProfileToolStripMenuItem
-            // 
-            saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
-            saveProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
-            saveProfileToolStripMenuItem.Size = new Size(179, 22);
-            saveProfileToolStripMenuItem.Text = "&Save Profile";
-            saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
-            // 
             // loadProfileToolStripMenuItem
             // 
             loadProfileToolStripMenuItem.Name = "loadProfileToolStripMenuItem";
@@ -234,6 +226,14 @@
             loadProfileToolStripMenuItem.Size = new Size(179, 22);
             loadProfileToolStripMenuItem.Text = "&Load Profile";
             loadProfileToolStripMenuItem.Click += loadProfileToolStripMenuItem_Click;
+            // 
+            // saveProfileToolStripMenuItem
+            // 
+            saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
+            saveProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
+            saveProfileToolStripMenuItem.Size = new Size(179, 22);
+            saveProfileToolStripMenuItem.Text = "&Save Profile";
+            saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
@@ -265,7 +265,6 @@
             // 
             // FormProducer
             // 
-            AcceptButton = buttonSend;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1014, 541);

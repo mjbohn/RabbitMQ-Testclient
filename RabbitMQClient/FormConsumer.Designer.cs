@@ -42,6 +42,8 @@
             labelServer = new Label();
             panel2 = new Panel();
             panelAck = new Panel();
+            checkBoxMultiple = new CheckBox();
+            buttonApply = new Button();
             checkBoxRequeue = new CheckBox();
             radioButtonReject = new RadioButton();
             radioButtonNack = new RadioButton();
@@ -60,7 +62,6 @@
             saveProfileToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
-            buttonApply = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panelAck.SuspendLayout();
@@ -201,6 +202,7 @@
             // 
             panelAck.BackColor = Color.Wheat;
             panelAck.BorderStyle = BorderStyle.FixedSingle;
+            panelAck.Controls.Add(checkBoxMultiple);
             panelAck.Controls.Add(buttonApply);
             panelAck.Controls.Add(checkBoxRequeue);
             panelAck.Controls.Add(radioButtonReject);
@@ -208,15 +210,39 @@
             panelAck.Controls.Add(radioButtonAck);
             panelAck.Location = new Point(267, 1);
             panelAck.Name = "panelAck";
-            panelAck.Size = new Size(362, 33);
+            panelAck.Size = new Size(573, 33);
             panelAck.TabIndex = 2;
             panelAck.Visible = false;
+            // 
+            // checkBoxMultiple
+            // 
+            checkBoxMultiple.AutoSize = true;
+            checkBoxMultiple.CheckAlign = ContentAlignment.MiddleRight;
+            checkBoxMultiple.Location = new Point(443, 6);
+            checkBoxMultiple.Name = "checkBoxMultiple";
+            checkBoxMultiple.Size = new Size(70, 19);
+            checkBoxMultiple.TabIndex = 5;
+            checkBoxMultiple.TabStop = false;
+            checkBoxMultiple.Text = "Multiple";
+            checkBoxMultiple.UseVisualStyleBackColor = true;
+            // 
+            // buttonApply
+            // 
+            buttonApply.Enabled = false;
+            buttonApply.Location = new Point(347, 3);
+            buttonApply.Name = "buttonApply";
+            buttonApply.Size = new Size(75, 23);
+            buttonApply.TabIndex = 4;
+            buttonApply.Text = "Apply";
+            buttonApply.UseVisualStyleBackColor = true;
+            buttonApply.Click += buttonApply_Click;
             // 
             // checkBoxRequeue
             // 
             checkBoxRequeue.AutoSize = true;
             checkBoxRequeue.CheckAlign = ContentAlignment.MiddleRight;
-            checkBoxRequeue.Location = new Point(175, 6);
+            checkBoxRequeue.Enabled = false;
+            checkBoxRequeue.Location = new Point(239, 6);
             checkBoxRequeue.Name = "checkBoxRequeue";
             checkBoxRequeue.Size = new Size(72, 19);
             checkBoxRequeue.TabIndex = 3;
@@ -228,7 +254,7 @@
             // 
             radioButtonReject.AutoSize = true;
             radioButtonReject.CheckAlign = ContentAlignment.MiddleRight;
-            radioButtonReject.Location = new Point(112, 5);
+            radioButtonReject.Location = new Point(160, 5);
             radioButtonReject.Name = "radioButtonReject";
             radioButtonReject.Size = new Size(57, 19);
             radioButtonReject.TabIndex = 2;
@@ -239,7 +265,7 @@
             // 
             radioButtonNack.AutoSize = true;
             radioButtonNack.CheckAlign = ContentAlignment.MiddleRight;
-            radioButtonNack.Location = new Point(54, 5);
+            radioButtonNack.Location = new Point(86, 5);
             radioButtonNack.Name = "radioButtonNack";
             radioButtonNack.Size = new Size(52, 19);
             radioButtonNack.TabIndex = 1;
@@ -252,7 +278,7 @@
             radioButtonAck.AutoSize = true;
             radioButtonAck.CheckAlign = ContentAlignment.MiddleRight;
             radioButtonAck.Checked = true;
-            radioButtonAck.Location = new Point(3, 5);
+            radioButtonAck.Location = new Point(19, 5);
             radioButtonAck.Name = "radioButtonAck";
             radioButtonAck.Size = new Size(45, 19);
             radioButtonAck.TabIndex = 0;
@@ -404,15 +430,6 @@
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
-            // buttonApply
-            // 
-            buttonApply.Location = new Point(267, 3);
-            buttonApply.Name = "buttonApply";
-            buttonApply.Size = new Size(75, 23);
-            buttonApply.TabIndex = 4;
-            buttonApply.Text = "Apply";
-            buttonApply.UseVisualStyleBackColor = true;
-            // 
             // FormConsumer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -475,5 +492,6 @@
         private RadioButton radioButtonAck;
         private CheckBox checkBoxRequeue;
         private Button buttonApply;
+        private CheckBox checkBoxMultiple;
     }
 }

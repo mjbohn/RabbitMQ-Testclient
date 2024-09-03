@@ -16,9 +16,12 @@ namespace RabbitMQClient
 {
     public partial class FormConsumer : Form
     {
-        ConnectionFactory factory = new ConnectionFactory();
+        ConnectionFactory _factory = new ConnectionFactory();
         IConnection _clientconnection;
         IModel _channel;
+        ulong _deliveryTag = 0;
+
+
         public FormConsumer()
         {
             InitializeComponent();
@@ -32,15 +35,15 @@ namespace RabbitMQClient
 
             TextBoxesEnabled(false);
 
-            factory.ClientProvidedName = textBoxClientName.Text;
-            factory.HostName = textBoxServer.Text;
-            factory.UserName = textBoxLogin.Text;
-            factory.Password = textBoxPassword.Text;
+            _factory.ClientProvidedName = textBoxClientName.Text;
+            _factory.HostName = textBoxServer.Text;
+            _factory.UserName = textBoxLogin.Text;
+            _factory.Password = textBoxPassword.Text;
 
             // try to connect
             try
             {
-                _clientconnection = factory.CreateConnection();
+                _clientconnection = _factory.CreateConnection();
             }
             catch (BrokerUnreachableException ex)
             {
@@ -86,13 +89,18 @@ namespace RabbitMQClient
             consumer.Received += (sender, args) =>
             {
                 byte[]? body = args.Body.ToArray();
-                ulong deliveryTag = args.DeliveryTag;
+                _deliveryTag = args.DeliveryTag;
 
                 string message = Encoding.UTF8.GetString(body);
-                //if (checkBoxAddLF.Checked) { message += "\n" + deliveryTag.ToString() + "\n"; }
+
                 if (checkBoxAddLF.Checked) { message += "\n"; }
 
                 BeginInvoke(() => { rtbReceivedMessages.AppendText(message); });
+
+                if (!checkBoxAutoAck.Checked)
+                {
+                    BeginInvoke(() => { buttonApply.Enabled = true; });
+                }
             };
         }
 
@@ -106,6 +114,26 @@ namespace RabbitMQClient
             _clientconnection.Close();
 
             TextBoxesEnabled(true);
+        }
+        private void buttonApply_Click(object sender, EventArgs e)
+        {
+            if (radioButtonAck.Checked)
+            {
+                _channel.BasicAck(_deliveryTag, checkBoxMultiple.Checked);
+            }
+
+            if (radioButtonNack.Checked)
+            {
+                _channel.BasicNack(_deliveryTag, checkBoxMultiple.Checked, checkBoxRequeue.Checked);
+            }
+
+            if (radioButtonReject.Checked)
+            {
+                _channel.BasicReject(_deliveryTag, checkBoxRequeue.Checked);
+            }
+
+
+            BeginInvoke(() => { buttonApply.Enabled = false; });
         }
 
         #region handle_config
@@ -234,12 +262,13 @@ namespace RabbitMQClient
             if (rb.Checked)
             {
                 checkBoxRequeue.Checked = true;
-                checkBoxRequeue.Enabled = false;
+                //checkBoxRequeue.Enabled = false;
             }
             else { checkBoxRequeue.Enabled = true; }
         }
 
         #endregion
+
 
     }
 }
