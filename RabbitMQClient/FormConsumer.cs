@@ -60,18 +60,16 @@ namespace RabbitMQClient
 
             EventingBasicConsumer? consumer = new EventingBasicConsumer(_channel);
 
-            consumer.Received += (sender, args) =>
-            {
-                var body = args.Body.ToArray();
-                string message = Encoding.UTF8.GetString(body);
-                if (checkBoxAddLF.Checked) { message += "\n"; }
+            FetchMessages(consumer);
+        }
 
-                BeginInvoke(() => { rtbReceivedMessages.AppendText(message); });
-            };
-
+        private void FetchMessages(EventingBasicConsumer consumer)
+        {
+            // start consumer
             try
             {
                 _channel.BasicConsume(queue: textBoxQueue.Text, autoAck: checkBoxAutoAck.Checked, consumer);
+
             }
             catch (Exception ex)
             {
@@ -80,14 +78,24 @@ namespace RabbitMQClient
                 sb.Append(Environment.NewLine);
                 MessageBox.Show(sb.ToString(), "Exeption", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 TextBoxesEnabled(true);
-                btn.Enabled = true;
+                buttonStart.Enabled = true;
                 buttonStop.Enabled = false;
                 return;
             }
 
+            consumer.Received += (sender, args) =>
+            {
+                byte[]? body = args.Body.ToArray();
+                ulong deliveryTag = args.DeliveryTag;
 
+                string message = Encoding.UTF8.GetString(body);
+                //if (checkBoxAddLF.Checked) { message += "\n" + deliveryTag.ToString() + "\n"; }
+                if (checkBoxAddLF.Checked) { message += "\n"; }
 
+                BeginInvoke(() => { rtbReceivedMessages.AppendText(message); });
+            };
         }
+
         private void ButtonStop_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
@@ -99,7 +107,7 @@ namespace RabbitMQClient
 
             TextBoxesEnabled(true);
         }
-        
+
         #region handle_config
         private void saveProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -144,9 +152,9 @@ namespace RabbitMQClient
             }
         }
         #endregion
-        
+
         #region helper
-         private void TextBoxesEnabled(bool value)
+        private void TextBoxesEnabled(bool value)
         {
             textBoxServer.Enabled = value;
             textBoxLogin.Enabled = value;
@@ -204,6 +212,34 @@ namespace RabbitMQClient
             this.Text = $"Consumer | {textBoxServer.Text} | {textBoxQueue.Text} | ";
         }
 
+        private void checkBoxAutoAck_CheckedChanged(object sender, EventArgs e)
+        {
+            panelAck.Visible = !checkBoxAutoAck.Checked;
+        }
+
+        private void radioButtonAck_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+            if (rb.Checked)
+            {
+                checkBoxRequeue.Checked = false;
+                checkBoxRequeue.Enabled = false;
+            }
+            else { checkBoxRequeue.Enabled = true; }
+        }
+
+        private void radioButtonNack_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+            if (rb.Checked)
+            {
+                checkBoxRequeue.Checked = true;
+                checkBoxRequeue.Enabled = false;
+            }
+            else { checkBoxRequeue.Enabled = true; }
+        }
+
         #endregion
+
     }
 }

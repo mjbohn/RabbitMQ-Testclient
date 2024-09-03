@@ -41,6 +41,11 @@
             labelLogin = new Label();
             labelServer = new Label();
             panel2 = new Panel();
+            panelAck = new Panel();
+            checkBoxRequeue = new CheckBox();
+            radioButtonReject = new RadioButton();
+            radioButtonNack = new RadioButton();
+            radioButtonAck = new RadioButton();
             buttonStop = new Button();
             buttonStart = new Button();
             rtbReceivedMessages = new RichTextBox();
@@ -51,12 +56,14 @@
             checkBoxAutoAck = new CheckBox();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
-            saveProfileToolStripMenuItem = new ToolStripMenuItem();
             loadProfileToolStripMenuItem = new ToolStripMenuItem();
+            saveProfileToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
+            buttonApply = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            panelAck.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrefetch).BeginInit();
             menuStrip1.SuspendLayout();
@@ -181,6 +188,7 @@
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(panelAck);
             panel2.Controls.Add(buttonStop);
             panel2.Controls.Add(buttonStart);
             panel2.Dock = DockStyle.Top;
@@ -188,6 +196,70 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1014, 37);
             panel2.TabIndex = 11;
+            // 
+            // panelAck
+            // 
+            panelAck.BackColor = Color.Wheat;
+            panelAck.BorderStyle = BorderStyle.FixedSingle;
+            panelAck.Controls.Add(buttonApply);
+            panelAck.Controls.Add(checkBoxRequeue);
+            panelAck.Controls.Add(radioButtonReject);
+            panelAck.Controls.Add(radioButtonNack);
+            panelAck.Controls.Add(radioButtonAck);
+            panelAck.Location = new Point(267, 1);
+            panelAck.Name = "panelAck";
+            panelAck.Size = new Size(362, 33);
+            panelAck.TabIndex = 2;
+            panelAck.Visible = false;
+            // 
+            // checkBoxRequeue
+            // 
+            checkBoxRequeue.AutoSize = true;
+            checkBoxRequeue.CheckAlign = ContentAlignment.MiddleRight;
+            checkBoxRequeue.Location = new Point(175, 6);
+            checkBoxRequeue.Name = "checkBoxRequeue";
+            checkBoxRequeue.Size = new Size(72, 19);
+            checkBoxRequeue.TabIndex = 3;
+            checkBoxRequeue.TabStop = false;
+            checkBoxRequeue.Text = "Requeue";
+            checkBoxRequeue.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonReject
+            // 
+            radioButtonReject.AutoSize = true;
+            radioButtonReject.CheckAlign = ContentAlignment.MiddleRight;
+            radioButtonReject.Location = new Point(112, 5);
+            radioButtonReject.Name = "radioButtonReject";
+            radioButtonReject.Size = new Size(57, 19);
+            radioButtonReject.TabIndex = 2;
+            radioButtonReject.Text = "Reject";
+            radioButtonReject.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonNack
+            // 
+            radioButtonNack.AutoSize = true;
+            radioButtonNack.CheckAlign = ContentAlignment.MiddleRight;
+            radioButtonNack.Location = new Point(54, 5);
+            radioButtonNack.Name = "radioButtonNack";
+            radioButtonNack.Size = new Size(52, 19);
+            radioButtonNack.TabIndex = 1;
+            radioButtonNack.Text = "Nack";
+            radioButtonNack.UseVisualStyleBackColor = true;
+            radioButtonNack.CheckedChanged += radioButtonNack_CheckedChanged;
+            // 
+            // radioButtonAck
+            // 
+            radioButtonAck.AutoSize = true;
+            radioButtonAck.CheckAlign = ContentAlignment.MiddleRight;
+            radioButtonAck.Checked = true;
+            radioButtonAck.Location = new Point(3, 5);
+            radioButtonAck.Name = "radioButtonAck";
+            radioButtonAck.Size = new Size(45, 19);
+            radioButtonAck.TabIndex = 0;
+            radioButtonAck.TabStop = true;
+            radioButtonAck.Text = "Ack";
+            radioButtonAck.UseVisualStyleBackColor = true;
+            radioButtonAck.CheckedChanged += radioButtonAck_CheckedChanged;
             // 
             // buttonStop
             // 
@@ -276,6 +348,8 @@
             // 
             checkBoxAutoAck.AutoSize = true;
             checkBoxAutoAck.CheckAlign = ContentAlignment.MiddleRight;
+            checkBoxAutoAck.Checked = true;
+            checkBoxAutoAck.CheckState = CheckState.Checked;
             checkBoxAutoAck.Location = new Point(76, 8);
             checkBoxAutoAck.Name = "checkBoxAutoAck";
             checkBoxAutoAck.Size = new Size(71, 19);
@@ -283,6 +357,7 @@
             checkBoxAutoAck.TabStop = false;
             checkBoxAutoAck.Text = "auto ack";
             checkBoxAutoAck.UseVisualStyleBackColor = true;
+            checkBoxAutoAck.CheckedChanged += checkBoxAutoAck_CheckedChanged;
             // 
             // menuStrip1
             // 
@@ -300,14 +375,6 @@
             fileToolStripMenuItem.Size = new Size(37, 20);
             fileToolStripMenuItem.Text = "&File";
             // 
-            // saveProfileToolStripMenuItem
-            // 
-            saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
-            saveProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
-            saveProfileToolStripMenuItem.Size = new Size(179, 22);
-            saveProfileToolStripMenuItem.Text = "&Save Profile";
-            saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
-            // 
             // loadProfileToolStripMenuItem
             // 
             loadProfileToolStripMenuItem.Name = "loadProfileToolStripMenuItem";
@@ -315,6 +382,14 @@
             loadProfileToolStripMenuItem.Size = new Size(179, 22);
             loadProfileToolStripMenuItem.Text = "&Load Profile";
             loadProfileToolStripMenuItem.Click += loadProfileToolStripMenuItem_Click;
+            // 
+            // saveProfileToolStripMenuItem
+            // 
+            saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
+            saveProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
+            saveProfileToolStripMenuItem.Size = new Size(179, 22);
+            saveProfileToolStripMenuItem.Text = "&Save Profile";
+            saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
@@ -328,6 +403,15 @@
             closeToolStripMenuItem.Size = new Size(179, 22);
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
+            // 
+            // buttonApply
+            // 
+            buttonApply.Location = new Point(267, 3);
+            buttonApply.Name = "buttonApply";
+            buttonApply.Size = new Size(75, 23);
+            buttonApply.TabIndex = 4;
+            buttonApply.Text = "Apply";
+            buttonApply.UseVisualStyleBackColor = true;
             // 
             // FormConsumer
             // 
@@ -346,6 +430,8 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
+            panelAck.ResumeLayout(false);
+            panelAck.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrefetch).EndInit();
@@ -383,5 +469,11 @@
         private NumericUpDown numericUpDownPrefetch;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem closeToolStripMenuItem;
+        private Panel panelAck;
+        private RadioButton radioButtonReject;
+        private RadioButton radioButtonNack;
+        private RadioButton radioButtonAck;
+        private CheckBox checkBoxRequeue;
+        private Button buttonApply;
     }
 }
