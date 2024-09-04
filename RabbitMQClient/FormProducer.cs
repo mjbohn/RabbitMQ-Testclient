@@ -1,19 +1,36 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using System.ComponentModel;
 using System.Configuration;
 using System.Reflection;
 using System.Text;
+using System.Threading.Channels;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace RabbitMQClient
 {
     public partial class FormProducer : Form
     {
+        IConnection? _connection;
+        IModel? _channel;
+        byte[]? _body;
+        BackgroundWorker _worker;
+
         public FormProducer()
         {
             InitializeComponent();
-        }
 
+            _worker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+
+            _worker.DoWork += Worker_DoWork;
+            _worker.RunWorkerCompleted += RunWorkerCompleted;
+        }
+                
         private void SetProperties(PublisherConfig config)
         {
             textBoxServer.Text = config.Server;
@@ -32,18 +49,40 @@ namespace RabbitMQClient
                 UserName = textBoxLogin.Text,
                 Password = textBoxPassword.Text
             };
-            using IConnection? connection = factory.CreateConnection();
-            using IModel? channel = connection.CreateModel();
 
-            byte[]? body = Encoding.UTF8.GetBytes(textBoxMessage.Text);
+            _connection = factory.CreateConnection();
+            _channel = _connection.CreateModel();
 
+            _body = Encoding.UTF8.GetBytes(textBoxMessage.Text);
 
-            channel.BasicPublish(exchange: textBoxExchange.Text,
-                                 routingKey: textBoxRoutingKey.Text,
-                                 basicProperties: null,
-                                 body: body);
+            if (!_worker.IsBusy)
+            {
+                _worker.RunWorkerAsync();
+            }
+
+            buttonSend.Enabled = false;
+
         }
 
+        private void Worker_DoWork(object? sender, DoWorkEventArgs e)
+        {
+            do
+            {
+                _channel.BasicPublish(exchange: textBoxExchange.Text,
+                routingKey: textBoxRoutingKey.Text,
+                                     basicProperties: null,
+                                     body: _body);
+
+                Thread.Sleep(new TimeSpan(0, 0, 1));
+            } while (checkBoxRepeatSend.Checked);
+        }
+
+        private void RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+        {
+            buttonSend.Enabled=true;
+            _channel.Close();
+            _connection.Close();
+        }
 
         private void saveProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {

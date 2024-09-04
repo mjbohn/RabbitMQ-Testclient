@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProducer));
             buttonSend = new Button();
             labelRoutingKey = new Label();
@@ -52,14 +53,24 @@
             closeToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
             panel2 = new Panel();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            seleceAllToolStripMenuItem = new ToolStripMenuItem();
+            copyToolStripMenuItem = new ToolStripMenuItem();
+            pasteToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            clearToolStripMenuItem = new ToolStripMenuItem();
+            checkBoxRepeatSend = new CheckBox();
+            numericUpDown1 = new NumericUpDown();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // buttonSend
             // 
-            buttonSend.Location = new Point(834, 4);
+            buttonSend.Location = new Point(790, 4);
             buttonSend.Name = "buttonSend";
             buttonSend.Size = new Size(102, 23);
             buttonSend.TabIndex = 6;
@@ -130,7 +141,7 @@
             textBoxMessage.Location = new Point(0, 98);
             textBoxMessage.Multiline = true;
             textBoxMessage.Name = "textBoxMessage";
-            textBoxMessage.Size = new Size(1014, 443);
+            textBoxMessage.Size = new Size(1076, 443);
             textBoxMessage.TabIndex = 0;
             textBoxMessage.TabStop = false;
             textBoxMessage.Text = "Hello World!";
@@ -147,7 +158,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 24);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1014, 37);
+            panel1.Size = new Size(1076, 37);
             panel1.TabIndex = 9;
             // 
             // textBoxPassword
@@ -208,7 +219,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1014, 24);
+            menuStrip1.Size = new Size(1076, 24);
             menuStrip1.TabIndex = 13;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -250,6 +261,8 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(numericUpDown1);
+            panel2.Controls.Add(checkBoxRepeatSend);
             panel2.Controls.Add(labelQueue);
             panel2.Controls.Add(textBoxQueue);
             panel2.Controls.Add(textBoxExchange);
@@ -260,14 +273,68 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 61);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1014, 37);
+            panel2.Size = new Size(1076, 37);
             panel2.TabIndex = 14;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { seleceAllToolStripMenuItem, copyToolStripMenuItem, pasteToolStripMenuItem, toolStripSeparator2, clearToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(122, 98);
+            // 
+            // seleceAllToolStripMenuItem
+            // 
+            seleceAllToolStripMenuItem.Name = "seleceAllToolStripMenuItem";
+            seleceAllToolStripMenuItem.Size = new Size(121, 22);
+            seleceAllToolStripMenuItem.Text = "selece all";
+            // 
+            // copyToolStripMenuItem
+            // 
+            copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            copyToolStripMenuItem.Size = new Size(121, 22);
+            copyToolStripMenuItem.Text = "copy";
+            // 
+            // pasteToolStripMenuItem
+            // 
+            pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            pasteToolStripMenuItem.Size = new Size(121, 22);
+            pasteToolStripMenuItem.Text = "paste";
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(118, 6);
+            // 
+            // clearToolStripMenuItem
+            // 
+            clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            clearToolStripMenuItem.Size = new Size(121, 22);
+            clearToolStripMenuItem.Text = "clear";
+            // 
+            // checkBoxRepeatSend
+            // 
+            checkBoxRepeatSend.AutoSize = true;
+            checkBoxRepeatSend.Location = new Point(898, 8);
+            checkBoxRepeatSend.Name = "checkBoxRepeatSend";
+            checkBoxRepeatSend.Size = new Size(118, 19);
+            checkBoxRepeatSend.TabIndex = 7;
+            checkBoxRepeatSend.Text = "repeat / delay sec";
+            checkBoxRepeatSend.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(1019, 7);
+            numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(45, 23);
+            numericUpDown1.TabIndex = 8;
+            numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // FormProducer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1014, 541);
+            ClientSize = new Size(1076, 541);
             Controls.Add(textBoxMessage);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -283,6 +350,8 @@
             menuStrip1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -312,5 +381,13 @@
         private Panel panel2;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem closeToolStripMenuItem;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem seleceAllToolStripMenuItem;
+        private ToolStripMenuItem copyToolStripMenuItem;
+        private ToolStripMenuItem pasteToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem clearToolStripMenuItem;
+        private NumericUpDown numericUpDown1;
+        private CheckBox checkBoxRepeatSend;
     }
 }
