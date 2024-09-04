@@ -52,6 +52,12 @@
             buttonStop = new Button();
             buttonStart = new Button();
             rtbReceivedMessages = new RichTextBox();
+            contextMenuRtbReceivedMsgs = new ContextMenuStrip(components);
+            MenuItemSelectAll = new ToolStripMenuItem();
+            MenuItemCopy = new ToolStripMenuItem();
+            MenuItemPaste = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            MenuItemClear = new ToolStripMenuItem();
             checkBoxAddLF = new CheckBox();
             panel3 = new Panel();
             labelPrefetch = new Label();
@@ -63,19 +69,13 @@
             saveProfileToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
-            contextMenuRtbReceivedMsgs = new ContextMenuStrip(components);
-            MenuItemSelectAll = new ToolStripMenuItem();
-            MenuItemCopy = new ToolStripMenuItem();
-            MenuItemPaste = new ToolStripMenuItem();
-            toolStripSeparator2 = new ToolStripSeparator();
-            MenuItemClear = new ToolStripMenuItem();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panelAck.SuspendLayout();
+            contextMenuRtbReceivedMsgs.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrefetch).BeginInit();
             menuStrip1.SuspendLayout();
-            contextMenuRtbReceivedMsgs.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -333,6 +333,46 @@
             rtbReceivedMessages.TabStop = false;
             rtbReceivedMessages.Text = "";
             // 
+            // contextMenuRtbReceivedMsgs
+            // 
+            contextMenuRtbReceivedMsgs.Items.AddRange(new ToolStripItem[] { MenuItemSelectAll, MenuItemCopy, MenuItemPaste, toolStripSeparator2, MenuItemClear });
+            contextMenuRtbReceivedMsgs.Name = "contextMenuStrip1";
+            contextMenuRtbReceivedMsgs.Size = new Size(120, 98);
+            // 
+            // MenuItemSelectAll
+            // 
+            MenuItemSelectAll.Name = "MenuItemSelectAll";
+            MenuItemSelectAll.Size = new Size(119, 22);
+            MenuItemSelectAll.Text = "select all";
+            MenuItemSelectAll.Click += MenuItemSelectAll_Click;
+            // 
+            // MenuItemCopy
+            // 
+            MenuItemCopy.Name = "MenuItemCopy";
+            MenuItemCopy.Size = new Size(119, 22);
+            MenuItemCopy.Text = "copy";
+            MenuItemCopy.Click += MenuItemCopy_Click;
+            // 
+            // MenuItemPaste
+            // 
+            MenuItemPaste.Name = "MenuItemPaste";
+            MenuItemPaste.Size = new Size(119, 22);
+            MenuItemPaste.Text = "paste";
+            MenuItemPaste.Visible = false;
+            MenuItemPaste.Click += MenuItemPaste_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(116, 6);
+            // 
+            // MenuItemClear
+            // 
+            MenuItemClear.Name = "MenuItemClear";
+            MenuItemClear.Size = new Size(119, 22);
+            MenuItemClear.Text = "clear";
+            MenuItemClear.Click += MenuItemClear_Click;
+            // 
             // checkBoxAddLF
             // 
             checkBoxAddLF.AutoSize = true;
@@ -341,10 +381,10 @@
             checkBoxAddLF.CheckState = CheckState.Checked;
             checkBoxAddLF.Location = new Point(3, 8);
             checkBoxAddLF.Name = "checkBoxAddLF";
-            checkBoxAddLF.Size = new Size(67, 19);
+            checkBoxAddLF.Size = new Size(61, 19);
             checkBoxAddLF.TabIndex = 2;
             checkBoxAddLF.TabStop = false;
-            checkBoxAddLF.Text = "add '\\n'";
+            checkBoxAddLF.Text = "add LF";
             checkBoxAddLF.UseVisualStyleBackColor = true;
             // 
             // panel3
@@ -363,7 +403,7 @@
             // labelPrefetch
             // 
             labelPrefetch.AutoSize = true;
-            labelPrefetch.Location = new Point(153, 9);
+            labelPrefetch.Location = new Point(185, 9);
             labelPrefetch.Name = "labelPrefetch";
             labelPrefetch.Size = new Size(51, 15);
             labelPrefetch.TabIndex = 5;
@@ -371,12 +411,13 @@
             // 
             // numericUpDownPrefetch
             // 
-            numericUpDownPrefetch.Location = new Point(210, 7);
+            numericUpDownPrefetch.Location = new Point(242, 7);
             numericUpDownPrefetch.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDownPrefetch.Name = "numericUpDownPrefetch";
             numericUpDownPrefetch.Size = new Size(45, 23);
             numericUpDownPrefetch.TabIndex = 4;
             numericUpDownPrefetch.TabStop = false;
+            numericUpDownPrefetch.TextAlign = HorizontalAlignment.Center;
             numericUpDownPrefetch.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // checkBoxAutoAck
@@ -385,7 +426,7 @@
             checkBoxAutoAck.CheckAlign = ContentAlignment.MiddleRight;
             checkBoxAutoAck.Checked = true;
             checkBoxAutoAck.CheckState = CheckState.Checked;
-            checkBoxAutoAck.Location = new Point(76, 8);
+            checkBoxAutoAck.Location = new Point(92, 8);
             checkBoxAutoAck.Name = "checkBoxAutoAck";
             checkBoxAutoAck.Size = new Size(71, 19);
             checkBoxAutoAck.TabIndex = 3;
@@ -414,7 +455,7 @@
             // 
             loadProfileToolStripMenuItem.Name = "loadProfileToolStripMenuItem";
             loadProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.L;
-            loadProfileToolStripMenuItem.Size = new Size(180, 22);
+            loadProfileToolStripMenuItem.Size = new Size(179, 22);
             loadProfileToolStripMenuItem.Text = "&Load Profile";
             loadProfileToolStripMenuItem.Click += loadProfileToolStripMenuItem_Click;
             // 
@@ -422,61 +463,22 @@
             // 
             saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
             saveProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
-            saveProfileToolStripMenuItem.Size = new Size(180, 22);
+            saveProfileToolStripMenuItem.Size = new Size(179, 22);
             saveProfileToolStripMenuItem.Text = "&Save Profile";
             saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(177, 6);
+            toolStripSeparator1.Size = new Size(176, 6);
             // 
             // closeToolStripMenuItem
             // 
             closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             closeToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.X;
-            closeToolStripMenuItem.Size = new Size(180, 22);
+            closeToolStripMenuItem.Size = new Size(179, 22);
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
-            // 
-            // contextMenuRtbReceivedMsgs
-            // 
-            contextMenuRtbReceivedMsgs.Items.AddRange(new ToolStripItem[] { MenuItemSelectAll, MenuItemCopy, MenuItemPaste, toolStripSeparator2, MenuItemClear });
-            contextMenuRtbReceivedMsgs.Name = "contextMenuStrip1";
-            contextMenuRtbReceivedMsgs.Size = new Size(120, 98);
-            // 
-            // MenuItemSelectAll
-            // 
-            MenuItemSelectAll.Name = "MenuItemSelectAll";
-            MenuItemSelectAll.Size = new Size(119, 22);
-            MenuItemSelectAll.Text = "select all";
-            MenuItemSelectAll.Click += MenuItemSelectAll_Click;
-            // 
-            // MenuItemCopy
-            // 
-            MenuItemCopy.Name = "MenuItemCopy";
-            MenuItemCopy.Size = new Size(119, 22);
-            MenuItemCopy.Text = "copy";
-            MenuItemCopy.Click += MenuItemCopy_Click;
-            // 
-            // MenuItemPaste
-            // 
-            MenuItemPaste.Name = "MenuItemPaste";
-            MenuItemPaste.Size = new Size(119, 22);
-            MenuItemPaste.Text = "paste";
-            MenuItemPaste.Click += MenuItemPaste_Click;
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(116, 6);
-            // 
-            // MenuItemClear
-            // 
-            MenuItemClear.Name = "MenuItemClear";
-            MenuItemClear.Size = new Size(119, 22);
-            MenuItemClear.Text = "clear";
-            MenuItemClear.Click += MenuItemClear_Click;
             // 
             // FormConsumer
             // 
@@ -497,12 +499,12 @@
             panel2.ResumeLayout(false);
             panelAck.ResumeLayout(false);
             panelAck.PerformLayout();
+            contextMenuRtbReceivedMsgs.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrefetch).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            contextMenuRtbReceivedMsgs.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }

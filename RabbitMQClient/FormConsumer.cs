@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading.Channels;
 using RabbitMQ.Client.Exceptions;
+using System.CodeDom;
 
 namespace RabbitMQClient
 {
@@ -266,31 +267,52 @@ namespace RabbitMQClient
             }
             else { checkBoxRequeue.Enabled = true; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="toolStripItem"></param>
+        /// <returns>T</returns>
+        private T GetToolStripItemParent<T>(ToolStripItem toolStripItem) where T : Control
+        {
+            T _returnObject;
+            ContextMenuStrip owner = toolStripItem.Owner as ContextMenuStrip;
+            _returnObject = owner.SourceControl as T;
+            return _returnObject;
+        }
         #endregion
 
+        #region RTB ContexMenuEvents
 
         private void MenuItemSelectAll_Click(object sender, EventArgs e)
         {
             ToolStripItem toolStripItem = sender as ToolStripItem;
-            ContextMenuStrip owner = toolStripItem.Owner as ContextMenuStrip;
-            RichTextBox rtb = owner.SourceControl as RichTextBox;
+            RichTextBox rtb = GetToolStripItemParent<RichTextBox>(toolStripItem);
+            rtb.Focus();
             rtb.SelectAll();
         }
 
         private void MenuItemCopy_Click(object sender, EventArgs e)
         {
-
+            ToolStripItem toolStripItem = sender as ToolStripItem;
+            RichTextBox rtb = GetToolStripItemParent<RichTextBox>(toolStripItem);
+            rtb.Copy();
         }
 
         private void MenuItemPaste_Click(object sender, EventArgs e)
         {
-
+            ToolStripItem toolStripItem = sender as ToolStripItem;
+            RichTextBox rtb = GetToolStripItemParent<RichTextBox>(toolStripItem);
+            rtb.Paste();
         }
 
         private void MenuItemClear_Click(object sender, EventArgs e)
         {
-
+            ToolStripItem toolStripItem = sender as ToolStripItem;
+            RichTextBox rtb = GetToolStripItemParent<RichTextBox>(toolStripItem);
+            rtb.Clear();
         }
+
+        #endregion
     }
 }
