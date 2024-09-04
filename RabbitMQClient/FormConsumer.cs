@@ -270,5 +270,27 @@ namespace RabbitMQClient
         #endregion
 
 
+        private void MenuItemSelectAll_Click(object sender, EventArgs e)
+        {
+            ToolStripItem toolStripItem = sender as ToolStripItem;
+            ContextMenuStrip owner = toolStripItem.Owner as ContextMenuStrip;
+            RichTextBox rtb = owner.SourceControl as RichTextBox;
+            rtb.SelectAll();
+        }
+
+        private void MenuItemCopy_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MenuItemPaste_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MenuItemClear_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

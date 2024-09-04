@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConsumer));
             panel1 = new Panel();
             textBoxClientName = new TextBox();
@@ -62,12 +63,19 @@
             saveProfileToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
+            contextMenuRtbReceivedMsgs = new ContextMenuStrip(components);
+            MenuItemSelectAll = new ToolStripMenuItem();
+            MenuItemCopy = new ToolStripMenuItem();
+            MenuItemPaste = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            MenuItemClear = new ToolStripMenuItem();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panelAck.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrefetch).BeginInit();
             menuStrip1.SuspendLayout();
+            contextMenuRtbReceivedMsgs.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -315,11 +323,12 @@
             // rtbReceivedMessages
             // 
             rtbReceivedMessages.BackColor = Color.Wheat;
+            rtbReceivedMessages.ContextMenuStrip = contextMenuRtbReceivedMsgs;
             rtbReceivedMessages.Dock = DockStyle.Fill;
             rtbReceivedMessages.Location = new Point(0, 129);
             rtbReceivedMessages.Name = "rtbReceivedMessages";
             rtbReceivedMessages.ReadOnly = true;
-            rtbReceivedMessages.Size = new Size(1014, 412);
+            rtbReceivedMessages.Size = new Size(1014, 372);
             rtbReceivedMessages.TabIndex = 12;
             rtbReceivedMessages.TabStop = false;
             rtbReceivedMessages.Text = "";
@@ -405,7 +414,7 @@
             // 
             loadProfileToolStripMenuItem.Name = "loadProfileToolStripMenuItem";
             loadProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.L;
-            loadProfileToolStripMenuItem.Size = new Size(179, 22);
+            loadProfileToolStripMenuItem.Size = new Size(180, 22);
             loadProfileToolStripMenuItem.Text = "&Load Profile";
             loadProfileToolStripMenuItem.Click += loadProfileToolStripMenuItem_Click;
             // 
@@ -413,30 +422,69 @@
             // 
             saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
             saveProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
-            saveProfileToolStripMenuItem.Size = new Size(179, 22);
+            saveProfileToolStripMenuItem.Size = new Size(180, 22);
             saveProfileToolStripMenuItem.Text = "&Save Profile";
             saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(176, 6);
+            toolStripSeparator1.Size = new Size(177, 6);
             // 
             // closeToolStripMenuItem
             // 
             closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             closeToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.X;
-            closeToolStripMenuItem.Size = new Size(179, 22);
+            closeToolStripMenuItem.Size = new Size(180, 22);
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
+            // 
+            // contextMenuRtbReceivedMsgs
+            // 
+            contextMenuRtbReceivedMsgs.Items.AddRange(new ToolStripItem[] { MenuItemSelectAll, MenuItemCopy, MenuItemPaste, toolStripSeparator2, MenuItemClear });
+            contextMenuRtbReceivedMsgs.Name = "contextMenuStrip1";
+            contextMenuRtbReceivedMsgs.Size = new Size(120, 98);
+            // 
+            // MenuItemSelectAll
+            // 
+            MenuItemSelectAll.Name = "MenuItemSelectAll";
+            MenuItemSelectAll.Size = new Size(119, 22);
+            MenuItemSelectAll.Text = "select all";
+            MenuItemSelectAll.Click += MenuItemSelectAll_Click;
+            // 
+            // MenuItemCopy
+            // 
+            MenuItemCopy.Name = "MenuItemCopy";
+            MenuItemCopy.Size = new Size(119, 22);
+            MenuItemCopy.Text = "copy";
+            MenuItemCopy.Click += MenuItemCopy_Click;
+            // 
+            // MenuItemPaste
+            // 
+            MenuItemPaste.Name = "MenuItemPaste";
+            MenuItemPaste.Size = new Size(119, 22);
+            MenuItemPaste.Text = "paste";
+            MenuItemPaste.Click += MenuItemPaste_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(116, 6);
+            // 
+            // MenuItemClear
+            // 
+            MenuItemClear.Name = "MenuItemClear";
+            MenuItemClear.Size = new Size(119, 22);
+            MenuItemClear.Text = "clear";
+            MenuItemClear.Click += MenuItemClear_Click;
             // 
             // FormConsumer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1014, 541);
-            Controls.Add(panel3);
             Controls.Add(rtbReceivedMessages);
+            Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(menuStrip1);
@@ -454,6 +502,7 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrefetch).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            contextMenuRtbReceivedMsgs.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -493,5 +542,11 @@
         private CheckBox checkBoxRequeue;
         private Button buttonApply;
         private CheckBox checkBoxMultiple;
+        private ContextMenuStrip contextMenuRtbReceivedMsgs;
+        private ToolStripMenuItem MenuItemSelectAll;
+        private ToolStripMenuItem MenuItemCopy;
+        private ToolStripMenuItem MenuItemPaste;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem MenuItemClear;
     }
 }
