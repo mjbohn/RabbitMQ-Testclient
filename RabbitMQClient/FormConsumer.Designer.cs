@@ -60,6 +60,8 @@
             MenuItemClear = new ToolStripMenuItem();
             checkBoxAddLF = new CheckBox();
             panel3 = new Panel();
+            label1 = new Label();
+            numericUpDownDelay = new NumericUpDown();
             labelPrefetch = new Label();
             numericUpDownPrefetch = new NumericUpDown();
             checkBoxAutoAck = new CheckBox();
@@ -74,6 +76,7 @@
             panelAck.SuspendLayout();
             contextMenuRtbReceivedMsgs.SuspendLayout();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrefetch).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -390,6 +393,8 @@
             // panel3
             // 
             panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(label1);
+            panel3.Controls.Add(numericUpDownDelay);
             panel3.Controls.Add(labelPrefetch);
             panel3.Controls.Add(numericUpDownPrefetch);
             panel3.Controls.Add(checkBoxAutoAck);
@@ -399,6 +404,27 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(1014, 40);
             panel3.TabIndex = 13;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(313, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(56, 15);
+            label1.TabIndex = 7;
+            label1.Text = "delay/ms";
+            // 
+            // numericUpDownDelay
+            // 
+            numericUpDownDelay.Increment = new decimal(new int[] { 250, 0, 0, 0 });
+            numericUpDownDelay.Location = new Point(370, 7);
+            numericUpDownDelay.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
+            numericUpDownDelay.Name = "numericUpDownDelay";
+            numericUpDownDelay.Size = new Size(79, 23);
+            numericUpDownDelay.TabIndex = 6;
+            numericUpDownDelay.TabStop = false;
+            numericUpDownDelay.TextAlign = HorizontalAlignment.Center;
+            numericUpDownDelay.Value = new decimal(new int[] { 2000, 0, 0, 0 });
             // 
             // labelPrefetch
             // 
@@ -502,6 +528,7 @@
             contextMenuRtbReceivedMsgs.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrefetch).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -550,5 +577,7 @@
         private ToolStripMenuItem MenuItemPaste;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem MenuItemClear;
+        private Label label1;
+        private NumericUpDown numericUpDownDelay;
     }
 }

@@ -53,19 +53,19 @@
             closeToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
             panel2 = new Panel();
+            numericUpDownDelay = new NumericUpDown();
+            checkBoxRepeatSend = new CheckBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
             seleceAllToolStripMenuItem = new ToolStripMenuItem();
             copyToolStripMenuItem = new ToolStripMenuItem();
             pasteToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             clearToolStripMenuItem = new ToolStripMenuItem();
-            checkBoxRepeatSend = new CheckBox();
-            numericUpDown1 = new NumericUpDown();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).BeginInit();
             contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // buttonSend
@@ -141,7 +141,7 @@
             textBoxMessage.Location = new Point(0, 98);
             textBoxMessage.Multiline = true;
             textBoxMessage.Name = "textBoxMessage";
-            textBoxMessage.Size = new Size(1076, 443);
+            textBoxMessage.Size = new Size(1110, 443);
             textBoxMessage.TabIndex = 0;
             textBoxMessage.TabStop = false;
             textBoxMessage.Text = "Hello World!";
@@ -158,7 +158,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 24);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1076, 37);
+            panel1.Size = new Size(1110, 37);
             panel1.TabIndex = 9;
             // 
             // textBoxPassword
@@ -219,7 +219,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1076, 24);
+            menuStrip1.Size = new Size(1110, 24);
             menuStrip1.TabIndex = 13;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -261,7 +261,7 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(numericUpDown1);
+            panel2.Controls.Add(numericUpDownDelay);
             panel2.Controls.Add(checkBoxRepeatSend);
             panel2.Controls.Add(labelQueue);
             panel2.Controls.Add(textBoxQueue);
@@ -273,8 +273,30 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 61);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1076, 37);
+            panel2.Size = new Size(1110, 37);
             panel2.TabIndex = 14;
+            // 
+            // numericUpDownDelay
+            // 
+            numericUpDownDelay.Increment = new decimal(new int[] { 250, 0, 0, 0 });
+            numericUpDownDelay.Location = new Point(1019, 7);
+            numericUpDownDelay.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            numericUpDownDelay.Minimum = new decimal(new int[] { 500, 0, 0, 0 });
+            numericUpDownDelay.Name = "numericUpDownDelay";
+            numericUpDownDelay.Size = new Size(52, 23);
+            numericUpDownDelay.TabIndex = 8;
+            numericUpDownDelay.TextAlign = HorizontalAlignment.Center;
+            numericUpDownDelay.Value = new decimal(new int[] { 1000, 0, 0, 0 });
+            // 
+            // checkBoxRepeatSend
+            // 
+            checkBoxRepeatSend.AutoSize = true;
+            checkBoxRepeatSend.Location = new Point(898, 8);
+            checkBoxRepeatSend.Name = "checkBoxRepeatSend";
+            checkBoxRepeatSend.Size = new Size(117, 19);
+            checkBoxRepeatSend.TabIndex = 7;
+            checkBoxRepeatSend.Text = "repeat / delay ms";
+            checkBoxRepeatSend.UseVisualStyleBackColor = true;
             // 
             // contextMenuStrip1
             // 
@@ -311,30 +333,11 @@
             clearToolStripMenuItem.Size = new Size(121, 22);
             clearToolStripMenuItem.Text = "clear";
             // 
-            // checkBoxRepeatSend
-            // 
-            checkBoxRepeatSend.AutoSize = true;
-            checkBoxRepeatSend.Location = new Point(898, 8);
-            checkBoxRepeatSend.Name = "checkBoxRepeatSend";
-            checkBoxRepeatSend.Size = new Size(118, 19);
-            checkBoxRepeatSend.TabIndex = 7;
-            checkBoxRepeatSend.Text = "repeat / delay sec";
-            checkBoxRepeatSend.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown1
-            // 
-            numericUpDown1.Location = new Point(1019, 7);
-            numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(45, 23);
-            numericUpDown1.TabIndex = 8;
-            numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
             // FormProducer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1076, 541);
+            ClientSize = new Size(1110, 541);
             Controls.Add(textBoxMessage);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -344,14 +347,15 @@
             Name = "FormProducer";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Producer";
+            FormClosing += FormProducer_FormClosing;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).EndInit();
             contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -387,7 +391,7 @@
         private ToolStripMenuItem pasteToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem clearToolStripMenuItem;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown numericUpDownDelay;
         private CheckBox checkBoxRepeatSend;
     }
 }

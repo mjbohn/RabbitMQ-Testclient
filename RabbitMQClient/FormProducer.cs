@@ -30,7 +30,7 @@ namespace RabbitMQClient
             _worker.DoWork += Worker_DoWork;
             _worker.RunWorkerCompleted += RunWorkerCompleted;
         }
-                
+
         private void SetProperties(PublisherConfig config)
         {
             textBoxServer.Text = config.Server;
@@ -73,13 +73,13 @@ namespace RabbitMQClient
                                      basicProperties: null,
                                      body: _body);
 
-                Thread.Sleep(new TimeSpan(0, 0, 1));
+                Thread.Sleep((int)numericUpDownDelay.Value);
             } while (checkBoxRepeatSend.Checked);
         }
 
         private void RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
-            buttonSend.Enabled=true;
+            buttonSend.Enabled = true;
             _channel.Close();
             _connection.Close();
         }
@@ -144,6 +144,11 @@ namespace RabbitMQClient
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void FormProducer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _worker.CancelAsync();
         }
     }
 }

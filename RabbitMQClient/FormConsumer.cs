@@ -72,7 +72,7 @@ namespace RabbitMQClient
             // start consumer
             try
             {
-                _channel.BasicConsume(queue: textBoxQueue.Text, autoAck: checkBoxAutoAck.Checked, consumer);
+                _channel.BasicConsume(queue: textBoxQueue.Text, autoAck: false, consumer);
 
             }
             catch (Exception ex)
@@ -102,6 +102,12 @@ namespace RabbitMQClient
                 {
                     BeginInvoke(() => { buttonApply.Enabled = true; });
                 }
+                else
+                {
+                    _channel.BasicAck(_deliveryTag, checkBoxMultiple.Checked);
+                    Thread.Sleep((int)numericUpDownDelay.Value);
+                }
+                                
             };
         }
 
