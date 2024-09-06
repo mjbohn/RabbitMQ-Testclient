@@ -1,5 +1,6 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RabbitMQ.Client.Exceptions;
 using System.ComponentModel;
 using System.Configuration;
 using System.Reflection;
@@ -50,7 +51,16 @@ namespace RabbitMQClient
                 Password = textBoxPassword.Text
             };
 
-            _connection = factory.CreateConnection();
+            try
+            {
+                _connection = factory.CreateConnection();
+            }
+            catch (BrokerUnreachableException ex)
+            {
+                MessageBox.Show($"Connection faild\n {ex.Message}", "Connection faild", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             _channel = _connection.CreateModel();
 
             _body = Encoding.UTF8.GetBytes(textBoxMessage.Text);
