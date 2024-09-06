@@ -39,6 +39,8 @@
             labelQueue = new Label();
             textBoxMessage = new TextBox();
             panel1 = new Panel();
+            textBoxPort = new TextBox();
+            labelPort = new Label();
             textBoxPassword = new TextBox();
             textBoxLogin = new TextBox();
             textBoxServer = new TextBox();
@@ -149,6 +151,8 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(textBoxPort);
+            panel1.Controls.Add(labelPort);
             panel1.Controls.Add(textBoxPassword);
             panel1.Controls.Add(textBoxLogin);
             panel1.Controls.Add(textBoxServer);
@@ -161,28 +165,50 @@
             panel1.Size = new Size(1110, 37);
             panel1.TabIndex = 9;
             // 
+            // textBoxPort
+            // 
+            textBoxPort.Location = new Point(291, 6);
+            textBoxPort.Name = "textBoxPort";
+            textBoxPort.PlaceholderText = "default 5672";
+            textBoxPort.Size = new Size(74, 23);
+            textBoxPort.TabIndex = 3;
+            textBoxPort.TabStop = false;
+            textBoxPort.Tag = "Login";
+            textBoxPort.Validating += textBoxPort_Validating;
+            // 
+            // labelPort
+            // 
+            labelPort.AutoSize = true;
+            labelPort.Location = new Point(253, 14);
+            labelPort.Name = "labelPort";
+            labelPort.Size = new Size(32, 15);
+            labelPort.TabIndex = 4;
+            labelPort.Text = "Port:";
+            // 
             // textBoxPassword
             // 
-            textBoxPassword.Location = new Point(593, 6);
+            textBoxPassword.Location = new Point(729, 6);
             textBoxPassword.Name = "textBoxPassword";
             textBoxPassword.PasswordChar = '*';
+            textBoxPassword.PlaceholderText = "Password";
             textBoxPassword.Size = new Size(190, 23);
             textBoxPassword.TabIndex = 2;
             textBoxPassword.Tag = "Password";
             // 
             // textBoxLogin
             // 
-            textBoxLogin.Location = new Point(319, 6);
+            textBoxLogin.Location = new Point(455, 6);
             textBoxLogin.Name = "textBoxLogin";
+            textBoxLogin.PlaceholderText = "Login name";
             textBoxLogin.Size = new Size(190, 23);
             textBoxLogin.TabIndex = 1;
             textBoxLogin.Tag = "Login";
-            textBoxLogin.Text = "Login";
             // 
             // textBoxServer
             // 
             textBoxServer.Location = new Point(57, 6);
             textBoxServer.Name = "textBoxServer";
+            textBoxServer.PlaceholderText = "FQDN or IP";
             textBoxServer.Size = new Size(190, 23);
             textBoxServer.TabIndex = 0;
             textBoxServer.Tag = "Server";
@@ -190,7 +216,7 @@
             // labelPassword
             // 
             labelPassword.AutoSize = true;
-            labelPassword.Location = new Point(527, 14);
+            labelPassword.Location = new Point(663, 14);
             labelPassword.Name = "labelPassword";
             labelPassword.Size = new Size(60, 15);
             labelPassword.TabIndex = 2;
@@ -199,7 +225,7 @@
             // labelLogin
             // 
             labelLogin.AutoSize = true;
-            labelLogin.Location = new Point(253, 14);
+            labelLogin.Location = new Point(389, 14);
             labelLogin.Name = "labelLogin";
             labelLogin.Size = new Size(40, 15);
             labelLogin.TabIndex = 1;
@@ -393,5 +419,7 @@
         private ToolStripMenuItem clearToolStripMenuItem;
         private NumericUpDown numericUpDownDelay;
         private CheckBox checkBoxRepeatSend;
+        private TextBox textBoxPort;
+        private Label labelPort;
     }
 }

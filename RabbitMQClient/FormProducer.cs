@@ -48,7 +48,9 @@ namespace RabbitMQClient
             {
                 HostName = textBoxServer.Text,
                 UserName = textBoxLogin.Text,
-                Password = textBoxPassword.Text
+                Password = textBoxPassword.Text,
+                Port = int.Parse(textBoxPort.Text)
+
             };
 
             try
@@ -159,6 +161,19 @@ namespace RabbitMQClient
         private void FormProducer_FormClosing(object sender, FormClosingEventArgs e)
         {
             _worker.CancelAsync();
+        }
+
+        private void textBoxPort_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (int.TryParse(tb.Text,out int result))
+            {
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Port must be an integer!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
     }
 }
