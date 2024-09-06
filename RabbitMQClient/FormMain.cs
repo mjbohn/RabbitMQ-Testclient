@@ -15,7 +15,7 @@ namespace RabbitMQClient
         public FormMain()
         {
             InitializeComponent();
-            LabelVersionInfo.Text = $"{ThisAssembly.Git.SemVer.Major}.{ThisAssembly.Git.SemVer.Minor}.{ThisAssembly.Git.SemVer.Patch}.{ThisAssembly.Git.SemVer.DashLabel}";
+            LabelVersionInfo.Text = $"{ThisAssembly.Git.SemVer.Major}.{ThisAssembly.Git.SemVer.Minor}.{ThisAssembly.Git.SemVer.Patch}{ThisAssembly.Git.SemVer.DashLabel}";
         }
 
         private void buttonCreateProducer_Click(object sender, EventArgs e)

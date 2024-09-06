@@ -21,7 +21,9 @@ namespace RabbitMQClient
         private void SetLabels()
         {
             labelGitTag.Text = $"Version: {ThisAssembly.Git.Tag}";
-            labelCommit.Text = $"Commit : {ThisAssembly.Git.CommitDate} {ThisAssembly.Git.Branch} {ThisAssembly.Git.Commit}";
+            labelCommitDate.Text = $"Date : {ThisAssembly.Git.CommitDate}";
+            labelBranch.Text = $"{ThisAssembly.Git.Branch}";
+            labelCommit.Text = $"{ThisAssembly.Git.Commit}";
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
