@@ -55,7 +55,7 @@
             // 
             // buttonClose
             // 
-            buttonClose.Location = new Point(126, 153);
+            buttonClose.Location = new Point(142, 153);
             buttonClose.Name = "buttonClose";
             buttonClose.Size = new Size(75, 23);
             buttonClose.TabIndex = 2;
@@ -87,7 +87,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.AntiqueWhite;
-            ClientSize = new Size(327, 197);
+            ClientSize = new Size(358, 197);
             Controls.Add(labelCommit);
             Controls.Add(labelBranch);
             Controls.Add(buttonClose);
