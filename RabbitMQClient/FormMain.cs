@@ -15,6 +15,9 @@ namespace RabbitMQClient
         public FormMain()
         {
             InitializeComponent();
+            string ver = Application.ProductVersion;
+            string gitver = ThisAssembly.Git.SemVer.Major;
+            string gittag = ThisAssembly.Git.Tag;
         }
 
         private void buttonCreateProducer_Click(object sender, EventArgs e)
