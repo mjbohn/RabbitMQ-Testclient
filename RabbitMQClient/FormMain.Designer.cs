@@ -34,6 +34,7 @@
             fileToolStripMenuItem = new ToolStripMenuItem();
             closeToolStripMenuItem = new ToolStripMenuItem();
             buttonCreateConsumer = new Button();
+            LabelVersionInfo = new LinkLabel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -66,7 +67,7 @@
             // closeToolStripMenuItem
             // 
             closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            closeToolStripMenuItem.Size = new Size(180, 22);
+            closeToolStripMenuItem.Size = new Size(101, 22);
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
@@ -80,11 +81,24 @@
             buttonCreateConsumer.UseVisualStyleBackColor = true;
             buttonCreateConsumer.Click += buttonCreateConsumer_Click;
             // 
+            // LabelVersionInfo
+            // 
+            LabelVersionInfo.AutoSize = true;
+            LabelVersionInfo.Font = new Font("Segoe UI", 8F);
+            LabelVersionInfo.Location = new Point(199, 72);
+            LabelVersionInfo.Name = "LabelVersionInfo";
+            LabelVersionInfo.Size = new Size(59, 13);
+            LabelVersionInfo.TabIndex = 3;
+            LabelVersionInfo.TabStop = true;
+            LabelVersionInfo.Text = "VersioInfo";
+            LabelVersionInfo.LinkClicked += LabelVersionInfo_LinkClicked;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(275, 86);
+            Controls.Add(LabelVersionInfo);
             Controls.Add(buttonCreateConsumer);
             Controls.Add(buttonCreateProducer);
             Controls.Add(menuStrip1);
@@ -108,5 +122,6 @@
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem closeToolStripMenuItem;
         private Button buttonCreateConsumer;
+        private LinkLabel LabelVersionInfo;
     }
 }

@@ -15,9 +15,7 @@ namespace RabbitMQClient
         public FormMain()
         {
             InitializeComponent();
-            string ver = Application.ProductVersion;
-            string gitver = ThisAssembly.Git.SemVer.Major;
-            string gittag = ThisAssembly.Git.Tag;
+            LabelVersionInfo.Text = $"{ThisAssembly.Git.SemVer.Major}.{ThisAssembly.Git.SemVer.Minor}.{ThisAssembly.Git.SemVer.Patch}.{ThisAssembly.Git.SemVer.DashLabel}";
         }
 
         private void buttonCreateProducer_Click(object sender, EventArgs e)
@@ -45,7 +43,7 @@ namespace RabbitMQClient
                 if (dr != DialogResult.OK)
                 {
                     e.Cancel = true;
-                } 
+                }
             }
 
         }
@@ -53,6 +51,12 @@ namespace RabbitMQClient
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void LabelVersionInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormVersionInfo formVersionInfo = new FormVersionInfo();
+            formVersionInfo.Show();
         }
     }
 }
