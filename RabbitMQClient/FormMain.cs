@@ -32,11 +32,17 @@ namespace RabbitMQClient
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Are you sure you want to close? All Producer and Consumer forms will be closed",
-                "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-            if (dr != DialogResult.OK)
+            bool formProducerExists = Application.OpenForms.OfType<FormProducer>().Any();
+            bool formConsumerExists = Application.OpenForms.OfType<FormConsumer>().Any();
+
+            if (formProducerExists || formConsumerExists)
             {
-                e.Cancel = true;
+                DialogResult dr = MessageBox.Show("Are you sure you want to close? All Producer and Consumer forms will be closed",
+                        "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                if (dr != DialogResult.OK)
+                {
+                    e.Cancel = true;
+                } 
             }
 
         }
