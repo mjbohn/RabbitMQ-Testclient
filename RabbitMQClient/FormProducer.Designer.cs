@@ -83,9 +83,10 @@
             // labelRoutingKey
             // 
             labelRoutingKey.AutoSize = true;
-            labelRoutingKey.Location = new Point(514, 12);
+            labelRoutingKey.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelRoutingKey.Location = new Point(514, 9);
             labelRoutingKey.Name = "labelRoutingKey";
-            labelRoutingKey.Size = new Size(74, 15);
+            labelRoutingKey.Size = new Size(78, 15);
             labelRoutingKey.TabIndex = 1;
             labelRoutingKey.Text = "Routing Key:";
             // 
@@ -110,9 +111,10 @@
             // labelExchange
             // 
             labelExchange.AutoSize = true;
-            labelExchange.Location = new Point(253, 12);
+            labelExchange.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelExchange.Location = new Point(253, 9);
             labelExchange.Name = "labelExchange";
-            labelExchange.Size = new Size(61, 15);
+            labelExchange.Size = new Size(63, 15);
             labelExchange.TabIndex = 3;
             labelExchange.Text = "Exchange:";
             // 
@@ -128,9 +130,10 @@
             // labelQueue
             // 
             labelQueue.AutoSize = true;
-            labelQueue.Location = new Point(13, 12);
+            labelQueue.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelQueue.Location = new Point(5, 9);
             labelQueue.Name = "labelQueue";
-            labelQueue.Size = new Size(45, 15);
+            labelQueue.Size = new Size(47, 15);
             labelQueue.TabIndex = 5;
             labelQueue.Text = "Queue:";
             labelQueue.Visible = false;
@@ -179,9 +182,10 @@
             // labelPort
             // 
             labelPort.AutoSize = true;
-            labelPort.Location = new Point(253, 14);
+            labelPort.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelPort.Location = new Point(251, 9);
             labelPort.Name = "labelPort";
-            labelPort.Size = new Size(32, 15);
+            labelPort.Size = new Size(34, 15);
             labelPort.TabIndex = 4;
             labelPort.Text = "Port:";
             // 
@@ -216,16 +220,18 @@
             // labelPassword
             // 
             labelPassword.AutoSize = true;
-            labelPassword.Location = new Point(663, 14);
+            labelPassword.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelPassword.Location = new Point(663, 9);
             labelPassword.Name = "labelPassword";
-            labelPassword.Size = new Size(60, 15);
+            labelPassword.Size = new Size(62, 15);
             labelPassword.TabIndex = 2;
             labelPassword.Text = "Password:";
             // 
             // labelLogin
             // 
             labelLogin.AutoSize = true;
-            labelLogin.Location = new Point(389, 14);
+            labelLogin.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelLogin.Location = new Point(409, 9);
             labelLogin.Name = "labelLogin";
             labelLogin.Size = new Size(40, 15);
             labelLogin.TabIndex = 1;
@@ -234,9 +240,10 @@
             // labelServer
             // 
             labelServer.AutoSize = true;
-            labelServer.Location = new Point(12, 14);
+            labelServer.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelServer.Location = new Point(3, 9);
             labelServer.Name = "labelServer";
-            labelServer.Size = new Size(42, 15);
+            labelServer.Size = new Size(48, 15);
             labelServer.TabIndex = 0;
             labelServer.Text = "Server:";
             // 

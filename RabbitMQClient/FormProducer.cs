@@ -49,7 +49,7 @@ namespace RabbitMQClient
                 HostName = textBoxServer.Text,
                 UserName = textBoxLogin.Text,
                 Password = textBoxPassword.Text,
-                Port = int.Parse(textBoxPort.Text)
+                Port = (!string.IsNullOrEmpty(textBoxPort.Text)) ? int.Parse(textBoxPort.Text) : 5672
 
             };
 

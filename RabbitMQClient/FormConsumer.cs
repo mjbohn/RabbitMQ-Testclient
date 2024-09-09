@@ -40,6 +40,7 @@ namespace RabbitMQClient
             _factory.HostName = textBoxServer.Text;
             _factory.UserName = textBoxLogin.Text;
             _factory.Password = textBoxPassword.Text;
+            _factory.Port = (!string.IsNullOrEmpty(textBoxPort.Text)) ? int.Parse(textBoxPort.Text) : 5672;
 
             // try to connect
             try
@@ -107,7 +108,7 @@ namespace RabbitMQClient
                     _channel.BasicAck(_deliveryTag, checkBoxMultiple.Checked);
                     Thread.Sleep((int)numericUpDownDelay.Value);
                 }
-                                
+
             };
         }
 
@@ -286,6 +287,20 @@ namespace RabbitMQClient
             _returnObject = owner.SourceControl as T;
             return _returnObject;
         }
+
+        private void textBoxPort_Validated(object sender, EventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (int.TryParse(tb.Text, out int result))
+            {
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Port must be an integer!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         #endregion
 
         #region RTB ContexMenuEvents
@@ -320,5 +335,7 @@ namespace RabbitMQClient
         }
 
         #endregion
+
+
     }
 }

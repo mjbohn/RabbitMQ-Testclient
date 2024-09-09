@@ -71,6 +71,8 @@
             saveProfileToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
+            textBoxPort = new TextBox();
+            labelPort = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panelAck.SuspendLayout();
@@ -84,6 +86,8 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(textBoxPort);
+            panel1.Controls.Add(labelPort);
             panel1.Controls.Add(textBoxClientName);
             panel1.Controls.Add(labelClientName);
             panel1.Controls.Add(textBoxQueue);
@@ -506,6 +510,27 @@
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
+            // textBoxPort
+            // 
+            textBoxPort.Location = new Point(57, 38);
+            textBoxPort.Name = "textBoxPort";
+            textBoxPort.PlaceholderText = "default 5672";
+            textBoxPort.Size = new Size(74, 23);
+            textBoxPort.TabIndex = 9;
+            textBoxPort.TabStop = false;
+            textBoxPort.Tag = "Login";
+            textBoxPort.Validated += textBoxPort_Validated;
+            // 
+            // labelPort
+            // 
+            labelPort.AutoSize = true;
+            labelPort.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelPort.Location = new Point(12, 41);
+            labelPort.Name = "labelPort";
+            labelPort.Size = new Size(34, 15);
+            labelPort.TabIndex = 10;
+            labelPort.Text = "Port:";
+            // 
             // FormConsumer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -579,5 +604,7 @@
         private ToolStripMenuItem MenuItemClear;
         private Label label1;
         private NumericUpDown numericUpDownDelay;
+        private TextBox textBoxPort;
+        private Label labelPort;
     }
 }
