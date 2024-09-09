@@ -97,7 +97,11 @@ namespace RabbitMQClient
 
                 if (checkBoxAddLF.Checked) { message += "\n"; }
 
-                BeginInvoke(() => { rtbReceivedMessages.AppendText(message); });
+                BeginInvoke(() =>
+                {
+                    rtbReceivedMessages.AppendText(message);
+                    rtbReceivedMessages.ScrollToCaret();
+                });
 
                 if (!checkBoxAutoAck.Checked)
                 {
