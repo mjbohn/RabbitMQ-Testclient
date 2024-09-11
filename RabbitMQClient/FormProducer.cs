@@ -224,6 +224,11 @@ namespace RabbitMQClient
 
         }
 
+        private void ExplorertoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormRabbitMQExplorer explorer = new FormRabbitMQExplorer();
+            explorer.Show();
+        }
     }
 }
 

@@ -65,6 +65,8 @@
             clearToolStripMenuItem = new ToolStripMenuItem();
             button1 = new Button();
             treeView1 = new TreeView();
+            toolStripSeparator3 = new ToolStripSeparator();
+            ExplorertoolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
@@ -260,7 +262,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { loadProfileToolStripMenuItem, saveProfileToolStripMenuItem, toolStripSeparator1, closeToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { loadProfileToolStripMenuItem, saveProfileToolStripMenuItem, toolStripSeparator3, ExplorertoolStripMenuItem, toolStripSeparator1, closeToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(37, 20);
             fileToolStripMenuItem.Text = "&File";
@@ -269,7 +271,7 @@
             // 
             loadProfileToolStripMenuItem.Name = "loadProfileToolStripMenuItem";
             loadProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.L;
-            loadProfileToolStripMenuItem.Size = new Size(179, 22);
+            loadProfileToolStripMenuItem.Size = new Size(180, 22);
             loadProfileToolStripMenuItem.Text = "&Load Profile";
             loadProfileToolStripMenuItem.Click += loadProfileToolStripMenuItem_Click;
             // 
@@ -277,20 +279,20 @@
             // 
             saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
             saveProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
-            saveProfileToolStripMenuItem.Size = new Size(179, 22);
+            saveProfileToolStripMenuItem.Size = new Size(180, 22);
             saveProfileToolStripMenuItem.Text = "&Save Profile";
             saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(176, 6);
+            toolStripSeparator1.Size = new Size(177, 6);
             // 
             // closeToolStripMenuItem
             // 
             closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             closeToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.X;
-            closeToolStripMenuItem.Size = new Size(179, 22);
+            closeToolStripMenuItem.Size = new Size(180, 22);
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
@@ -385,6 +387,19 @@
             treeView1.Size = new Size(184, 304);
             treeView1.TabIndex = 16;
             // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(177, 6);
+            // 
+            // ExplorertoolStripMenuItem
+            // 
+            ExplorertoolStripMenuItem.Name = "ExplorertoolStripMenuItem";
+            ExplorertoolStripMenuItem.ShortcutKeys = Keys.Control | Keys.E;
+            ExplorertoolStripMenuItem.Size = new Size(180, 22);
+            ExplorertoolStripMenuItem.Text = "&Explorer";
+            ExplorertoolStripMenuItem.Click += ExplorertoolStripMenuItem_Click;
+            // 
             // FormProducer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -451,5 +466,7 @@
         private Label labelPort;
         private Button button1;
         private TreeView treeView1;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripMenuItem ExplorertoolStripMenuItem;
     }
 }
