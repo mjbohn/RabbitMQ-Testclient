@@ -63,6 +63,8 @@
             pasteToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             clearToolStripMenuItem = new ToolStripMenuItem();
+            button1 = new Button();
+            treeView1 = new TreeView();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
@@ -141,12 +143,12 @@
             // textBoxMessage
             // 
             textBoxMessage.BackColor = Color.SteelBlue;
-            textBoxMessage.Dock = DockStyle.Fill;
+            textBoxMessage.Dock = DockStyle.Left;
             textBoxMessage.Font = new Font("Courier New", 11F);
             textBoxMessage.Location = new Point(0, 98);
             textBoxMessage.Multiline = true;
             textBoxMessage.Name = "textBoxMessage";
-            textBoxMessage.Size = new Size(1110, 443);
+            textBoxMessage.Size = new Size(552, 443);
             textBoxMessage.TabIndex = 0;
             textBoxMessage.TabStop = false;
             textBoxMessage.Text = "Hello World!";
@@ -366,11 +368,30 @@
             clearToolStripMenuItem.Size = new Size(121, 22);
             clearToolStripMenuItem.Text = "clear";
             // 
+            // button1
+            // 
+            button1.Location = new Point(916, 170);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 15;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // treeView1
+            // 
+            treeView1.Location = new Point(641, 186);
+            treeView1.Name = "treeView1";
+            treeView1.Size = new Size(184, 304);
+            treeView1.TabIndex = 16;
+            // 
             // FormProducer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1110, 541);
+            Controls.Add(treeView1);
+            Controls.Add(button1);
             Controls.Add(textBoxMessage);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -428,5 +449,7 @@
         private CheckBox checkBoxRepeatSend;
         private TextBox textBoxPort;
         private Label labelPort;
+        private Button button1;
+        private TreeView treeView1;
     }
 }

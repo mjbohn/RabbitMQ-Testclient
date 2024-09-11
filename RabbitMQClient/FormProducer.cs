@@ -1,10 +1,15 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
+using RabbitMQClient.RMQ_Entities;
 using System.ComponentModel;
 using System.Configuration;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 using System.Threading.Channels;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
@@ -50,7 +55,6 @@ namespace RabbitMQClient
                 UserName = textBoxLogin.Text,
                 Password = textBoxPassword.Text,
                 Port = (!string.IsNullOrEmpty(textBoxPort.Text)) ? int.Parse(textBoxPort.Text) : 5672
-
             };
 
             try
@@ -166,14 +170,60 @@ namespace RabbitMQClient
         private void textBoxPort_Validating(object sender, CancelEventArgs e)
         {
             TextBox tb = sender as TextBox;
-            if (int.TryParse(tb.Text,out int result))
+            if (int.TryParse(tb.Text, out int result))
             {
                 return;
             }
             else
             {
-                MessageBox.Show("Port must be an integer!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Port must be an integer!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            //Exchange ex = new Exchange();
+            //ex.Name = "root";
+            //ex.Text = "root";
+            //treeView1.Nodes.Add(ex);
+
+
+            var client = new HttpClient();
+
+            // Benutzername und Passwort für die Authentifizierung
+            var username = "tester";
+            var password = "1234";
+
+            // Base64-kodierte Authentifizierungsdaten
+            var authToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{password}"));
+
+            // Authorization-Header hinzufügen
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authToken);
+
+            var url = "https://rabbit.michael-bohn.net/api/vhosts";
+
+            // Anfrage senden
+            var response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                JsonArray? jsonArray = JsonNode.Parse(content).AsArray();
+
+                foreach (JsonObject jo in jsonArray)
+                {
+                    //treeView1.Nodes.Add((string)jo["name"]);
+                    RabbitMQVirtualHost vh = new RabbitMQVirtualHost();
+                    vh.Text = (string)jo["name"];
+                    treeView1.Nodes.Add(vh);
+                }
+
+
+                //MessageBox.Show(response.StatusCode.ToString());
+            }
+
+        }
+
     }
 }
+
