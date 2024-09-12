@@ -186,8 +186,10 @@ namespace RabbitMQClient
             }
         }
 
-
-
+        private void checkBoxRepeatSend_CheckedChanged(object sender, EventArgs e)
+        {
+            buttonSendFile.Enabled = !(sender as CheckBox).Checked;
+        }
     }
 }
 

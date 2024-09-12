@@ -65,16 +65,21 @@
             pasteToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             clearToolStripMenuItem = new ToolStripMenuItem();
+            panel3 = new Panel();
+            panel4 = new Panel();
+            buttonSendFile = new Button();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).BeginInit();
             contextMenuStrip1.SuspendLayout();
+            panel3.SuspendLayout();
+            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // buttonSend
             // 
-            buttonSend.Location = new Point(790, 4);
+            buttonSend.Location = new Point(16, 6);
             buttonSend.Name = "buttonSend";
             buttonSend.Size = new Size(102, 23);
             buttonSend.TabIndex = 6;
@@ -86,7 +91,7 @@
             // 
             labelRoutingKey.AutoSize = true;
             labelRoutingKey.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            labelRoutingKey.Location = new Point(514, 9);
+            labelRoutingKey.Location = new Point(649, 8);
             labelRoutingKey.Name = "labelRoutingKey";
             labelRoutingKey.Size = new Size(78, 15);
             labelRoutingKey.TabIndex = 1;
@@ -94,7 +99,7 @@
             // 
             // textBoxRoutingKey
             // 
-            textBoxRoutingKey.Location = new Point(594, 4);
+            textBoxRoutingKey.Location = new Point(729, 3);
             textBoxRoutingKey.Name = "textBoxRoutingKey";
             textBoxRoutingKey.Size = new Size(190, 23);
             textBoxRoutingKey.TabIndex = 5;
@@ -103,7 +108,7 @@
             // 
             // textBoxExchange
             // 
-            textBoxExchange.Location = new Point(320, 6);
+            textBoxExchange.Location = new Point(455, 5);
             textBoxExchange.Name = "textBoxExchange";
             textBoxExchange.Size = new Size(190, 23);
             textBoxExchange.TabIndex = 4;
@@ -114,7 +119,7 @@
             // 
             labelExchange.AutoSize = true;
             labelExchange.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            labelExchange.Location = new Point(253, 9);
+            labelExchange.Location = new Point(388, 8);
             labelExchange.Name = "labelExchange";
             labelExchange.Size = new Size(63, 15);
             labelExchange.TabIndex = 3;
@@ -309,12 +314,10 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(numericUpDownDelay);
-            panel2.Controls.Add(checkBoxRepeatSend);
+            panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(labelQueue);
             panel2.Controls.Add(textBoxQueue);
             panel2.Controls.Add(textBoxExchange);
-            panel2.Controls.Add(buttonSend);
             panel2.Controls.Add(labelExchange);
             panel2.Controls.Add(textBoxRoutingKey);
             panel2.Controls.Add(labelRoutingKey);
@@ -327,7 +330,7 @@
             // numericUpDownDelay
             // 
             numericUpDownDelay.Increment = new decimal(new int[] { 250, 0, 0, 0 });
-            numericUpDownDelay.Location = new Point(1019, 7);
+            numericUpDownDelay.Location = new Point(245, 9);
             numericUpDownDelay.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numericUpDownDelay.Minimum = new decimal(new int[] { 500, 0, 0, 0 });
             numericUpDownDelay.Name = "numericUpDownDelay";
@@ -339,12 +342,13 @@
             // checkBoxRepeatSend
             // 
             checkBoxRepeatSend.AutoSize = true;
-            checkBoxRepeatSend.Location = new Point(898, 8);
+            checkBoxRepeatSend.Location = new Point(124, 10);
             checkBoxRepeatSend.Name = "checkBoxRepeatSend";
             checkBoxRepeatSend.Size = new Size(117, 19);
             checkBoxRepeatSend.TabIndex = 7;
             checkBoxRepeatSend.Text = "repeat / delay ms";
             checkBoxRepeatSend.UseVisualStyleBackColor = true;
+            checkBoxRepeatSend.CheckedChanged += checkBoxRepeatSend_CheckedChanged;
             // 
             // contextMenuStrip1
             // 
@@ -381,11 +385,45 @@
             clearToolStripMenuItem.Size = new Size(121, 22);
             clearToolStripMenuItem.Text = "clear";
             // 
+            // panel3
+            // 
+            panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(numericUpDownDelay);
+            panel3.Controls.Add(buttonSend);
+            panel3.Controls.Add(checkBoxRepeatSend);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(552, 98);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(558, 37);
+            panel3.TabIndex = 15;
+            // 
+            // panel4
+            // 
+            panel4.BorderStyle = BorderStyle.FixedSingle;
+            panel4.Controls.Add(buttonSendFile);
+            panel4.Dock = DockStyle.Top;
+            panel4.Location = new Point(552, 135);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(558, 37);
+            panel4.TabIndex = 16;
+            // 
+            // buttonSendFile
+            // 
+            buttonSendFile.Location = new Point(16, 6);
+            buttonSendFile.Name = "buttonSendFile";
+            buttonSendFile.Size = new Size(102, 23);
+            buttonSendFile.TabIndex = 6;
+            buttonSendFile.TabStop = false;
+            buttonSendFile.Text = "Send File";
+            buttonSendFile.UseVisualStyleBackColor = true;
+            // 
             // FormProducer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1110, 541);
+            Controls.Add(panel4);
+            Controls.Add(panel3);
             Controls.Add(textBoxMessage);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -404,6 +442,9 @@
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).EndInit();
             contextMenuStrip1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            panel4.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -445,5 +486,8 @@
         private Label labelPort;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripMenuItem ExplorertoolStripMenuItem;
+        private Panel panel3;
+        private Panel panel4;
+        private Button buttonSendFile;
     }
 }
