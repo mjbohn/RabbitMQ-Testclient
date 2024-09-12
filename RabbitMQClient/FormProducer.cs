@@ -79,7 +79,10 @@ namespace RabbitMQClient
             buttonSend.Enabled = false;
 
         }
-
+        private void buttonSendFile_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Not implemented yet");
+        }
         private void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
             do
@@ -190,6 +193,8 @@ namespace RabbitMQClient
         {
             buttonSendFile.Enabled = !(sender as CheckBox).Checked;
         }
+
+
     }
 }
 

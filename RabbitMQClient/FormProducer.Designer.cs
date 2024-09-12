@@ -416,6 +416,7 @@
             buttonSendFile.TabStop = false;
             buttonSendFile.Text = "Send File";
             buttonSendFile.UseVisualStyleBackColor = true;
+            buttonSendFile.Click += buttonSendFile_Click;
             // 
             // FormProducer
             // 

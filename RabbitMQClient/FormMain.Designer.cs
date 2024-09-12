@@ -85,7 +85,7 @@
             // 
             LabelVersionInfo.AutoSize = true;
             LabelVersionInfo.Font = new Font("Segoe UI", 8F);
-            LabelVersionInfo.Location = new Point(199, 72);
+            LabelVersionInfo.Location = new Point(12, 64);
             LabelVersionInfo.Name = "LabelVersionInfo";
             LabelVersionInfo.Size = new Size(59, 13);
             LabelVersionInfo.TabIndex = 3;
@@ -97,7 +97,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(275, 86);
+            ClientSize = new Size(275, 92);
             Controls.Add(LabelVersionInfo);
             Controls.Add(buttonCreateConsumer);
             Controls.Add(buttonCreateProducer);
