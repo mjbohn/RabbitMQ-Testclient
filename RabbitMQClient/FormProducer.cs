@@ -147,6 +147,12 @@ namespace RabbitMQClient
             ChangeFormTitle();
         }
 
+        private void ExplorertoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormRabbitMQExplorer explorer = new FormRabbitMQExplorer();
+            explorer.Show();
+        }
+
         private void ChangeFormTitle()
         {
             this.Text = $"Producer | {textBoxExchange.Text} | {textBoxRoutingKey.Text}";
@@ -180,55 +186,8 @@ namespace RabbitMQClient
             }
         }
 
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            //Exchange ex = new Exchange();
-            //ex.Name = "root";
-            //ex.Text = "root";
-            //treeView1.Nodes.Add(ex);
 
 
-            var client = new HttpClient();
-
-            // Benutzername und Passwort für die Authentifizierung
-            var username = "tester";
-            var password = "1234";
-
-            // Base64-kodierte Authentifizierungsdaten
-            var authToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{password}"));
-
-            // Authorization-Header hinzufügen
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authToken);
-
-            var url = "https://rabbit.michael-bohn.net/api/vhosts";
-
-            // Anfrage senden
-            var response = await client.GetAsync(url);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                JsonArray? jsonArray = JsonNode.Parse(content).AsArray();
-
-                foreach (JsonObject jo in jsonArray)
-                {
-                    //treeView1.Nodes.Add((string)jo["name"]);
-                    RabbitMQVirtualHost vh = new RabbitMQVirtualHost();
-                    vh.Text = (string)jo["name"];
-                    treeView1.Nodes.Add(vh);
-                }
-
-
-                //MessageBox.Show(response.StatusCode.ToString());
-            }
-
-        }
-
-        private void ExplorertoolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormRabbitMQExplorer explorer = new FormRabbitMQExplorer();
-            explorer.Show();
-        }
     }
 }
 

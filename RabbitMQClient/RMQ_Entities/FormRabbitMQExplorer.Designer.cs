@@ -29,21 +29,57 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRabbitMQExplorer));
+            panelTop = new Panel();
+            statusStrip1 = new StatusStrip();
+            treeViewRMQ = new TreeView();
             SuspendLayout();
             // 
-            // RabbitMQExplorer
+            // panelTop
+            // 
+            panelTop.Dock = DockStyle.Top;
+            panelTop.Location = new Point(0, 0);
+            panelTop.Name = "panelTop";
+            panelTop.Size = new Size(766, 42);
+            panelTop.TabIndex = 1;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new Point(0, 422);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(766, 22);
+            statusStrip1.TabIndex = 2;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // treeViewRMQ
+            // 
+            treeViewRMQ.Dock = DockStyle.Left;
+            treeViewRMQ.Location = new Point(0, 42);
+            treeViewRMQ.Name = "treeViewRMQ";
+            treeViewRMQ.Size = new Size(121, 380);
+            treeViewRMQ.TabIndex = 3;
+            treeViewRMQ.TabStop = false;
+            // 
+            // FormRabbitMQExplorer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(766, 444);
+            Controls.Add(treeViewRMQ);
+            Controls.Add(statusStrip1);
+            Controls.Add(panelTop);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "RabbitMQExplorer";
+            Name = "FormRabbitMQExplorer";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "RabbitMQ Explorer";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Panel panelTop;
+        private StatusStrip statusStrip1;
+        private TreeView treeViewRMQ;
     }
 }

@@ -51,6 +51,8 @@
             fileToolStripMenuItem = new ToolStripMenuItem();
             loadProfileToolStripMenuItem = new ToolStripMenuItem();
             saveProfileToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator3 = new ToolStripSeparator();
+            ExplorertoolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
@@ -63,10 +65,6 @@
             pasteToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             clearToolStripMenuItem = new ToolStripMenuItem();
-            button1 = new Button();
-            treeView1 = new TreeView();
-            toolStripSeparator3 = new ToolStripSeparator();
-            ExplorertoolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
@@ -271,7 +269,7 @@
             // 
             loadProfileToolStripMenuItem.Name = "loadProfileToolStripMenuItem";
             loadProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.L;
-            loadProfileToolStripMenuItem.Size = new Size(180, 22);
+            loadProfileToolStripMenuItem.Size = new Size(179, 22);
             loadProfileToolStripMenuItem.Text = "&Load Profile";
             loadProfileToolStripMenuItem.Click += loadProfileToolStripMenuItem_Click;
             // 
@@ -279,20 +277,33 @@
             // 
             saveProfileToolStripMenuItem.Name = "saveProfileToolStripMenuItem";
             saveProfileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
-            saveProfileToolStripMenuItem.Size = new Size(180, 22);
+            saveProfileToolStripMenuItem.Size = new Size(179, 22);
             saveProfileToolStripMenuItem.Text = "&Save Profile";
             saveProfileToolStripMenuItem.Click += saveProfileToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(176, 6);
+            // 
+            // ExplorertoolStripMenuItem
+            // 
+            ExplorertoolStripMenuItem.Name = "ExplorertoolStripMenuItem";
+            ExplorertoolStripMenuItem.ShortcutKeys = Keys.Control | Keys.E;
+            ExplorertoolStripMenuItem.Size = new Size(179, 22);
+            ExplorertoolStripMenuItem.Text = "&Explorer";
+            ExplorertoolStripMenuItem.Click += ExplorertoolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(177, 6);
+            toolStripSeparator1.Size = new Size(176, 6);
             // 
             // closeToolStripMenuItem
             // 
             closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             closeToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.X;
-            closeToolStripMenuItem.Size = new Size(180, 22);
+            closeToolStripMenuItem.Size = new Size(179, 22);
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
@@ -370,43 +381,11 @@
             clearToolStripMenuItem.Size = new Size(121, 22);
             clearToolStripMenuItem.Text = "clear";
             // 
-            // button1
-            // 
-            button1.Location = new Point(916, 170);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 15;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
-            // treeView1
-            // 
-            treeView1.Location = new Point(641, 186);
-            treeView1.Name = "treeView1";
-            treeView1.Size = new Size(184, 304);
-            treeView1.TabIndex = 16;
-            // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(177, 6);
-            // 
-            // ExplorertoolStripMenuItem
-            // 
-            ExplorertoolStripMenuItem.Name = "ExplorertoolStripMenuItem";
-            ExplorertoolStripMenuItem.ShortcutKeys = Keys.Control | Keys.E;
-            ExplorertoolStripMenuItem.Size = new Size(180, 22);
-            ExplorertoolStripMenuItem.Text = "&Explorer";
-            ExplorertoolStripMenuItem.Click += ExplorertoolStripMenuItem_Click;
-            // 
             // FormProducer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1110, 541);
-            Controls.Add(treeView1);
-            Controls.Add(button1);
             Controls.Add(textBoxMessage);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -464,8 +443,6 @@
         private CheckBox checkBoxRepeatSend;
         private TextBox textBoxPort;
         private Label labelPort;
-        private Button button1;
-        private TreeView treeView1;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripMenuItem ExplorertoolStripMenuItem;
     }
