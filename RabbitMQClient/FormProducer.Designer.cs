@@ -53,6 +53,7 @@
             saveProfileToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
             ExplorertoolStripMenuItem = new ToolStripMenuItem();
+            ExplorerNoSsltoolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
@@ -68,7 +69,8 @@
             panel3 = new Panel();
             panel4 = new Panel();
             buttonSendFile = new Button();
-            ExplorerNoSsltoolStripMenuItem = new ToolStripMenuItem();
+            textBoxVhost = new TextBox();
+            labelVhost = new Label();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
@@ -130,7 +132,7 @@
             // 
             textBoxQueue.Location = new Point(58, 6);
             textBoxQueue.Name = "textBoxQueue";
-            textBoxQueue.Size = new Size(190, 23);
+            textBoxQueue.Size = new Size(28, 23);
             textBoxQueue.TabIndex = 3;
             textBoxQueue.Tag = "Queue";
             textBoxQueue.Visible = false;
@@ -138,7 +140,7 @@
             // labelQueue
             // 
             labelQueue.AutoSize = true;
-            labelQueue.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelQueue.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Strikeout);
             labelQueue.Location = new Point(5, 9);
             labelQueue.Name = "labelQueue";
             labelQueue.Size = new Size(47, 15);
@@ -300,6 +302,13 @@
             ExplorertoolStripMenuItem.Text = "&Explorer (SSL)";
             ExplorertoolStripMenuItem.Click += ExplorertoolStripMenuItem_Click;
             // 
+            // ExplorerNoSsltoolStripMenuItem
+            // 
+            ExplorerNoSsltoolStripMenuItem.Name = "ExplorerNoSsltoolStripMenuItem";
+            ExplorerNoSsltoolStripMenuItem.Size = new Size(188, 22);
+            ExplorerNoSsltoolStripMenuItem.Text = "Explorer (No SSL)";
+            ExplorerNoSsltoolStripMenuItem.Click += ExplorerNoSsltoolStripMenuItem_Click;
+            // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
@@ -316,6 +325,8 @@
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(textBoxVhost);
+            panel2.Controls.Add(labelVhost);
             panel2.Controls.Add(labelQueue);
             panel2.Controls.Add(textBoxQueue);
             panel2.Controls.Add(textBoxExchange);
@@ -419,12 +430,24 @@
             buttonSendFile.UseVisualStyleBackColor = true;
             buttonSendFile.Click += buttonSendFile_Click;
             // 
-            // ExplorerNoSsltoolStripMenuItem
+            // textBoxVhost
             // 
-            ExplorerNoSsltoolStripMenuItem.Name = "ExplorerNoSsltoolStripMenuItem";
-            ExplorerNoSsltoolStripMenuItem.Size = new Size(188, 22);
-            ExplorerNoSsltoolStripMenuItem.Text = "Explorer (No SSL)";
-            ExplorerNoSsltoolStripMenuItem.Click += ExplorerNoSsltoolStripMenuItem_Click;
+            textBoxVhost.Location = new Point(257, 5);
+            textBoxVhost.Name = "textBoxVhost";
+            textBoxVhost.PlaceholderText = "default /";
+            textBoxVhost.Size = new Size(108, 23);
+            textBoxVhost.TabIndex = 7;
+            textBoxVhost.Tag = "Exchange";
+            // 
+            // labelVhost
+            // 
+            labelVhost.AutoSize = true;
+            labelVhost.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelVhost.Location = new Point(208, 8);
+            labelVhost.Name = "labelVhost";
+            labelVhost.Size = new Size(43, 15);
+            labelVhost.TabIndex = 6;
+            labelVhost.Text = "vHost:";
             // 
             // FormProducer
             // 
@@ -499,5 +522,7 @@
         private Panel panel4;
         private Button buttonSendFile;
         private ToolStripMenuItem ExplorerNoSsltoolStripMenuItem;
+        private TextBox textBoxVhost;
+        private Label labelVhost;
     }
 }

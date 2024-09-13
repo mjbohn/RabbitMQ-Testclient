@@ -45,6 +45,7 @@ namespace RabbitMQClient
             textBoxQueue.Text = config.Queue;
             textBoxExchange.Text = config.Exchange;
             textBoxRoutingKey.Text = config.RoutingKey;
+            textBoxVhost.Text = config.VHost;
         }
 
         private void buttonSend_Click(object sender, EventArgs e)
@@ -54,6 +55,7 @@ namespace RabbitMQClient
                 HostName = textBoxServer.Text,
                 UserName = textBoxLogin.Text,
                 Password = textBoxPassword.Text,
+                VirtualHost = (string.IsNullOrEmpty(textBoxVhost.Text)) ? "/" : textBoxVhost.Text,
                 Port = (!string.IsNullOrEmpty(textBoxPort.Text)) ? int.Parse(textBoxPort.Text) : 5672
             };
 
@@ -112,7 +114,9 @@ namespace RabbitMQClient
                 Password = textBoxPassword.Text,
                 Queue = textBoxQueue.Text,
                 Exchange = textBoxExchange.Text,
+                VHost = textBoxVhost.Text,
                 RoutingKey = textBoxRoutingKey.Text
+                
             };
 
             SaveFileDialog sfd = new SaveFileDialog();
