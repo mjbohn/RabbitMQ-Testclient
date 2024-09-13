@@ -41,6 +41,7 @@ namespace RabbitMQClient
             _factory.UserName = textBoxLogin.Text;
             _factory.Password = textBoxPassword.Text;
             _factory.Port = (!string.IsNullOrEmpty(textBoxPort.Text)) ? int.Parse(textBoxPort.Text) : 5672;
+            _factory.VirtualHost = (string.IsNullOrEmpty(textBoxVhost.Text)) ? "/" : textBoxVhost.Text;
 
             // try to connect
             try
@@ -160,7 +161,8 @@ namespace RabbitMQClient
                 ClientName = textBoxClientName.Text,
                 AddLineFeed = checkBoxAddLF.Checked,
                 AutoAck = checkBoxAutoAck.Checked,
-                Prefetch = numericUpDownPrefetch.Value
+                Prefetch = numericUpDownPrefetch.Value,
+                VHost = textBoxVhost.Text,
             };
 
             SaveFileDialog sfd = new SaveFileDialog();
@@ -201,6 +203,7 @@ namespace RabbitMQClient
             textBoxPassword.Enabled = value;
             textBoxQueue.Enabled = value;
             textBoxClientName.Enabled = value;
+            textBoxVhost.Enabled = value;
 
             checkBoxAutoAck.Enabled = value;
 
@@ -214,6 +217,7 @@ namespace RabbitMQClient
             textBoxPassword.Text = config.Password;
             textBoxQueue.Text = config.Queue;
             textBoxClientName.Text = config.ClientName;
+            textBoxVhost.Text = config.VHost;
             checkBoxAddLF.Checked = config.AddLineFeed;
             checkBoxAutoAck.Checked = config.AutoAck;
             numericUpDownPrefetch.Value = config.Prefetch;

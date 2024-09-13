@@ -31,6 +31,10 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConsumer));
             panel1 = new Panel();
+            textBoxVhost = new TextBox();
+            labelVhost = new Label();
+            textBoxPort = new TextBox();
+            labelPort = new Label();
             textBoxClientName = new TextBox();
             labelClientName = new Label();
             textBoxQueue = new TextBox();
@@ -71,8 +75,6 @@
             saveProfileToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
-            textBoxPort = new TextBox();
-            labelPort = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panelAck.SuspendLayout();
@@ -86,6 +88,8 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(textBoxVhost);
+            panel1.Controls.Add(labelVhost);
             panel1.Controls.Add(textBoxPort);
             panel1.Controls.Add(labelPort);
             panel1.Controls.Add(textBoxClientName);
@@ -103,6 +107,46 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1014, 68);
             panel1.TabIndex = 10;
+            // 
+            // textBoxVhost
+            // 
+            textBoxVhost.Location = new Point(561, 35);
+            textBoxVhost.Name = "textBoxVhost";
+            textBoxVhost.PlaceholderText = "default /";
+            textBoxVhost.Size = new Size(190, 23);
+            textBoxVhost.TabIndex = 11;
+            textBoxVhost.Tag = "";
+            // 
+            // labelVhost
+            // 
+            labelVhost.AutoSize = true;
+            labelVhost.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelVhost.Location = new Point(512, 38);
+            labelVhost.Name = "labelVhost";
+            labelVhost.Size = new Size(43, 15);
+            labelVhost.TabIndex = 12;
+            labelVhost.Text = "vHost:";
+            // 
+            // textBoxPort
+            // 
+            textBoxPort.Location = new Point(57, 38);
+            textBoxPort.Name = "textBoxPort";
+            textBoxPort.PlaceholderText = "default 5672";
+            textBoxPort.Size = new Size(74, 23);
+            textBoxPort.TabIndex = 9;
+            textBoxPort.TabStop = false;
+            textBoxPort.Tag = "Login";
+            textBoxPort.Validated += textBoxPort_Validated;
+            // 
+            // labelPort
+            // 
+            labelPort.AutoSize = true;
+            labelPort.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelPort.Location = new Point(12, 41);
+            labelPort.Name = "labelPort";
+            labelPort.Size = new Size(34, 15);
+            labelPort.TabIndex = 10;
+            labelPort.Text = "Port:";
             // 
             // textBoxClientName
             // 
@@ -510,27 +554,6 @@
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
-            // textBoxPort
-            // 
-            textBoxPort.Location = new Point(57, 38);
-            textBoxPort.Name = "textBoxPort";
-            textBoxPort.PlaceholderText = "default 5672";
-            textBoxPort.Size = new Size(74, 23);
-            textBoxPort.TabIndex = 9;
-            textBoxPort.TabStop = false;
-            textBoxPort.Tag = "Login";
-            textBoxPort.Validated += textBoxPort_Validated;
-            // 
-            // labelPort
-            // 
-            labelPort.AutoSize = true;
-            labelPort.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            labelPort.Location = new Point(12, 41);
-            labelPort.Name = "labelPort";
-            labelPort.Size = new Size(34, 15);
-            labelPort.TabIndex = 10;
-            labelPort.Text = "Port:";
-            // 
             // FormConsumer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -606,5 +629,7 @@
         private NumericUpDown numericUpDownDelay;
         private TextBox textBoxPort;
         private Label labelPort;
+        private TextBox textBoxVhost;
+        private Label labelVhost;
     }
 }

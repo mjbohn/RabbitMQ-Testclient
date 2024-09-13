@@ -13,6 +13,7 @@ namespace RabbitMQClient
         public string Password { get; set; }
         public string Queue { get; set; }
         public string ClientName { get; set; }
+        public string VHost { get; set; }
         public bool AddLineFeed { get; set; }
         public bool AutoAck { get; set; }
         public decimal Prefetch {  get; set; }
