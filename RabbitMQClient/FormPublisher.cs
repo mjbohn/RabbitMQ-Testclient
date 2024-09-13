@@ -16,14 +16,14 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace RabbitMQClient
 {
-    public partial class FormProducer : Form
+    public partial class FormPublisher : Form
     {
         IConnection? _connection;
         IModel? _channel;
         byte[]? _body;
         BackgroundWorker _worker;
 
-        public FormProducer()
+        public FormPublisher()
         {
             InitializeComponent();
 

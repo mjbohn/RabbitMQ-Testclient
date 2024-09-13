@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            buttonCreateProducer = new Button();
+            buttonCreatePublisher = new Button();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             closeToolStripMenuItem = new ToolStripMenuItem();
@@ -38,15 +38,15 @@
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // buttonCreateProducer
+            // buttonCreatePublisher
             // 
-            buttonCreateProducer.Location = new Point(12, 27);
-            buttonCreateProducer.Name = "buttonCreateProducer";
-            buttonCreateProducer.Size = new Size(120, 23);
-            buttonCreateProducer.TabIndex = 0;
-            buttonCreateProducer.Text = "Create Producer";
-            buttonCreateProducer.UseVisualStyleBackColor = true;
-            buttonCreateProducer.Click += buttonCreateProducer_Click;
+            buttonCreatePublisher.Location = new Point(12, 27);
+            buttonCreatePublisher.Name = "buttonCreatePublisher";
+            buttonCreatePublisher.Size = new Size(120, 23);
+            buttonCreatePublisher.TabIndex = 0;
+            buttonCreatePublisher.Text = "Create Publisher";
+            buttonCreatePublisher.UseVisualStyleBackColor = true;
+            buttonCreatePublisher.Click += buttonCreatePublisher_Click;
             // 
             // menuStrip1
             // 
@@ -87,10 +87,10 @@
             LabelVersionInfo.Font = new Font("Segoe UI", 8F);
             LabelVersionInfo.Location = new Point(12, 64);
             LabelVersionInfo.Name = "LabelVersionInfo";
-            LabelVersionInfo.Size = new Size(59, 13);
+            LabelVersionInfo.Size = new Size(66, 13);
             LabelVersionInfo.TabIndex = 3;
             LabelVersionInfo.TabStop = true;
-            LabelVersionInfo.Text = "VersioInfo";
+            LabelVersionInfo.Text = "VersionInfo";
             LabelVersionInfo.LinkClicked += LabelVersionInfo_LinkClicked;
             // 
             // FormMain
@@ -100,7 +100,7 @@
             ClientSize = new Size(275, 92);
             Controls.Add(LabelVersionInfo);
             Controls.Add(buttonCreateConsumer);
-            Controls.Add(buttonCreateProducer);
+            Controls.Add(buttonCreatePublisher);
             Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
@@ -117,7 +117,7 @@
 
         #endregion
 
-        private Button buttonCreateProducer;
+        private Button buttonCreatePublisher;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem closeToolStripMenuItem;

@@ -19,11 +19,11 @@ namespace RabbitMQClient
             LabelVersionInfo.Text = ThisAssembly.Git.Tag;
         }
 
-        private void buttonCreateProducer_Click(object sender, EventArgs e)
+        private void buttonCreatePublisher_Click(object sender, EventArgs e)
         {
-            FormProducer? ProducerForm = new FormProducer();
-            ProducerForm.Parent = null;
-            ProducerForm.Show();
+            FormPublisher? PublisherForm = new FormPublisher();
+            PublisherForm.Parent = null;
+            PublisherForm.Show();
         }
 
         private void buttonCreateConsumer_Click(object sender, EventArgs e)
@@ -34,7 +34,7 @@ namespace RabbitMQClient
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bool formProducerExists = Application.OpenForms.OfType<FormProducer>().Any();
+            bool formProducerExists = Application.OpenForms.OfType<FormPublisher>().Any();
             bool formConsumerExists = Application.OpenForms.OfType<FormConsumer>().Any();
 
             if (formProducerExists || formConsumerExists)
