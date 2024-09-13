@@ -110,7 +110,10 @@ namespace RabbitMQClient
                 }
                 else
                 {
-                    _channel.BasicAck(_deliveryTag, checkBoxMultiple.Checked);
+                    if (_channel.IsOpen)
+                    {
+                        _channel.BasicAck(_deliveryTag, checkBoxMultiple.Checked); 
+                    }
                     Thread.Sleep((int)numericUpDownDelay.Value);
                 }
 
