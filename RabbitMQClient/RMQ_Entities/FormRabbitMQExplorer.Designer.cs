@@ -55,7 +55,7 @@
             treeViewRMQ.Dock = DockStyle.Left;
             treeViewRMQ.Location = new Point(0, 42);
             treeViewRMQ.Name = "treeViewRMQ";
-            treeViewRMQ.Size = new Size(121, 380);
+            treeViewRMQ.Size = new Size(174, 380);
             treeViewRMQ.TabIndex = 3;
             treeViewRMQ.TabStop = false;
             // 

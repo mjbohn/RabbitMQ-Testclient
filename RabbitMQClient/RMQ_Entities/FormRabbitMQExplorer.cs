@@ -15,46 +15,78 @@ namespace RabbitMQClient.RMQ_Entities
 {
     public partial class FormRabbitMQExplorer : Form
     {
-        public FormRabbitMQExplorer()
+        private string _username { get; set; }
+        private string _password { get; set; }
+        private string _server { get; set; }
+        private bool _useHttps { get; set; }
+
+        public FormRabbitMQExplorer(string servername, string username, string password, bool useHttps = true)
         {
+            _username = username;
+            _password = password;
+            _server = servername;
+            _useHttps = useHttps;
+
             InitializeComponent();
             InitializeTreeView();
         }
 
         private async void InitializeTreeView()
         {
-            var client = new HttpClient();
+            HttpClient? client = new HttpClient();
+            string protocol = _useHttps ? "https" : "http";
+            string? urlVhosts = $"{protocol}://{_server}/api/vhosts";
+            string? urlExchanges = $"{protocol}://{_server}/api/exchanges";
 
-            // Benutzername und Passwort für die Authentifizierung
-            var username = "tester";
-            var password = "1234";
+            string? authToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{_username}:{_password}"));
 
-            // Base64-kodierte Authentifizierungsdaten
-            var authToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{password}"));
-
-            // Authorization-Header hinzufügen
+            // Authorization-Header 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authToken);
 
-            var url = "https://rabbit.michael-bohn.net/api/vhosts";
+            // Send requests
+            HttpResponseMessage responseVhosts = await client.GetAsync(urlVhosts);
+            HttpResponseMessage responseExchanges = await client.GetAsync(urlExchanges);
 
-            // Anfrage senden
-            var response = await client.GetAsync(url);
 
-            if (response.IsSuccessStatusCode)
+            if (responseVhosts.IsSuccessStatusCode)
             {
-                var content = await response.Content.ReadAsStringAsync();
-                JsonArray? jsonArray = JsonNode.Parse(content).AsArray();
+                string contentVhosts = await responseVhosts.Content.ReadAsStringAsync();
+                string contentExchanges = await responseExchanges.Content.ReadAsStringAsync();
 
-                foreach (JsonObject jo in jsonArray)
-                {
-                    //treeView1.Nodes.Add((string)jo["name"]);
-                    RabbitMQVirtualHost vh = new RabbitMQVirtualHost();
-                    vh.Text = (string)jo["name"];
-                    treeViewRMQ.Nodes.Add(vh);
-                }
+                JsonArray jaVhosts = JsonNode.Parse(contentVhosts).AsArray();
+                JsonArray jaExchanges = JsonNode.Parse(contentExchanges).AsArray();
 
+                TreeViewAddVhosts(jaVhosts);
+                NewMethod(jaExchanges);
+
+                treeViewRMQ.ExpandAll();
 
                 //MessageBox.Show(response.StatusCode.ToString());
+            }
+        }
+
+        private void NewMethod(JsonArray jaExchanges)
+        {
+            foreach (JsonObject jo in jaExchanges)
+            {
+                RabbitMQExchange exchangeNode = new RabbitMQExchange();
+                exchangeNode.Text = (string)jo["name"] != string.Empty ? (string)jo["name"] : "(AMQP default)";
+
+                TreeNode[] tmpNode = treeViewRMQ.Nodes.Find((string)jo["vhost"], false);
+
+                tmpNode[0].Nodes.Add(exchangeNode);
+            }
+        }
+
+        private void TreeViewAddVhosts(JsonArray jaVhosts)
+        {
+            foreach (JsonObject jo in jaVhosts)
+            {
+                //treeView1.Nodes.Add((string)jo["name"]);
+                RabbitMQVirtualHost vhNode = new RabbitMQVirtualHost();
+                vhNode.Text = (string)jo["name"];
+                vhNode.Name = (string)jo["name"];
+                treeViewRMQ.Nodes.Add(vhNode);
             }
         }
     }

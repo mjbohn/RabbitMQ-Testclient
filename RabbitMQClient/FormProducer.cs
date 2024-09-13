@@ -152,9 +152,27 @@ namespace RabbitMQClient
 
         private void ExplorertoolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormRabbitMQExplorer explorer = new FormRabbitMQExplorer();
-            explorer.Show();
+            ShowExplorer(true);
         }
+
+        private void ShowExplorer(bool ssl)
+        {
+            if (textBoxLogin.Text != string.Empty && textBoxPassword.Text != string.Empty)
+            {
+                FormRabbitMQExplorer explorer = new FormRabbitMQExplorer(textBoxServer.Text, textBoxLogin.Text, textBoxPassword.Text, ssl);
+                explorer.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please enter Servername, Login & Password", "Missing credentils", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void ExplorerNoSsltoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowExplorer(false);
+        }
+
 
         private void ChangeFormTitle()
         {
