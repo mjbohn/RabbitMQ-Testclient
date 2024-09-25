@@ -58,6 +58,8 @@
             closeToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
             panel2 = new Panel();
+            textBoxVhost = new TextBox();
+            labelVhost = new Label();
             numericUpDownDelay = new NumericUpDown();
             checkBoxRepeatSend = new CheckBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
@@ -69,8 +71,6 @@
             panel3 = new Panel();
             panel4 = new Panel();
             buttonSendFile = new Button();
-            textBoxVhost = new TextBox();
-            labelVhost = new Label();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
@@ -339,6 +339,25 @@
             panel2.Size = new Size(1110, 37);
             panel2.TabIndex = 14;
             // 
+            // textBoxVhost
+            // 
+            textBoxVhost.Location = new Point(257, 5);
+            textBoxVhost.Name = "textBoxVhost";
+            textBoxVhost.PlaceholderText = "default /";
+            textBoxVhost.Size = new Size(108, 23);
+            textBoxVhost.TabIndex = 7;
+            textBoxVhost.Tag = "Exchange";
+            // 
+            // labelVhost
+            // 
+            labelVhost.AutoSize = true;
+            labelVhost.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelVhost.Location = new Point(208, 8);
+            labelVhost.Name = "labelVhost";
+            labelVhost.Size = new Size(43, 15);
+            labelVhost.TabIndex = 6;
+            labelVhost.Text = "vHost:";
+            // 
             // numericUpDownDelay
             // 
             numericUpDownDelay.Increment = new decimal(new int[] { 250, 0, 0, 0 });
@@ -430,26 +449,7 @@
             buttonSendFile.UseVisualStyleBackColor = true;
             buttonSendFile.Click += buttonSendFile_Click;
             // 
-            // textBoxVhost
-            // 
-            textBoxVhost.Location = new Point(257, 5);
-            textBoxVhost.Name = "textBoxVhost";
-            textBoxVhost.PlaceholderText = "default /";
-            textBoxVhost.Size = new Size(108, 23);
-            textBoxVhost.TabIndex = 7;
-            textBoxVhost.Tag = "Exchange";
-            // 
-            // labelVhost
-            // 
-            labelVhost.AutoSize = true;
-            labelVhost.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            labelVhost.Location = new Point(208, 8);
-            labelVhost.Name = "labelVhost";
-            labelVhost.Size = new Size(43, 15);
-            labelVhost.TabIndex = 6;
-            labelVhost.Text = "vHost:";
-            // 
-            // FormProducer
+            // FormPublisher
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -462,9 +462,9 @@
             Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
-            Name = "FormProducer";
+            Name = "FormPublisher";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Producer";
+            Text = "Publisher";
             FormClosing += FormProducer_FormClosing;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

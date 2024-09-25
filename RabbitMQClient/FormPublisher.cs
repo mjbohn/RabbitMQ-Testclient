@@ -87,11 +87,14 @@ namespace RabbitMQClient
         }
         private void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
+            IBasicProperties _basicProperties = _channel.CreateBasicProperties();
+            _basicProperties.Persistent = true;
+
             do
             {
                 _channel.BasicPublish(exchange: textBoxExchange.Text,
                 routingKey: textBoxRoutingKey.Text,
-                                     basicProperties: null,
+                                     basicProperties: _basicProperties,
                                      body: _body);
 
                 Thread.Sleep((int)numericUpDownDelay.Value);
@@ -180,7 +183,7 @@ namespace RabbitMQClient
 
         private void ChangeFormTitle()
         {
-            this.Text = $"Producer | {textBoxExchange.Text} | {textBoxRoutingKey.Text}";
+            this.Text = $"Publisher | {textBoxExchange.Text} | {textBoxRoutingKey.Text}";
         }
 
         private void textBoxExchange_TextChanged(object sender, EventArgs e)
