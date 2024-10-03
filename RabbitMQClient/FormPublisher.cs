@@ -1,6 +1,7 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
+using RabbitMQClient.ConfigHandling;
 using RabbitMQClient.RMQ_Entities;
 using System.ComponentModel;
 using System.Configuration;
@@ -37,17 +38,7 @@ namespace RabbitMQClient
             _worker.RunWorkerCompleted += RunWorkerCompleted;
         }
 
-        private void SetProperties(PublisherConfig config)
-        {
-            textBoxServer.Text = config.Server;
-            textBoxLogin.Text = config.Login;
-            textBoxPassword.Text = config.Password;
-            textBoxQueue.Text = config.Queue;
-            textBoxExchange.Text = config.Exchange;
-            textBoxRoutingKey.Text = config.RoutingKey;
-            textBoxVhost.Text = config.VHost;
-        }
-
+        // Action starts here
         private void buttonSend_Click(object sender, EventArgs e)
         {
             ConnectionFactory? factory = new ConnectionFactory
@@ -81,10 +72,12 @@ namespace RabbitMQClient
             buttonSend.Enabled = false;
 
         }
+
         private void buttonSendFile_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Not implemented yet");
         }
+
         private void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
             IBasicProperties _basicProperties = _channel.CreateBasicProperties();
@@ -100,13 +93,14 @@ namespace RabbitMQClient
                 Thread.Sleep((int)numericUpDownDelay.Value);
             } while (checkBoxRepeatSend.Checked);
         }
-
         private void RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             buttonSend.Enabled = true;
             _channel.Close();
             _connection.Close();
         }
+        
+        #region EventHandler
 
         private void saveProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -119,7 +113,7 @@ namespace RabbitMQClient
                 Exchange = textBoxExchange.Text,
                 VHost = textBoxVhost.Text,
                 RoutingKey = textBoxRoutingKey.Text
-                
+
             };
 
             SaveFileDialog sfd = new SaveFileDialog();
@@ -162,28 +156,9 @@ namespace RabbitMQClient
             ShowExplorer(true);
         }
 
-        private void ShowExplorer(bool ssl)
-        {
-            if (textBoxLogin.Text != string.Empty && textBoxPassword.Text != string.Empty)
-            {
-                FormRabbitMQExplorer explorer = new FormRabbitMQExplorer(textBoxServer.Text, textBoxLogin.Text, textBoxPassword.Text, ssl);
-                explorer.Show();
-            }
-            else
-            {
-                MessageBox.Show("Please enter Servername, Login & Password", "Missing credentils", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
         private void ExplorerNoSsltoolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowExplorer(false);
-        }
-
-
-        private void ChangeFormTitle()
-        {
-            this.Text = $"Publisher | {textBoxExchange.Text} | {textBoxRoutingKey.Text}";
         }
 
         private void textBoxExchange_TextChanged(object sender, EventArgs e)
@@ -204,7 +179,7 @@ namespace RabbitMQClient
         private void textBoxPort_Validating(object sender, CancelEventArgs e)
         {
             TextBox tb = sender as TextBox;
-            if (int.TryParse(tb.Text, out int result))
+            if (int.TryParse(tb.Text, out _))
             {
                 return;
             }
@@ -219,7 +194,36 @@ namespace RabbitMQClient
             buttonSendFile.Enabled = !(sender as CheckBox).Checked;
         }
 
+        #endregion
 
+        private void ShowExplorer(bool ssl)
+        {
+            if (textBoxLogin.Text != string.Empty && textBoxPassword.Text != string.Empty)
+            {
+                FormRabbitMQExplorer explorer = new FormRabbitMQExplorer(textBoxServer.Text, textBoxLogin.Text, textBoxPassword.Text, ssl);
+                explorer.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please enter Servername, Login & Password", "Missing credentils", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void ChangeFormTitle()
+        {
+            this.Text = $"Publisher | {textBoxExchange.Text} | {textBoxRoutingKey.Text}";
+        }
+
+        private void SetProperties(PublisherConfig config)
+        {
+            textBoxServer.Text = config.Server;
+            textBoxLogin.Text = config.Login;
+            textBoxPassword.Text = config.Password;
+            textBoxQueue.Text = config.Queue;
+            textBoxExchange.Text = config.Exchange;
+            textBoxRoutingKey.Text = config.RoutingKey;
+            textBoxVhost.Text = config.VHost;
+        }
     }
 }
 

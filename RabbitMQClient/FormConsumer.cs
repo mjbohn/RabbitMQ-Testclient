@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Threading.Channels;
 using RabbitMQ.Client.Exceptions;
 using System.CodeDom;
+using RabbitMQClient.ConfigHandling;
 
 namespace RabbitMQClient
 {
@@ -196,7 +197,8 @@ namespace RabbitMQClient
                 SetProperties(config);
             }
         }
-        #endregion
+
+        #endregion handle_config
 
         #region helper
         private void TextBoxesEnabled(bool value)
@@ -312,7 +314,7 @@ namespace RabbitMQClient
             }
         }
 
-        #endregion
+        #endregion helper
 
         #region RTB ContexMenuEvents
 
@@ -345,7 +347,7 @@ namespace RabbitMQClient
             rtb.Clear();
         }
 
-        #endregion
+        #endregion RTB ContexMenuEvents
 
 
     }

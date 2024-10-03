@@ -33,6 +33,7 @@
             buttonClose = new Button();
             labelBranch = new Label();
             labelCommit = new Label();
+            label1Author = new Label();
             SuspendLayout();
             // 
             // labelGitTag
@@ -81,6 +82,15 @@
             labelCommit.TabIndex = 4;
             labelCommit.Text = "labelCommit";
             // 
+            // label1Author
+            // 
+            label1Author.AutoSize = true;
+            label1Author.Location = new Point(208, 13);
+            label1Author.Name = "label1Author";
+            label1Author.Size = new Size(52, 15);
+            label1Author.TabIndex = 5;
+            label1Author.Text = "M. Bohn";
+            // 
             // FormVersionInfo
             // 
             AcceptButton = buttonClose;
@@ -88,6 +98,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.AntiqueWhite;
             ClientSize = new Size(358, 197);
+            Controls.Add(label1Author);
             Controls.Add(labelCommit);
             Controls.Add(labelBranch);
             Controls.Add(buttonClose);
@@ -108,5 +119,6 @@
         private Button buttonClose;
         private Label labelBranch;
         private Label labelCommit;
+        private Label label1Author;
     }
 }

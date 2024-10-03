@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RabbitMQClient
+namespace RabbitMQClient.ConfigHandling
 {
     internal class ConsumerConfig
     {
@@ -16,7 +16,7 @@ namespace RabbitMQClient
         public string VHost { get; set; }
         public bool AddLineFeed { get; set; }
         public bool AutoAck { get; set; }
-        public decimal Prefetch {  get; set; }
+        public decimal Prefetch { get; set; }
 
     }
 }

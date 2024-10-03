@@ -1,12 +1,12 @@
 ﻿using RabbitMQClient.Interfaces;
 using System.Text.Json.Serialization;
 
-namespace RabbitMQClient
+namespace RabbitMQClient.ConfigHandling
 {
-    
-    public class PublisherConfig 
+
+    public class PublisherConfig
     {
-       
+
         public string Server { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
