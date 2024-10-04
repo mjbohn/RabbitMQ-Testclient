@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RabbitMQClient.RMQ_Entities
 {
-    class RabbitMQExchange : TreeNode
+    class RabbitMQExchangeNode : TreeNode
     {
-        public RabbitMQExchange() : base()
+        public RabbitMQExchangeNode() : base()
         {
 
         }

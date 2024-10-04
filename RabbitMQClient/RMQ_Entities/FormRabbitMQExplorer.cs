@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -19,6 +21,12 @@ namespace RabbitMQClient.RMQ_Entities
         private string _password { get; set; }
         private string _server { get; set; }
         private bool _useHttps { get; set; }
+        private string _urlVhosts { get; set; }
+        private string _urlExchanges { get; set; }
+        private string _protocol { get; set; }
+        private string _authToken { get; set; }
+
+        private HttpClient? _client;
 
         public FormRabbitMQExplorer(string servername, string username, string password, bool useHttps = true)
         {
@@ -28,66 +36,88 @@ namespace RabbitMQClient.RMQ_Entities
             _useHttps = useHttps;
 
             InitializeComponent();
+            InitializeHttpClient();
             InitializeTreeView();
+                        
+        }
+
+        private void InitializeHttpClient()
+        {
+            _client = new HttpClient();
+            _protocol = _useHttps ? "https" : "http";
+            _urlVhosts = $"{_protocol}://{_server}/api/vhosts";
+            _urlExchanges = $"{_protocol}://{_server}/api/exchanges";
+
+            _authToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{_username}:{_password}"));
+
+            // Authorization-Header 
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _authToken);
+
         }
 
         private async void InitializeTreeView()
         {
-            HttpClient? client = new HttpClient();
-            string protocol = _useHttps ? "https" : "http";
-            string? urlVhosts = $"{protocol}://{_server}/api/vhosts";
-            string? urlExchanges = $"{protocol}://{_server}/api/exchanges";
-
-            string? authToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{_username}:{_password}"));
-
-            // Authorization-Header 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authToken);
+            string test = _urlVhosts;
 
             // Send requests
-            HttpResponseMessage responseVhosts = await client.GetAsync(urlVhosts);
-            HttpResponseMessage responseExchanges = await client.GetAsync(urlExchanges);
+            HttpResponseMessage responseVhosts = await _client.GetAsync(_urlVhosts);
+         
+            await TreeViewAddVhosts(responseVhosts);
+                        
+        }
 
-
+        private async Task TreeViewAddVhosts(HttpResponseMessage responseVhosts)
+        {
             if (responseVhosts.IsSuccessStatusCode)
             {
                 string contentVhosts = await responseVhosts.Content.ReadAsStringAsync();
-                string contentExchanges = await responseExchanges.Content.ReadAsStringAsync();
+
 
                 JsonArray jaVhosts = JsonNode.Parse(contentVhosts).AsArray();
+                foreach (JsonObject jo in jaVhosts)
+                {
+                    //treeView1.Nodes.Add((string)jo["name"]);
+                    RabbitMQVirtualHostNode vhNode = new RabbitMQVirtualHostNode();
+                    vhNode.Text = (string)jo["name"];
+                    vhNode.Name = (string)jo["name"];
+                    treeViewRMQ.Nodes.Add(vhNode);
+
+                    TreeViewAddExchangesToVhost(vhNode);
+                }
+
+
+            }
+            else
+            {
+                MessageBox.Show(responseVhosts.StatusCode.ToString());
+            }
+        }
+        private async void TreeViewAddExchangesToVhost(RabbitMQVirtualHostNode vhNode)
+        {
+            string vHostName = vhNode.Name == "/" ? HttpUtility.UrlEncode("/") : vhNode.Name;
+
+            HttpResponseMessage responseExchanges = await _client.GetAsync($"{_urlExchanges}/{vHostName}");
+
+            if (responseExchanges.IsSuccessStatusCode)
+            {
+                string contentExchanges = await responseExchanges.Content.ReadAsStringAsync();
                 JsonArray jaExchanges = JsonNode.Parse(contentExchanges).AsArray();
 
-                TreeViewAddVhosts(jaVhosts);
-                NewMethod(jaExchanges);
+                foreach (JsonObject jo in jaExchanges)
+                {
+                    string name = (string)jo["name"] == string.Empty ? "(AMPQ default)" : (string)jo["name"];
 
-                treeViewRMQ.ExpandAll();
-
-                //MessageBox.Show(response.StatusCode.ToString());
+                    RabbitMQExchangeNode exchangeNode = new RabbitMQExchangeNode();
+                    exchangeNode.Name = name;
+                    exchangeNode.Text = name;
+                    vhNode.Nodes.Add(exchangeNode);
+                }
             }
-        }
-
-        private void NewMethod(JsonArray jaExchanges)
-        {
-            foreach (JsonObject jo in jaExchanges)
+            else
             {
-                RabbitMQExchange exchangeNode = new RabbitMQExchange();
-                exchangeNode.Text = (string)jo["name"] != string.Empty ? (string)jo["name"] : "(AMQP default)";
-
-                TreeNode[] tmpNode = treeViewRMQ.Nodes.Find((string)jo["vhost"], false);
-
-                tmpNode[0].Nodes.Add(exchangeNode);
+                MessageBox.Show(responseExchanges.StatusCode.ToString());
             }
         }
 
-        private void TreeViewAddVhosts(JsonArray jaVhosts)
-        {
-            foreach (JsonObject jo in jaVhosts)
-            {
-                //treeView1.Nodes.Add((string)jo["name"]);
-                RabbitMQVirtualHost vhNode = new RabbitMQVirtualHost();
-                vhNode.Text = (string)jo["name"];
-                vhNode.Name = (string)jo["name"];
-                treeViewRMQ.Nodes.Add(vhNode);
-            }
-        }
     }
 }

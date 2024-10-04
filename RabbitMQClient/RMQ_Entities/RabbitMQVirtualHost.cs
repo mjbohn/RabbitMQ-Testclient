@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RabbitMQClient.RMQ_Entities
 {
-    internal class RabbitMQVirtualHost : TreeNode
+    internal class RabbitMQVirtualHostNode : TreeNode
     {
-        public RabbitMQVirtualHost() : base()
+        public RabbitMQVirtualHostNode() : base()
         {
 
         }
