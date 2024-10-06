@@ -28,5 +28,7 @@ namespace RabbitMQClient.RMQ_Entities
             return json_string;
         }
 
+       
+
     }
 }
