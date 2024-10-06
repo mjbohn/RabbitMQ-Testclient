@@ -70,6 +70,7 @@
             scintilla.ScrollWidth = 49;
             scintilla.Size = new Size(309, 380);
             scintilla.TabIndex = 5;
+            scintilla.TextChanged += scintilla_TextChanged;
             // 
             // FormRabbitMQExplorer
             // 
