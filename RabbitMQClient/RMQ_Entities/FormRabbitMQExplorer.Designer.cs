@@ -32,7 +32,7 @@
             panelTop = new Panel();
             statusStrip1 = new StatusStrip();
             treeViewRMQ = new TreeView();
-            richTextBox1 = new RichTextBox();
+            scintilla = new ScintillaNET.Scintilla();
             SuspendLayout();
             // 
             // panelTop
@@ -60,21 +60,23 @@
             treeViewRMQ.TabIndex = 3;
             treeViewRMQ.TabStop = false;
             // 
-            // richTextBox1
+            // scintilla
             // 
-            richTextBox1.Dock = DockStyle.Left;
-            richTextBox1.Location = new Point(174, 42);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(240, 380);
-            richTextBox1.TabIndex = 4;
-            richTextBox1.Text = "";
+            scintilla.AutocompleteListSelectedBackColor = Color.FromArgb(0, 120, 215);
+            scintilla.Dock = DockStyle.Left;
+            scintilla.LexerName = null;
+            scintilla.Location = new Point(174, 42);
+            scintilla.Name = "scintilla";
+            scintilla.ScrollWidth = 49;
+            scintilla.Size = new Size(309, 380);
+            scintilla.TabIndex = 5;
             // 
             // FormRabbitMQExplorer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(766, 444);
-            Controls.Add(richTextBox1);
+            Controls.Add(scintilla);
             Controls.Add(treeViewRMQ);
             Controls.Add(statusStrip1);
             Controls.Add(panelTop);
@@ -92,6 +94,6 @@
         private Panel panelTop;
         private StatusStrip statusStrip1;
         private TreeView treeViewRMQ;
-        private RichTextBox richTextBox1;
+        private ScintillaNET.Scintilla scintilla;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScintillaNET;
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,8 +17,12 @@ using System.Windows.Forms;
 using static System.Windows.Forms.Design.AxImporter;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
+#nullable disable warnings
+
+
 namespace RabbitMQClient.RMQ_Entities
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Plattformkompatibilität überprüfen", Justification = "<Ausstehend>")]
     public partial class FormRabbitMQExplorer : Form
     {
         private string _username { get; set; }
@@ -41,7 +46,45 @@ namespace RabbitMQClient.RMQ_Entities
             InitializeComponent();
             InitializeHttpClient();
             InitializeTreeView();
+            InitializeScintilla();
+
             treeViewRMQ.AfterSelect += TreeViewRMQ_AfterSelect;
+        }
+
+        
+        private void InitializeScintilla()
+        {
+            // Set the lexer
+            scintilla.LexerName = "cpp";
+
+            // Instruct the lexer to calculate folding
+            scintilla.SetProperty("fold", "1");
+            scintilla.SetProperty("fold.compact", "1");
+
+            // Configure a margin to display folding symbols
+            scintilla.Margins[2].Type = MarginType.Symbol;
+            scintilla.Margins[2].Mask = Marker.MaskFolders;
+            scintilla.Margins[2].Sensitive = true;
+            scintilla.Margins[2].Width = 20;
+
+            // Set colors for all folding markers
+            for (int i = 25; i <= 31; i++)
+            {
+                scintilla.Markers[i].SetForeColor(SystemColors.ControlLightLight);
+                scintilla.Markers[i].SetBackColor(SystemColors.ControlDark);
+            }
+
+            // Configure folding markers with respective symbols
+            scintilla.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
+            scintilla.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
+            scintilla.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
+            scintilla.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
+            scintilla.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
+            scintilla.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
+            scintilla.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
+
+            // Enable automatic folding
+            scintilla.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
         }
 
         private void TreeViewRMQ_AfterSelect(object? sender, TreeViewEventArgs e)
@@ -54,10 +97,12 @@ namespace RabbitMQClient.RMQ_Entities
                     
                     var jsonElement = JsonSerializer.Deserialize<JsonElement>((node as RabbitMQExchangeNode).json_string);
 
-                    richTextBox1.Text = JsonSerializer.Serialize(jsonElement, new JsonSerializerOptions()
+                    string text  = JsonSerializer.Serialize(jsonElement, new JsonSerializerOptions()
                     {
                         WriteIndented = true
                     });
+
+                    scintilla.Text = text;
 
                     break;
                 default:
