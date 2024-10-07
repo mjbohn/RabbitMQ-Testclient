@@ -266,8 +266,20 @@ namespace RabbitMQClient
 
             scintilla.BackColor = System.Drawing.Color.LightGray;
             scintilla.Styles[Style.Default].BackColor = Color.SteelBlue;
+
+            
+
             scintilla.StyleClearAll();
-            StyleCollection sc = scintilla.Styles;
+
+            //scintilla.Styles[Style.Cpp.Number].Bold = true;
+            //scintilla.Styles[Style.Cpp.Number].ForeColor = Color.Red;
+            //scintilla.Styles[Style.Cpp.Comment].ForeColor = Color.Green;
+            //scintilla.Styles[Style.Cpp.CommentDoc].ForeColor = Color.Green;
+            //scintilla.Styles[Style.Cpp.CommentLine].ForeColor = Color.Green;
+            //scintilla.Styles[Style.Cpp.Word].ForeColor = Color.Pink;
+
+            //scintilla.SetKeywords(0, "hello world foo baz int bool");
+            //StyleCollection sc = scintilla.Styles;
         }
 
         
