@@ -36,7 +36,7 @@
             labelExchange = new Label();
             textBoxQueue = new TextBox();
             labelQueue = new Label();
-            panel1 = new Panel();
+            panelTop = new Panel();
             textBoxPort = new TextBox();
             labelPort = new Label();
             textBoxPassword = new TextBox();
@@ -55,21 +55,21 @@
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
-            panel2 = new Panel();
+            panel2nd = new Panel();
             textBoxVhost = new TextBox();
             labelVhost = new Label();
             numericUpDownDelay = new NumericUpDown();
             checkBoxRepeatSend = new CheckBox();
-            panel3 = new Panel();
-            panel4 = new Panel();
+            panelSendButton = new Panel();
+            panelSendFile = new Panel();
             buttonSendFile = new Button();
             scintilla = new ScintillaNET.Scintilla();
-            panel1.SuspendLayout();
+            panelTop.SuspendLayout();
             menuStrip1.SuspendLayout();
-            panel2.SuspendLayout();
+            panel2nd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).BeginInit();
-            panel3.SuspendLayout();
-            panel4.SuspendLayout();
+            panelSendButton.SuspendLayout();
+            panelSendFile.SuspendLayout();
             SuspendLayout();
             // 
             // buttonSend
@@ -94,7 +94,7 @@
             // 
             // textBoxRoutingKey
             // 
-            textBoxRoutingKey.Location = new Point(729, 3);
+            textBoxRoutingKey.Location = new Point(729, 6);
             textBoxRoutingKey.Name = "textBoxRoutingKey";
             textBoxRoutingKey.Size = new Size(190, 23);
             textBoxRoutingKey.TabIndex = 5;
@@ -140,22 +140,22 @@
             labelQueue.Text = "Queue:";
             labelQueue.Visible = false;
             // 
-            // panel1
+            // panelTop
             // 
-            panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(textBoxPort);
-            panel1.Controls.Add(labelPort);
-            panel1.Controls.Add(textBoxPassword);
-            panel1.Controls.Add(textBoxLogin);
-            panel1.Controls.Add(textBoxServer);
-            panel1.Controls.Add(labelPassword);
-            panel1.Controls.Add(labelLogin);
-            panel1.Controls.Add(labelServer);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 24);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1110, 37);
-            panel1.TabIndex = 9;
+            panelTop.BorderStyle = BorderStyle.FixedSingle;
+            panelTop.Controls.Add(textBoxPort);
+            panelTop.Controls.Add(labelPort);
+            panelTop.Controls.Add(textBoxPassword);
+            panelTop.Controls.Add(textBoxLogin);
+            panelTop.Controls.Add(textBoxServer);
+            panelTop.Controls.Add(labelPassword);
+            panelTop.Controls.Add(labelLogin);
+            panelTop.Controls.Add(labelServer);
+            panelTop.Dock = DockStyle.Top;
+            panelTop.Location = new Point(0, 24);
+            panelTop.Name = "panelTop";
+            panelTop.Size = new Size(1110, 37);
+            panelTop.TabIndex = 9;
             // 
             // textBoxPort
             // 
@@ -301,22 +301,22 @@
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
-            // panel2
+            // panel2nd
             // 
-            panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Controls.Add(textBoxVhost);
-            panel2.Controls.Add(labelVhost);
-            panel2.Controls.Add(labelQueue);
-            panel2.Controls.Add(textBoxQueue);
-            panel2.Controls.Add(textBoxExchange);
-            panel2.Controls.Add(labelExchange);
-            panel2.Controls.Add(textBoxRoutingKey);
-            panel2.Controls.Add(labelRoutingKey);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 61);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1110, 37);
-            panel2.TabIndex = 14;
+            panel2nd.BorderStyle = BorderStyle.FixedSingle;
+            panel2nd.Controls.Add(textBoxVhost);
+            panel2nd.Controls.Add(labelVhost);
+            panel2nd.Controls.Add(labelQueue);
+            panel2nd.Controls.Add(textBoxQueue);
+            panel2nd.Controls.Add(textBoxExchange);
+            panel2nd.Controls.Add(labelExchange);
+            panel2nd.Controls.Add(textBoxRoutingKey);
+            panel2nd.Controls.Add(labelRoutingKey);
+            panel2nd.Dock = DockStyle.Top;
+            panel2nd.Location = new Point(0, 61);
+            panel2nd.Name = "panel2nd";
+            panel2nd.Size = new Size(1110, 37);
+            panel2nd.TabIndex = 14;
             // 
             // textBoxVhost
             // 
@@ -360,27 +360,27 @@
             checkBoxRepeatSend.UseVisualStyleBackColor = true;
             checkBoxRepeatSend.CheckedChanged += checkBoxRepeatSend_CheckedChanged;
             // 
-            // panel3
+            // panelSendButton
             // 
-            panel3.BorderStyle = BorderStyle.FixedSingle;
-            panel3.Controls.Add(numericUpDownDelay);
-            panel3.Controls.Add(buttonSend);
-            panel3.Controls.Add(checkBoxRepeatSend);
-            panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(504, 135);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(606, 37);
-            panel3.TabIndex = 15;
+            panelSendButton.BorderStyle = BorderStyle.FixedSingle;
+            panelSendButton.Controls.Add(numericUpDownDelay);
+            panelSendButton.Controls.Add(buttonSend);
+            panelSendButton.Controls.Add(checkBoxRepeatSend);
+            panelSendButton.Dock = DockStyle.Top;
+            panelSendButton.Location = new Point(504, 98);
+            panelSendButton.Name = "panelSendButton";
+            panelSendButton.Size = new Size(606, 37);
+            panelSendButton.TabIndex = 15;
             // 
-            // panel4
+            // panelSendFile
             // 
-            panel4.BorderStyle = BorderStyle.FixedSingle;
-            panel4.Controls.Add(buttonSendFile);
-            panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(504, 98);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(606, 37);
-            panel4.TabIndex = 16;
+            panelSendFile.BorderStyle = BorderStyle.FixedSingle;
+            panelSendFile.Controls.Add(buttonSendFile);
+            panelSendFile.Dock = DockStyle.Top;
+            panelSendFile.Location = new Point(504, 135);
+            panelSendFile.Name = "panelSendFile";
+            panelSendFile.Size = new Size(606, 37);
+            panelSendFile.TabIndex = 16;
             // 
             // buttonSendFile
             // 
@@ -410,11 +410,11 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1110, 541);
-            Controls.Add(panel3);
-            Controls.Add(panel4);
+            Controls.Add(panelSendFile);
+            Controls.Add(panelSendButton);
             Controls.Add(scintilla);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
+            Controls.Add(panel2nd);
+            Controls.Add(panelTop);
             Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -422,16 +422,16 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Publisher";
             FormClosing += FormProducer_FormClosing;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            panelTop.ResumeLayout(false);
+            panelTop.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
+            panel2nd.ResumeLayout(false);
+            panel2nd.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).EndInit();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            panel4.ResumeLayout(false);
+            panelSendButton.ResumeLayout(false);
+            panelSendButton.PerformLayout();
+            panelSendFile.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -445,7 +445,7 @@
         private Label labelExchange;
         private TextBox textBoxQueue;
         private Label labelQueue;
-        private Panel panel1;
+        private Panel panelTop;
         private TextBox textBoxPassword;
         private TextBox textBoxLogin;
         private TextBox textBoxServer;
@@ -457,7 +457,7 @@
         private ToolStripMenuItem saveProfileToolStripMenuItem;
         private ToolStripMenuItem loadProfileToolStripMenuItem;
         private SaveFileDialog saveFileDialog1;
-        private Panel panel2;
+        private Panel panel2nd;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem closeToolStripMenuItem;
         private NumericUpDown numericUpDownDelay;
@@ -466,8 +466,8 @@
         private Label labelPort;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripMenuItem ExplorertoolStripMenuItem;
-        private Panel panel3;
-        private Panel panel4;
+        private Panel panelSendButton;
+        private Panel panelSendFile;
         private Button buttonSendFile;
         private ToolStripMenuItem ExplorerNoSsltoolStripMenuItem;
         private TextBox textBoxVhost;
