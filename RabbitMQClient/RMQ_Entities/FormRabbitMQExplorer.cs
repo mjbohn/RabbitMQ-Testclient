@@ -90,6 +90,10 @@ namespace RabbitMQClient.RMQ_Entities
 
             // Enable automatic folding
             scintilla.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
+
+            scintilla.BackColor = System.Drawing.Color.LightGray;
+            scintilla.StyleClearAll();
+            StyleCollection sc = scintilla.Styles;
         }
         private void InitializeHttpClient()
         {

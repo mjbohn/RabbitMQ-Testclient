@@ -33,6 +33,10 @@
             statusStrip1 = new StatusStrip();
             treeViewRMQ = new TreeView();
             scintilla = new ScintillaNET.Scintilla();
+            splitContainer1 = new SplitContainer();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.SuspendLayout();
             SuspendLayout();
             // 
             // panelTop
@@ -40,14 +44,14 @@
             panelTop.Dock = DockStyle.Top;
             panelTop.Location = new Point(0, 0);
             panelTop.Name = "panelTop";
-            panelTop.Size = new Size(766, 42);
+            panelTop.Size = new Size(978, 42);
             panelTop.TabIndex = 1;
             // 
             // statusStrip1
             // 
-            statusStrip1.Location = new Point(0, 422);
+            statusStrip1.Location = new Point(0, 494);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(766, 22);
+            statusStrip1.Size = new Size(978, 22);
             statusStrip1.TabIndex = 2;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -56,28 +60,42 @@
             treeViewRMQ.Dock = DockStyle.Left;
             treeViewRMQ.Location = new Point(0, 42);
             treeViewRMQ.Name = "treeViewRMQ";
-            treeViewRMQ.Size = new Size(174, 380);
+            treeViewRMQ.Size = new Size(174, 452);
             treeViewRMQ.TabIndex = 3;
             treeViewRMQ.TabStop = false;
             // 
             // scintilla
             // 
             scintilla.AutocompleteListSelectedBackColor = Color.FromArgb(0, 120, 215);
-            scintilla.Dock = DockStyle.Left;
+            scintilla.Dock = DockStyle.Fill;
+            scintilla.Font = new Font("Verdana", 10F);
             scintilla.LexerName = null;
-            scintilla.Location = new Point(174, 42);
+            scintilla.Location = new Point(0, 0);
             scintilla.Name = "scintilla";
             scintilla.ScrollWidth = 49;
-            scintilla.Size = new Size(309, 380);
+            scintilla.Size = new Size(393, 452);
             scintilla.TabIndex = 5;
             scintilla.TextChanged += scintilla_TextChanged;
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(174, 42);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(scintilla);
+            splitContainer1.Size = new Size(804, 452);
+            splitContainer1.SplitterDistance = 393;
+            splitContainer1.TabIndex = 6;
             // 
             // FormRabbitMQExplorer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(766, 444);
-            Controls.Add(scintilla);
+            ClientSize = new Size(978, 516);
+            Controls.Add(splitContainer1);
             Controls.Add(treeViewRMQ);
             Controls.Add(statusStrip1);
             Controls.Add(panelTop);
@@ -86,6 +104,9 @@
             Name = "FormRabbitMQExplorer";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "RabbitMQ Explorer";
+            splitContainer1.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -96,5 +117,6 @@
         private StatusStrip statusStrip1;
         private TreeView treeViewRMQ;
         private ScintillaNET.Scintilla scintilla;
+        private SplitContainer splitContainer1;
     }
 }
