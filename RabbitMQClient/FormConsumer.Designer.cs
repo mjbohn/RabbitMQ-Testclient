@@ -68,6 +68,7 @@
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
             scintillaReceivedMessages = new ScintillaNET.Scintilla();
+            buttonClear = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panelAck.SuspendLayout();
@@ -380,6 +381,7 @@
             // panel3
             // 
             panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(buttonClear);
             panel3.Controls.Add(label1);
             panel3.Controls.Add(numericUpDownDelay);
             panel3.Controls.Add(labelPrefetch);
@@ -504,6 +506,17 @@
             scintillaReceivedMessages.Size = new Size(1014, 372);
             scintillaReceivedMessages.TabIndex = 15;
             // 
+            // buttonClear
+            // 
+            buttonClear.Location = new Point(480, 7);
+            buttonClear.Name = "buttonClear";
+            buttonClear.Size = new Size(75, 23);
+            buttonClear.TabIndex = 8;
+            buttonClear.TabStop = false;
+            buttonClear.Text = "clear";
+            buttonClear.UseVisualStyleBackColor = true;
+            buttonClear.Click += buttonClear_Click;
+            // 
             // FormConsumer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -574,5 +587,6 @@
         private TextBox textBoxVhost;
         private Label labelVhost;
         private ScintillaNET.Scintilla scintillaReceivedMessages;
+        private Button buttonClear;
     }
 }

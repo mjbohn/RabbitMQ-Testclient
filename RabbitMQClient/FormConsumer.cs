@@ -15,6 +15,8 @@ using System.CodeDom;
 using RabbitMQClient.ConfigHandling;
 using ScintillaNET;
 
+#nullable disable warnings
+
 namespace RabbitMQClient
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Plattformkompatibilität überprüfen", Justification = "<Ausstehend>")]
@@ -47,7 +49,7 @@ namespace RabbitMQClient
             scintillaReceivedMessages.Margins[2].Sensitive = true;
             scintillaReceivedMessages.Margins[2].Width = 20;
 
-            scintillaReceivedMessages.Margins[0].Width = 16;
+            scintillaReceivedMessages.Margins[0].Width = 32;
 
             // Set colors for all folding markers
             for (int i = 25; i <= 31; i++)
@@ -159,7 +161,9 @@ namespace RabbitMQClient
                 BeginInvoke(() =>
                 {
                     scintillaReceivedMessages.AppendText(message);
+                    scintillaReceivedMessages.SetSel(scintillaReceivedMessages.TextLength, scintillaReceivedMessages.TextLength);
                     scintillaReceivedMessages.ScrollCaret();
+                    
                 });
 
                 if (!checkBoxAutoAck.Checked)
@@ -407,5 +411,9 @@ namespace RabbitMQClient
         #endregion RTB ContexMenuEvents
 
 
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            scintillaReceivedMessages.ClearAll();
+        }
     }
 }

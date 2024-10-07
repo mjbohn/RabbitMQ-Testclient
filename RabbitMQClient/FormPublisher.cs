@@ -243,7 +243,7 @@ namespace RabbitMQClient
             scintilla.Margins[2].Sensitive = true;
             scintilla.Margins[2].Width = 20;
 
-            scintilla.Margins[0].Width = 16;
+            scintilla.Margins[0].Width = 32;
 
             // Set colors for all folding markers
             for (int i = 25; i <= 31; i++)
