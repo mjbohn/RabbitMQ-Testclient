@@ -3,6 +3,7 @@ using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
 using RabbitMQClient.ConfigHandling;
 using RabbitMQClient.RMQ_Entities;
+using ScintillaNET;
 using System.ComponentModel;
 using System.Configuration;
 using System.Net.Http.Headers;
@@ -17,6 +18,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace RabbitMQClient
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Plattformkompatibilität überprüfen", Justification = "<Ausstehend>")]
     public partial class FormPublisher : Form
     {
         IConnection? _connection;
@@ -27,6 +29,7 @@ namespace RabbitMQClient
         public FormPublisher()
         {
             InitializeComponent();
+            InitializeScintilla();
 
             _worker = new BackgroundWorker
             {
@@ -62,7 +65,7 @@ namespace RabbitMQClient
 
             _channel = _connection.CreateModel();
 
-            _body = Encoding.UTF8.GetBytes(textBoxMessage.Text);
+            _body = Encoding.UTF8.GetBytes(scintilla.Text);
 
             if (!_worker.IsBusy)
             {
@@ -99,7 +102,7 @@ namespace RabbitMQClient
             _channel.Close();
             _connection.Close();
         }
-        
+
         #region EventHandler
 
         private void saveProfileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -224,6 +227,50 @@ namespace RabbitMQClient
             textBoxRoutingKey.Text = config.RoutingKey;
             textBoxVhost.Text = config.VHost;
         }
+
+        private void InitializeScintilla()
+        {
+            // Set the lexer
+            scintilla.LexerName = "cpp";
+
+            // Instruct the lexer to calculate folding
+            scintilla.SetProperty("fold", "1");
+            scintilla.SetProperty("fold.compact", "1");
+
+            // Configure a margin to display folding symbols
+            scintilla.Margins[2].Type = MarginType.Symbol;
+            scintilla.Margins[2].Mask = Marker.MaskFolders;
+            scintilla.Margins[2].Sensitive = true;
+            scintilla.Margins[2].Width = 20;
+
+            scintilla.Margins[0].Width = 16;
+
+            // Set colors for all folding markers
+            for (int i = 25; i <= 31; i++)
+            {
+                scintilla.Markers[i].SetForeColor(SystemColors.ControlLightLight);
+                scintilla.Markers[i].SetBackColor(SystemColors.ControlDark);
+            }
+
+            // Configure folding markers with respective symbols
+            scintilla.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
+            scintilla.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
+            scintilla.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
+            scintilla.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
+            scintilla.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
+            scintilla.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
+            scintilla.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
+
+            // Enable automatic folding
+            scintilla.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
+
+            scintilla.BackColor = System.Drawing.Color.LightGray;
+            scintilla.Styles[Style.Default].BackColor = Color.SteelBlue;
+            scintilla.StyleClearAll();
+            StyleCollection sc = scintilla.Styles;
+        }
+
+        
     }
 }
 

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPublisher));
             buttonSend = new Button();
             labelRoutingKey = new Label();
@@ -37,7 +36,6 @@
             labelExchange = new Label();
             textBoxQueue = new TextBox();
             labelQueue = new Label();
-            textBoxMessage = new TextBox();
             panel1 = new Panel();
             textBoxPort = new TextBox();
             labelPort = new Label();
@@ -62,20 +60,14 @@
             labelVhost = new Label();
             numericUpDownDelay = new NumericUpDown();
             checkBoxRepeatSend = new CheckBox();
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            seleceAllToolStripMenuItem = new ToolStripMenuItem();
-            copyToolStripMenuItem = new ToolStripMenuItem();
-            pasteToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator2 = new ToolStripSeparator();
-            clearToolStripMenuItem = new ToolStripMenuItem();
             panel3 = new Panel();
             panel4 = new Panel();
             buttonSendFile = new Button();
+            scintilla = new ScintillaNET.Scintilla();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).BeginInit();
-            contextMenuStrip1.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             SuspendLayout();
@@ -147,19 +139,6 @@
             labelQueue.TabIndex = 5;
             labelQueue.Text = "Queue:";
             labelQueue.Visible = false;
-            // 
-            // textBoxMessage
-            // 
-            textBoxMessage.BackColor = Color.SteelBlue;
-            textBoxMessage.Dock = DockStyle.Left;
-            textBoxMessage.Font = new Font("Courier New", 11F);
-            textBoxMessage.Location = new Point(0, 98);
-            textBoxMessage.Multiline = true;
-            textBoxMessage.Name = "textBoxMessage";
-            textBoxMessage.Size = new Size(552, 443);
-            textBoxMessage.TabIndex = 0;
-            textBoxMessage.TabStop = false;
-            textBoxMessage.Text = "Hello World!";
             // 
             // panel1
             // 
@@ -381,41 +360,6 @@
             checkBoxRepeatSend.UseVisualStyleBackColor = true;
             checkBoxRepeatSend.CheckedChanged += checkBoxRepeatSend_CheckedChanged;
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { seleceAllToolStripMenuItem, copyToolStripMenuItem, pasteToolStripMenuItem, toolStripSeparator2, clearToolStripMenuItem });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(122, 98);
-            // 
-            // seleceAllToolStripMenuItem
-            // 
-            seleceAllToolStripMenuItem.Name = "seleceAllToolStripMenuItem";
-            seleceAllToolStripMenuItem.Size = new Size(121, 22);
-            seleceAllToolStripMenuItem.Text = "selece all";
-            // 
-            // copyToolStripMenuItem
-            // 
-            copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            copyToolStripMenuItem.Size = new Size(121, 22);
-            copyToolStripMenuItem.Text = "copy";
-            // 
-            // pasteToolStripMenuItem
-            // 
-            pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            pasteToolStripMenuItem.Size = new Size(121, 22);
-            pasteToolStripMenuItem.Text = "paste";
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(118, 6);
-            // 
-            // clearToolStripMenuItem
-            // 
-            clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            clearToolStripMenuItem.Size = new Size(121, 22);
-            clearToolStripMenuItem.Text = "clear";
-            // 
             // panel3
             // 
             panel3.BorderStyle = BorderStyle.FixedSingle;
@@ -423,9 +367,9 @@
             panel3.Controls.Add(buttonSend);
             panel3.Controls.Add(checkBoxRepeatSend);
             panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(552, 98);
+            panel3.Location = new Point(504, 135);
             panel3.Name = "panel3";
-            panel3.Size = new Size(558, 37);
+            panel3.Size = new Size(606, 37);
             panel3.TabIndex = 15;
             // 
             // panel4
@@ -433,9 +377,9 @@
             panel4.BorderStyle = BorderStyle.FixedSingle;
             panel4.Controls.Add(buttonSendFile);
             panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(552, 135);
+            panel4.Location = new Point(504, 98);
             panel4.Name = "panel4";
-            panel4.Size = new Size(558, 37);
+            panel4.Size = new Size(606, 37);
             panel4.TabIndex = 16;
             // 
             // buttonSendFile
@@ -449,14 +393,26 @@
             buttonSendFile.UseVisualStyleBackColor = true;
             buttonSendFile.Click += buttonSendFile_Click;
             // 
+            // scintilla
+            // 
+            scintilla.AutocompleteListSelectedBackColor = Color.FromArgb(0, 120, 215);
+            scintilla.Dock = DockStyle.Left;
+            scintilla.LexerName = null;
+            scintilla.Location = new Point(0, 98);
+            scintilla.Name = "scintilla";
+            scintilla.ScrollWidth = 88;
+            scintilla.Size = new Size(504, 443);
+            scintilla.TabIndex = 17;
+            scintilla.Text = "Hello World :-) ";
+            // 
             // FormPublisher
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1110, 541);
-            Controls.Add(panel4);
             Controls.Add(panel3);
-            Controls.Add(textBoxMessage);
+            Controls.Add(panel4);
+            Controls.Add(scintilla);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(menuStrip1);
@@ -473,7 +429,6 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).EndInit();
-            contextMenuStrip1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel4.ResumeLayout(false);
@@ -490,7 +445,6 @@
         private Label labelExchange;
         private TextBox textBoxQueue;
         private Label labelQueue;
-        private TextBox textBoxMessage;
         private Panel panel1;
         private TextBox textBoxPassword;
         private TextBox textBoxLogin;
@@ -506,12 +460,6 @@
         private Panel panel2;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem closeToolStripMenuItem;
-        private ContextMenuStrip contextMenuStrip1;
-        private ToolStripMenuItem seleceAllToolStripMenuItem;
-        private ToolStripMenuItem copyToolStripMenuItem;
-        private ToolStripMenuItem pasteToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator2;
-        private ToolStripMenuItem clearToolStripMenuItem;
         private NumericUpDown numericUpDownDelay;
         private CheckBox checkBoxRepeatSend;
         private TextBox textBoxPort;
@@ -524,5 +472,6 @@
         private ToolStripMenuItem ExplorerNoSsltoolStripMenuItem;
         private TextBox textBoxVhost;
         private Label labelVhost;
+        private ScintillaNET.Scintilla scintilla;
     }
 }
