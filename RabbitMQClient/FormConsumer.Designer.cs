@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConsumer));
             panel1 = new Panel();
             textBoxVhost = new TextBox();
@@ -55,13 +54,6 @@
             radioButtonAck = new RadioButton();
             buttonStop = new Button();
             buttonStart = new Button();
-            rtbReceivedMessages = new RichTextBox();
-            contextMenuRtbReceivedMsgs = new ContextMenuStrip(components);
-            MenuItemSelectAll = new ToolStripMenuItem();
-            MenuItemCopy = new ToolStripMenuItem();
-            MenuItemPaste = new ToolStripMenuItem();
-            toolStripSeparator2 = new ToolStripSeparator();
-            MenuItemClear = new ToolStripMenuItem();
             checkBoxAddLF = new CheckBox();
             panel3 = new Panel();
             label1 = new Label();
@@ -75,10 +67,10 @@
             saveProfileToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             closeToolStripMenuItem = new ToolStripMenuItem();
+            scintillaReceivedMessages = new ScintillaNET.Scintilla();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panelAck.SuspendLayout();
-            contextMenuRtbReceivedMsgs.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrefetch).BeginInit();
@@ -371,59 +363,6 @@
             buttonStart.UseVisualStyleBackColor = false;
             buttonStart.Click += ButtonStart_Click;
             // 
-            // rtbReceivedMessages
-            // 
-            rtbReceivedMessages.BackColor = Color.Wheat;
-            rtbReceivedMessages.ContextMenuStrip = contextMenuRtbReceivedMsgs;
-            rtbReceivedMessages.Dock = DockStyle.Fill;
-            rtbReceivedMessages.Location = new Point(0, 129);
-            rtbReceivedMessages.Name = "rtbReceivedMessages";
-            rtbReceivedMessages.ReadOnly = true;
-            rtbReceivedMessages.Size = new Size(1014, 372);
-            rtbReceivedMessages.TabIndex = 12;
-            rtbReceivedMessages.TabStop = false;
-            rtbReceivedMessages.Text = "";
-            // 
-            // contextMenuRtbReceivedMsgs
-            // 
-            contextMenuRtbReceivedMsgs.Items.AddRange(new ToolStripItem[] { MenuItemSelectAll, MenuItemCopy, MenuItemPaste, toolStripSeparator2, MenuItemClear });
-            contextMenuRtbReceivedMsgs.Name = "contextMenuStrip1";
-            contextMenuRtbReceivedMsgs.Size = new Size(120, 98);
-            // 
-            // MenuItemSelectAll
-            // 
-            MenuItemSelectAll.Name = "MenuItemSelectAll";
-            MenuItemSelectAll.Size = new Size(119, 22);
-            MenuItemSelectAll.Text = "select all";
-            MenuItemSelectAll.Click += MenuItemSelectAll_Click;
-            // 
-            // MenuItemCopy
-            // 
-            MenuItemCopy.Name = "MenuItemCopy";
-            MenuItemCopy.Size = new Size(119, 22);
-            MenuItemCopy.Text = "copy";
-            MenuItemCopy.Click += MenuItemCopy_Click;
-            // 
-            // MenuItemPaste
-            // 
-            MenuItemPaste.Name = "MenuItemPaste";
-            MenuItemPaste.Size = new Size(119, 22);
-            MenuItemPaste.Text = "paste";
-            MenuItemPaste.Visible = false;
-            MenuItemPaste.Click += MenuItemPaste_Click;
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(116, 6);
-            // 
-            // MenuItemClear
-            // 
-            MenuItemClear.Name = "MenuItemClear";
-            MenuItemClear.Size = new Size(119, 22);
-            MenuItemClear.Text = "clear";
-            MenuItemClear.Click += MenuItemClear_Click;
-            // 
             // checkBoxAddLF
             // 
             checkBoxAddLF.AutoSize = true;
@@ -554,12 +493,23 @@
             closeToolStripMenuItem.Text = "close";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
+            // scintillaReceivedMessages
+            // 
+            scintillaReceivedMessages.AutocompleteListSelectedBackColor = Color.FromArgb(0, 120, 215);
+            scintillaReceivedMessages.Dock = DockStyle.Fill;
+            scintillaReceivedMessages.LexerName = null;
+            scintillaReceivedMessages.Location = new Point(0, 129);
+            scintillaReceivedMessages.Name = "scintillaReceivedMessages";
+            scintillaReceivedMessages.ScrollWidth = 49;
+            scintillaReceivedMessages.Size = new Size(1014, 372);
+            scintillaReceivedMessages.TabIndex = 15;
+            // 
             // FormConsumer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1014, 541);
-            Controls.Add(rtbReceivedMessages);
+            Controls.Add(scintillaReceivedMessages);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -573,7 +523,6 @@
             panel2.ResumeLayout(false);
             panelAck.ResumeLayout(false);
             panelAck.PerformLayout();
-            contextMenuRtbReceivedMsgs.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).EndInit();
@@ -597,7 +546,6 @@
         private Label labelQueue;
         private Panel panel2;
         private Button buttonStart;
-        private RichTextBox rtbReceivedMessages;
         private Button buttonStop;
         private CheckBox checkBoxAddLF;
         private Panel panel3;
@@ -619,17 +567,12 @@
         private CheckBox checkBoxRequeue;
         private Button buttonApply;
         private CheckBox checkBoxMultiple;
-        private ContextMenuStrip contextMenuRtbReceivedMsgs;
-        private ToolStripMenuItem MenuItemSelectAll;
-        private ToolStripMenuItem MenuItemCopy;
-        private ToolStripMenuItem MenuItemPaste;
-        private ToolStripSeparator toolStripSeparator2;
-        private ToolStripMenuItem MenuItemClear;
         private Label label1;
         private NumericUpDown numericUpDownDelay;
         private TextBox textBoxPort;
         private Label labelPort;
         private TextBox textBoxVhost;
         private Label labelVhost;
+        private ScintillaNET.Scintilla scintillaReceivedMessages;
     }
 }

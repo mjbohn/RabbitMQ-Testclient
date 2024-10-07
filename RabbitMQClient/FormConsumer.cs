@@ -13,9 +13,11 @@ using System.Threading.Channels;
 using RabbitMQ.Client.Exceptions;
 using System.CodeDom;
 using RabbitMQClient.ConfigHandling;
+using ScintillaNET;
 
 namespace RabbitMQClient
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Plattformkompatibilität überprüfen", Justification = "<Ausstehend>")]
     public partial class FormConsumer : Form
     {
         ConnectionFactory _factory = new ConnectionFactory();
@@ -27,6 +29,61 @@ namespace RabbitMQClient
         public FormConsumer()
         {
             InitializeComponent();
+            InitializeScintilla();
+        }
+
+        private void InitializeScintilla()
+        {
+            // Set the lexer
+            scintillaReceivedMessages.LexerName = "cpp";
+
+            // Instruct the lexer to calculate folding
+            scintillaReceivedMessages.SetProperty("fold", "1");
+            scintillaReceivedMessages.SetProperty("fold.compact", "1");
+
+            // Configure a margin to display folding symbols
+            scintillaReceivedMessages.Margins[2].Type = MarginType.Symbol;
+            scintillaReceivedMessages.Margins[2].Mask = Marker.MaskFolders;
+            scintillaReceivedMessages.Margins[2].Sensitive = true;
+            scintillaReceivedMessages.Margins[2].Width = 20;
+
+            scintillaReceivedMessages.Margins[0].Width = 16;
+
+            // Set colors for all folding markers
+            for (int i = 25; i <= 31; i++)
+            {
+                scintillaReceivedMessages.Markers[i].SetForeColor(SystemColors.ControlLightLight);
+                scintillaReceivedMessages.Markers[i].SetBackColor(SystemColors.ControlDark);
+            }
+
+            // Configure folding markers with respective symbols
+            scintillaReceivedMessages.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
+            scintillaReceivedMessages.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
+            scintillaReceivedMessages.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
+            scintillaReceivedMessages.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
+            scintillaReceivedMessages.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
+            scintillaReceivedMessages.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
+            scintillaReceivedMessages.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
+
+            // Enable automatic folding
+            scintillaReceivedMessages.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
+
+            scintillaReceivedMessages.BackColor = System.Drawing.Color.LightGray;
+            scintillaReceivedMessages.Styles[Style.Default].BackColor = Color.Wheat;
+
+
+
+            scintillaReceivedMessages.StyleClearAll();
+
+            //scintilla.Styles[Style.Cpp.Number].Bold = true;
+            //scintilla.Styles[Style.Cpp.Number].ForeColor = Color.Red;
+            //scintilla.Styles[Style.Cpp.Comment].ForeColor = Color.Green;
+            //scintilla.Styles[Style.Cpp.CommentDoc].ForeColor = Color.Green;
+            //scintilla.Styles[Style.Cpp.CommentLine].ForeColor = Color.Green;
+            //scintilla.Styles[Style.Cpp.Word].ForeColor = Color.Pink;
+
+            //scintilla.SetKeywords(0, "hello world foo baz int bool");
+            //StyleCollection sc = scintilla.Styles;
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)
@@ -101,8 +158,8 @@ namespace RabbitMQClient
 
                 BeginInvoke(() =>
                 {
-                    rtbReceivedMessages.AppendText(message);
-                    rtbReceivedMessages.ScrollToCaret();
+                    scintillaReceivedMessages.AppendText(message);
+                    scintillaReceivedMessages.ScrollCaret();
                 });
 
                 if (!checkBoxAutoAck.Checked)
@@ -113,7 +170,7 @@ namespace RabbitMQClient
                 {
                     if (_channel.IsOpen)
                     {
-                        _channel.BasicAck(_deliveryTag, checkBoxMultiple.Checked); 
+                        _channel.BasicAck(_deliveryTag, checkBoxMultiple.Checked);
                     }
                     Thread.Sleep((int)numericUpDownDelay.Value);
                 }
