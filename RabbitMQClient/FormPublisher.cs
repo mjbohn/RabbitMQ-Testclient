@@ -76,11 +76,7 @@ namespace RabbitMQClient
 
         }
 
-        private void buttonSendFile_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Not implemented yet");
-        }
-
+        
         private void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
             IBasicProperties _basicProperties = _channel.CreateBasicProperties();
@@ -135,9 +131,9 @@ namespace RabbitMQClient
             OpenFileDialog ofd = new OpenFileDialog();
             PublisherConfig config = new PublisherConfig();
 
-            ofd.Filter = "Producer Profile(*.pcon)|*.pcon|All Files|*.*";
+            ofd.Filter = "Publisher Profile(*.pcon)|*.pcon|All Files|*.*";
             ofd.RestoreDirectory = true;
-            ofd.Title = "Select producer configuration";
+            ofd.Title = "Select publisher configuration";
             ofd.Multiselect = false;
             ofd.DefaultExt = "pcon";
 
@@ -197,6 +193,30 @@ namespace RabbitMQClient
             buttonSendFile.Enabled = !(sender as CheckBox).Checked;
         }
 
+        private void buttonLoadFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+           
+            ofd.Filter = "JSON(*.json)|*.json|Textfile(*.txt)|*.txt|CSV(*.csv)|*.csv|All Files|*.*";
+            ofd.RestoreDirectory = true;
+            ofd.Title = "Select file";
+            ofd.Multiselect = false;
+            ofd.DefaultExt = ".json";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    scintilla.Text = File.ReadAllText(ofd.FileName);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
+                
+            }
+        }
         #endregion
 
         private void ShowExplorer(bool ssl)
@@ -267,7 +287,7 @@ namespace RabbitMQClient
             scintilla.BackColor = System.Drawing.Color.LightGray;
             scintilla.Styles[Style.Default].BackColor = Color.SteelBlue;
 
-            
+
 
             scintilla.StyleClearAll();
 

@@ -389,9 +389,9 @@
             buttonSendFile.Size = new Size(102, 23);
             buttonSendFile.TabIndex = 6;
             buttonSendFile.TabStop = false;
-            buttonSendFile.Text = "Send File";
+            buttonSendFile.Text = "Load File";
             buttonSendFile.UseVisualStyleBackColor = true;
-            buttonSendFile.Click += buttonSendFile_Click;
+            buttonSendFile.Click += buttonLoadFile_Click;
             // 
             // scintilla
             // 
@@ -400,10 +400,10 @@
             scintilla.LexerName = null;
             scintilla.Location = new Point(0, 98);
             scintilla.Name = "scintilla";
-            scintilla.ScrollWidth = 88;
+            scintilla.ScrollWidth = 164;
             scintilla.Size = new Size(504, 443);
             scintilla.TabIndex = 17;
-            scintilla.Text = "Hello World :-) ";
+            scintilla.Text = "{\r\n\"greeting\" : \"Hello World :-)\"\r\n} ";
             // 
             // FormPublisher
             // 
