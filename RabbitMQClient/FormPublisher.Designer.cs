@@ -417,7 +417,6 @@
             Controls.Add(panelTop);
             Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MaximizeBox = false;
             Name = "FormPublisher";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Publisher";
