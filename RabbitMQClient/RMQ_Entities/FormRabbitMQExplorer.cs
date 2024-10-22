@@ -33,18 +33,20 @@ namespace RabbitMQClient.RMQ_Entities
         private string _urlExchanges { get; set; }
         private string _protocol { get; set; }
         private string _authToken { get; set; }
+        private string _apiPort { get; set; }
 
         private HttpClient? _client;
 
         //scintilla
         private int maxLineNumberCharLength;
 
-        public FormRabbitMQExplorer(string servername, string username, string password, bool useHttps = true)
+        public FormRabbitMQExplorer(string servername, string username, string password, string apiPort, bool useHttps = true)
         {
             _username = username;
             _password = password;
             _server = servername;
             _useHttps = useHttps;
+            _apiPort = apiPort;
 
             InitializeComponent();
             InitializeHttpClient();
@@ -100,8 +102,11 @@ namespace RabbitMQClient.RMQ_Entities
         {
             _client = new HttpClient();
             _protocol = _useHttps ? "https" : "http";
-            _urlVhosts = $"{_protocol}://{_server}/api/vhosts";
-            _urlExchanges = $"{_protocol}://{_server}/api/exchanges";
+
+            string baseUrl = $"{_protocol}://{_server}:{_apiPort}";
+
+            _urlVhosts = $"{baseUrl}/api/vhosts";
+            _urlExchanges = $"{baseUrl}/api/exchanges";
 
             _authToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{_username}:{_password}"));
 
@@ -112,13 +117,18 @@ namespace RabbitMQClient.RMQ_Entities
 
         private async void InitializeTreeView()
         {
-            string test = _urlVhosts;
+            //string test = _urlVhosts;
 
             // Send requests
-            HttpResponseMessage responseVhosts = await _client.GetAsync(_urlVhosts);
-
-            await TreeViewAddVhosts(responseVhosts);
-
+            try
+            {
+                HttpResponseMessage responseVhosts = await _client.GetAsync(_urlVhosts);
+                await TreeViewAddVhosts(responseVhosts);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async Task TreeViewAddVhosts(HttpResponseMessage responseVhosts)
@@ -144,7 +154,7 @@ namespace RabbitMQClient.RMQ_Entities
             }
             else
             {
-                MessageBox.Show(responseVhosts.StatusCode.ToString());
+                MessageBox.Show(_urlVhosts + " : " + responseVhosts.StatusCode.ToString());
             }
         }
 
@@ -182,7 +192,7 @@ namespace RabbitMQClient.RMQ_Entities
             }
             else
             {
-                MessageBox.Show(responseExchanges.StatusCode.ToString());
+                MessageBox.Show($"{_urlExchanges}/{vHostName}" + responseExchanges.StatusCode.ToString());
             }
         }
 

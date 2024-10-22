@@ -34,8 +34,6 @@
             textBoxRoutingKey = new TextBox();
             textBoxExchange = new TextBox();
             labelExchange = new Label();
-            textBoxQueue = new TextBox();
-            labelQueue = new Label();
             panelTop = new Panel();
             textBoxPort = new TextBox();
             labelPort = new Label();
@@ -56,7 +54,9 @@
             closeToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
             panel2nd = new Panel();
+            textBoxApiPort = new TextBox();
             textBoxVhost = new TextBox();
+            labelApiPort = new Label();
             labelVhost = new Label();
             numericUpDownDelay = new NumericUpDown();
             checkBoxRepeatSend = new CheckBox();
@@ -119,26 +119,6 @@
             labelExchange.Size = new Size(63, 15);
             labelExchange.TabIndex = 3;
             labelExchange.Text = "Exchange:";
-            // 
-            // textBoxQueue
-            // 
-            textBoxQueue.Location = new Point(58, 6);
-            textBoxQueue.Name = "textBoxQueue";
-            textBoxQueue.Size = new Size(28, 23);
-            textBoxQueue.TabIndex = 3;
-            textBoxQueue.Tag = "Queue";
-            textBoxQueue.Visible = false;
-            // 
-            // labelQueue
-            // 
-            labelQueue.AutoSize = true;
-            labelQueue.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Strikeout);
-            labelQueue.Location = new Point(5, 9);
-            labelQueue.Name = "labelQueue";
-            labelQueue.Size = new Size(47, 15);
-            labelQueue.TabIndex = 5;
-            labelQueue.Text = "Queue:";
-            labelQueue.Visible = false;
             // 
             // panelTop
             // 
@@ -304,10 +284,10 @@
             // panel2nd
             // 
             panel2nd.BorderStyle = BorderStyle.FixedSingle;
+            panel2nd.Controls.Add(textBoxApiPort);
             panel2nd.Controls.Add(textBoxVhost);
+            panel2nd.Controls.Add(labelApiPort);
             panel2nd.Controls.Add(labelVhost);
-            panel2nd.Controls.Add(labelQueue);
-            panel2nd.Controls.Add(textBoxQueue);
             panel2nd.Controls.Add(textBoxExchange);
             panel2nd.Controls.Add(labelExchange);
             panel2nd.Controls.Add(textBoxRoutingKey);
@@ -318,6 +298,15 @@
             panel2nd.Size = new Size(1110, 37);
             panel2nd.TabIndex = 14;
             // 
+            // textBoxApiPort
+            // 
+            textBoxApiPort.Location = new Point(57, 5);
+            textBoxApiPort.Name = "textBoxApiPort";
+            textBoxApiPort.Size = new Size(74, 23);
+            textBoxApiPort.TabIndex = 5;
+            textBoxApiPort.TabStop = false;
+            textBoxApiPort.Tag = "Login";
+            // 
             // textBoxVhost
             // 
             textBoxVhost.Location = new Point(257, 5);
@@ -327,11 +316,21 @@
             textBoxVhost.TabIndex = 7;
             textBoxVhost.Tag = "Exchange";
             // 
+            // labelApiPort
+            // 
+            labelApiPort.AutoSize = true;
+            labelApiPort.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelApiPort.Location = new Point(-1, 8);
+            labelApiPort.Name = "labelApiPort";
+            labelApiPort.Size = new Size(52, 15);
+            labelApiPort.TabIndex = 6;
+            labelApiPort.Text = "ApiPort:";
+            // 
             // labelVhost
             // 
             labelVhost.AutoSize = true;
             labelVhost.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            labelVhost.Location = new Point(208, 8);
+            labelVhost.Location = new Point(197, 8);
             labelVhost.Name = "labelVhost";
             labelVhost.Size = new Size(43, 15);
             labelVhost.TabIndex = 6;
@@ -442,8 +441,6 @@
         private TextBox textBoxRoutingKey;
         private TextBox textBoxExchange;
         private Label labelExchange;
-        private TextBox textBoxQueue;
-        private Label labelQueue;
         private Panel panelTop;
         private TextBox textBoxPassword;
         private TextBox textBoxLogin;
@@ -472,5 +469,7 @@
         private TextBox textBoxVhost;
         private Label labelVhost;
         private ScintillaNET.Scintilla scintilla;
+        private TextBox textBoxApiPort;
+        private Label labelApiPort;
     }
 }

@@ -108,10 +108,12 @@ namespace RabbitMQClient
                 Server = textBoxServer.Text,
                 Login = textBoxLogin.Text,
                 Password = textBoxPassword.Text,
-                Queue = textBoxQueue.Text,
+                //Queue = textBoxQueue.Text,
                 Exchange = textBoxExchange.Text,
                 VHost = textBoxVhost.Text,
-                RoutingKey = textBoxRoutingKey.Text
+                RoutingKey = textBoxRoutingKey.Text,
+                Port = textBoxPort.Text,             
+                ApiPort = textBoxApiPort.Text,
 
             };
 
@@ -223,7 +225,7 @@ namespace RabbitMQClient
         {
             if (textBoxLogin.Text != string.Empty && textBoxPassword.Text != string.Empty)
             {
-                FormRabbitMQExplorer explorer = new FormRabbitMQExplorer(textBoxServer.Text, textBoxLogin.Text, textBoxPassword.Text, ssl);
+                FormRabbitMQExplorer explorer = new FormRabbitMQExplorer(textBoxServer.Text, textBoxLogin.Text, textBoxPassword.Text, textBoxApiPort.Text, ssl);
                 explorer.Show();
             }
             else
@@ -242,10 +244,12 @@ namespace RabbitMQClient
             textBoxServer.Text = config.Server;
             textBoxLogin.Text = config.Login;
             textBoxPassword.Text = config.Password;
-            textBoxQueue.Text = config.Queue;
+            //textBoxQueue.Text = config.Queue;
             textBoxExchange.Text = config.Exchange;
             textBoxRoutingKey.Text = config.RoutingKey;
             textBoxVhost.Text = config.VHost;
+            textBoxApiPort.Text = config.ApiPort;
+            textBoxPort.Text = config.Port;
         }
 
         private void InitializeScintilla()
