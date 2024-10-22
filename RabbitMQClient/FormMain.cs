@@ -39,7 +39,7 @@ namespace RabbitMQClient
 
             if (formProducerExists || formConsumerExists)
             {
-                DialogResult dr = MessageBox.Show("Are you sure you want to close? All Producer and Consumer forms will be closed",
+                DialogResult dr = MessageBox.Show("Are you sure you want to close? All Publisher and Consumer forms will be closed",
                         "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (dr != DialogResult.OK)
                 {
