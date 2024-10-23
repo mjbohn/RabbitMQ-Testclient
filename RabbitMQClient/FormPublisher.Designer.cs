@@ -64,12 +64,17 @@
             panelSendFile = new Panel();
             buttonSendFile = new Button();
             scintilla = new ScintillaNET.Scintilla();
+            splitContainer1 = new SplitContainer();
             panelTop.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2nd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).BeginInit();
             panelSendButton.SuspendLayout();
             panelSendFile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
             SuspendLayout();
             // 
             // buttonSend
@@ -366,9 +371,9 @@
             panelSendButton.Controls.Add(buttonSend);
             panelSendButton.Controls.Add(checkBoxRepeatSend);
             panelSendButton.Dock = DockStyle.Top;
-            panelSendButton.Location = new Point(504, 98);
+            panelSendButton.Location = new Point(0, 0);
             panelSendButton.Name = "panelSendButton";
-            panelSendButton.Size = new Size(606, 37);
+            panelSendButton.Size = new Size(719, 37);
             panelSendButton.TabIndex = 15;
             // 
             // panelSendFile
@@ -376,9 +381,9 @@
             panelSendFile.BorderStyle = BorderStyle.FixedSingle;
             panelSendFile.Controls.Add(buttonSendFile);
             panelSendFile.Dock = DockStyle.Top;
-            panelSendFile.Location = new Point(504, 135);
+            panelSendFile.Location = new Point(0, 37);
             panelSendFile.Name = "panelSendFile";
-            panelSendFile.Size = new Size(606, 37);
+            panelSendFile.Size = new Size(719, 37);
             panelSendFile.TabIndex = 16;
             // 
             // buttonSendFile
@@ -395,23 +400,40 @@
             // scintilla
             // 
             scintilla.AutocompleteListSelectedBackColor = Color.FromArgb(0, 120, 215);
-            scintilla.Dock = DockStyle.Left;
+            scintilla.Dock = DockStyle.Fill;
             scintilla.LexerName = null;
-            scintilla.Location = new Point(0, 98);
+            scintilla.Location = new Point(0, 0);
             scintilla.Name = "scintilla";
             scintilla.ScrollWidth = 164;
-            scintilla.Size = new Size(504, 443);
+            scintilla.Size = new Size(383, 441);
             scintilla.TabIndex = 17;
             scintilla.Text = "{\r\n\"greeting\" : \"Hello World :-)\"\r\n} ";
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.BorderStyle = BorderStyle.FixedSingle;
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(0, 98);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(scintilla);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(panelSendFile);
+            splitContainer1.Panel2.Controls.Add(panelSendButton);
+            splitContainer1.Size = new Size(1110, 443);
+            splitContainer1.SplitterDistance = 385;
+            splitContainer1.TabIndex = 18;
             // 
             // FormPublisher
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1110, 541);
-            Controls.Add(panelSendFile);
-            Controls.Add(panelSendButton);
-            Controls.Add(scintilla);
+            Controls.Add(splitContainer1);
             Controls.Add(panel2nd);
             Controls.Add(panelTop);
             Controls.Add(menuStrip1);
@@ -430,6 +452,10 @@
             panelSendButton.ResumeLayout(false);
             panelSendButton.PerformLayout();
             panelSendFile.ResumeLayout(false);
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -471,5 +497,6 @@
         private ScintillaNET.Scintilla scintilla;
         private TextBox textBoxApiPort;
         private Label labelApiPort;
+        private SplitContainer splitContainer1;
     }
 }
