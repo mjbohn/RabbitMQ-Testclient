@@ -76,7 +76,7 @@ namespace RabbitMQClient
 
         }
 
-        
+
         private void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
             IBasicProperties _basicProperties = _channel.CreateBasicProperties();
@@ -85,9 +85,9 @@ namespace RabbitMQClient
             do
             {
                 _channel.BasicPublish(exchange: textBoxExchange.Text,
-                routingKey: textBoxRoutingKey.Text,
-                                     basicProperties: _basicProperties,
-                                     body: _body);
+                                      routingKey: textBoxRoutingKey.Text,
+                                      basicProperties: _basicProperties,
+                                      body: _body);
 
                 Thread.Sleep((int)numericUpDownDelay.Value);
             } while (checkBoxRepeatSend.Checked);
@@ -112,7 +112,7 @@ namespace RabbitMQClient
                 Exchange = textBoxExchange.Text,
                 VHost = textBoxVhost.Text,
                 RoutingKey = textBoxRoutingKey.Text,
-                Port = textBoxPort.Text,             
+                Port = textBoxPort.Text,
                 ApiPort = textBoxApiPort.Text,
 
             };
@@ -198,7 +198,7 @@ namespace RabbitMQClient
         private void buttonLoadFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-           
+
             ofd.Filter = "JSON(*.json)|*.json|Textfile(*.txt)|*.txt|CSV(*.csv)|*.csv|All Files|*.*";
             ofd.RestoreDirectory = true;
             ofd.Title = "Select file";
@@ -216,7 +216,7 @@ namespace RabbitMQClient
 
                     MessageBox.Show(ex.Message);
                 }
-                
+
             }
         }
         #endregion
@@ -306,7 +306,7 @@ namespace RabbitMQClient
             //StyleCollection sc = scintilla.Styles;
         }
 
-        
+
     }
 }
 

@@ -106,6 +106,7 @@ namespace RabbitMQClient
             // try to connect
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 _clientconnection = _factory.CreateConnection();
             }
             catch (BrokerUnreachableException ex)
@@ -119,6 +120,10 @@ namespace RabbitMQClient
                 btn.Enabled = true;
                 buttonStop.Enabled = false;
                 return;
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
             }
 
             _channel = _clientconnection.CreateModel();
@@ -163,7 +168,7 @@ namespace RabbitMQClient
                     scintillaReceivedMessages.AppendText(message);
                     scintillaReceivedMessages.SetSel(scintillaReceivedMessages.TextLength, scintillaReceivedMessages.TextLength);
                     scintillaReceivedMessages.ScrollCaret();
-                    
+
                 });
 
                 if (!checkBoxAutoAck.Checked)
