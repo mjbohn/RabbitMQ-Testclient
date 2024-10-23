@@ -33,10 +33,15 @@
             statusStrip1 = new StatusStrip();
             treeViewRMQ = new TreeView();
             scintilla = new ScintillaNET.Scintilla();
-            splitContainer1 = new SplitContainer();
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
-            splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.SuspendLayout();
+            splitContainerData = new SplitContainer();
+            splitContainerTree = new SplitContainer();
+            ((System.ComponentModel.ISupportInitialize)splitContainerData).BeginInit();
+            splitContainerData.Panel1.SuspendLayout();
+            splitContainerData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainerTree).BeginInit();
+            splitContainerTree.Panel1.SuspendLayout();
+            splitContainerTree.Panel2.SuspendLayout();
+            splitContainerTree.SuspendLayout();
             SuspendLayout();
             // 
             // panelTop
@@ -57,10 +62,10 @@
             // 
             // treeViewRMQ
             // 
-            treeViewRMQ.Dock = DockStyle.Left;
-            treeViewRMQ.Location = new Point(0, 42);
+            treeViewRMQ.Dock = DockStyle.Fill;
+            treeViewRMQ.Location = new Point(0, 0);
             treeViewRMQ.Name = "treeViewRMQ";
-            treeViewRMQ.Size = new Size(174, 452);
+            treeViewRMQ.Size = new Size(255, 450);
             treeViewRMQ.TabIndex = 3;
             treeViewRMQ.TabStop = false;
             // 
@@ -73,30 +78,47 @@
             scintilla.Location = new Point(0, 0);
             scintilla.Name = "scintilla";
             scintilla.ScrollWidth = 49;
-            scintilla.Size = new Size(393, 452);
+            scintilla.Size = new Size(414, 450);
             scintilla.TabIndex = 5;
             scintilla.TextChanged += scintilla_TextChanged;
             // 
-            // splitContainer1
+            // splitContainerData
             // 
-            splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(174, 42);
-            splitContainer1.Name = "splitContainer1";
+            splitContainerData.Dock = DockStyle.Fill;
+            splitContainerData.Location = new Point(0, 0);
+            splitContainerData.Name = "splitContainerData";
             // 
-            // splitContainer1.Panel1
+            // splitContainerData.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(scintilla);
-            splitContainer1.Size = new Size(804, 452);
-            splitContainer1.SplitterDistance = 393;
-            splitContainer1.TabIndex = 6;
+            splitContainerData.Panel1.Controls.Add(scintilla);
+            splitContainerData.Size = new Size(715, 450);
+            splitContainerData.SplitterDistance = 414;
+            splitContainerData.TabIndex = 6;
+            // 
+            // splitContainerTree
+            // 
+            splitContainerTree.BorderStyle = BorderStyle.FixedSingle;
+            splitContainerTree.Dock = DockStyle.Fill;
+            splitContainerTree.Location = new Point(0, 42);
+            splitContainerTree.Name = "splitContainerTree";
+            // 
+            // splitContainerTree.Panel1
+            // 
+            splitContainerTree.Panel1.Controls.Add(treeViewRMQ);
+            // 
+            // splitContainerTree.Panel2
+            // 
+            splitContainerTree.Panel2.Controls.Add(splitContainerData);
+            splitContainerTree.Size = new Size(978, 452);
+            splitContainerTree.SplitterDistance = 257;
+            splitContainerTree.TabIndex = 7;
             // 
             // FormRabbitMQExplorer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(978, 516);
-            Controls.Add(splitContainer1);
-            Controls.Add(treeViewRMQ);
+            Controls.Add(splitContainerTree);
             Controls.Add(statusStrip1);
             Controls.Add(panelTop);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -104,9 +126,13 @@
             Name = "FormRabbitMQExplorer";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "RabbitMQ Explorer";
-            splitContainer1.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
-            splitContainer1.ResumeLayout(false);
+            splitContainerData.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainerData).EndInit();
+            splitContainerData.ResumeLayout(false);
+            splitContainerTree.Panel1.ResumeLayout(false);
+            splitContainerTree.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainerTree).EndInit();
+            splitContainerTree.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -117,6 +143,7 @@
         private StatusStrip statusStrip1;
         private TreeView treeViewRMQ;
         private ScintillaNET.Scintilla scintilla;
-        private SplitContainer splitContainer1;
+        private SplitContainer splitContainerData;
+        private SplitContainer splitContainerTree;
     }
 }
