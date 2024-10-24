@@ -119,8 +119,9 @@ namespace RabbitMQClient
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Producer Profile(*.pcon)|*.pcon|All Files|*.*";
+            sfd.DefaultExt = "pcon";
             sfd.RestoreDirectory = true;
-            sfd.Title = "Safe producer configuratiom";
+            sfd.Title = "Safe publisher configuratiom";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 JsonFileConfigHandler jfch = new JsonFileConfigHandler(config, sfd.FileName);

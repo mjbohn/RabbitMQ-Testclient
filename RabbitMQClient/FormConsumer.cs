@@ -237,6 +237,7 @@ namespace RabbitMQClient
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Consumer Profile(*.ccon)|*.ccon|All Files|*.*";
+            sfd.DefaultExt = "ccon";
             sfd.RestoreDirectory = true;
             sfd.Title = "Safe consumer configuratiom";
             if (sfd.ShowDialog() == DialogResult.OK)
