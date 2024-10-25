@@ -270,6 +270,7 @@ namespace RabbitMQClient
             scintillaPublisher.Margins[2].Sensitive = true;
             scintillaPublisher.Margins[2].Width = 20;
 
+            // show line numbers
             scintillaPublisher.Margins[0].Width = 32;
 
             // Set colors for all folding markers
@@ -301,16 +302,7 @@ namespace RabbitMQClient
             scintillaPublisher.Styles[Style.BraceLight].BackColor = Color.LightGray;
             scintillaPublisher.Styles[Style.BraceLight].ForeColor = Color.BlueViolet;
             scintillaPublisher.Styles[Style.BraceBad].ForeColor = Color.Red;
-
-            //scintilla.Styles[Style.Cpp.Number].Bold = true;
-            //scintilla.Styles[Style.Cpp.Number].ForeColor = Color.Red;
-            //scintilla.Styles[Style.Cpp.Comment].ForeColor = Color.Green;
-            //scintilla.Styles[Style.Cpp.CommentDoc].ForeColor = Color.Green;
-            //scintilla.Styles[Style.Cpp.CommentLine].ForeColor = Color.Green;
-            //scintilla.Styles[Style.Cpp.Word].ForeColor = Color.Pink;
-
-            //scintilla.SetKeywords(0, "hello world foo baz int bool");
-            //StyleCollection sc = scintilla.Styles;
+                        
         }
         
         private static bool IsBrace(int c)
