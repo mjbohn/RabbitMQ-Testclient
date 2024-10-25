@@ -26,6 +26,8 @@ namespace RabbitMQClient
         byte[]? _body;
         BackgroundWorker _worker;
 
+        int lastCaretPos = 0;
+
         public FormPublisher()
         {
             InitializeComponent();
@@ -65,7 +67,7 @@ namespace RabbitMQClient
 
             _channel = _connection.CreateModel();
 
-            _body = Encoding.UTF8.GetBytes(scintilla.Text);
+            _body = Encoding.UTF8.GetBytes(scintillaPublisher.Text);
 
             if (!_worker.IsBusy)
             {
@@ -210,7 +212,7 @@ namespace RabbitMQClient
             {
                 try
                 {
-                    scintilla.Text = File.ReadAllText(ofd.FileName);
+                    scintillaPublisher.Text = File.ReadAllText(ofd.FileName);
                 }
                 catch (Exception ex)
                 {
@@ -256,45 +258,49 @@ namespace RabbitMQClient
         private void InitializeScintilla()
         {
             // Set the lexer
-            scintilla.LexerName = "cpp";
+            scintillaPublisher.LexerName = "cpp";
 
             // Instruct the lexer to calculate folding
-            scintilla.SetProperty("fold", "1");
-            scintilla.SetProperty("fold.compact", "1");
+            scintillaPublisher.SetProperty("fold", "1");
+            scintillaPublisher.SetProperty("fold.compact", "1");
 
             // Configure a margin to display folding symbols
-            scintilla.Margins[2].Type = MarginType.Symbol;
-            scintilla.Margins[2].Mask = Marker.MaskFolders;
-            scintilla.Margins[2].Sensitive = true;
-            scintilla.Margins[2].Width = 20;
+            scintillaPublisher.Margins[2].Type = MarginType.Symbol;
+            scintillaPublisher.Margins[2].Mask = Marker.MaskFolders;
+            scintillaPublisher.Margins[2].Sensitive = true;
+            scintillaPublisher.Margins[2].Width = 20;
 
-            scintilla.Margins[0].Width = 32;
+            scintillaPublisher.Margins[0].Width = 32;
 
             // Set colors for all folding markers
             for (int i = 25; i <= 31; i++)
             {
-                scintilla.Markers[i].SetForeColor(SystemColors.ControlLightLight);
-                scintilla.Markers[i].SetBackColor(SystemColors.ControlDark);
+                scintillaPublisher.Markers[i].SetForeColor(SystemColors.ControlLightLight);
+                scintillaPublisher.Markers[i].SetBackColor(SystemColors.ControlDark);
             }
 
             // Configure folding markers with respective symbols
-            scintilla.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
-            scintilla.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
-            scintilla.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
-            scintilla.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
-            scintilla.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
-            scintilla.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
-            scintilla.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
+            scintillaPublisher.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
+            scintillaPublisher.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
+            scintillaPublisher.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
+            scintillaPublisher.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
+            scintillaPublisher.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
+            scintillaPublisher.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
+            scintillaPublisher.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
 
             // Enable automatic folding
-            scintilla.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
+            scintillaPublisher.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
 
-            scintilla.BackColor = System.Drawing.Color.LightGray;
-            scintilla.Styles[Style.Default].BackColor = Color.SteelBlue;
+            scintillaPublisher.BackColor = System.Drawing.Color.LightGray;
+            scintillaPublisher.Styles[Style.Default].BackColor = Color.SteelBlue;
 
 
+            scintillaPublisher.StyleClearAll();
 
-            scintilla.StyleClearAll();
+            // Set styles for matching braces
+            scintillaPublisher.Styles[Style.BraceLight].BackColor = Color.LightGray;
+            scintillaPublisher.Styles[Style.BraceLight].ForeColor = Color.BlueViolet;
+            scintillaPublisher.Styles[Style.BraceBad].ForeColor = Color.Red;
 
             //scintilla.Styles[Style.Cpp.Number].Bold = true;
             //scintilla.Styles[Style.Cpp.Number].ForeColor = Color.Red;
@@ -306,8 +312,56 @@ namespace RabbitMQClient
             //scintilla.SetKeywords(0, "hello world foo baz int bool");
             //StyleCollection sc = scintilla.Styles;
         }
+        
+        private static bool IsBrace(int c)
+        {
+            switch (c)
+            {
+                case '(':
+                case ')':
+                case '[':
+                case ']':
+                case '{':
+                case '}':
+                case '<':
+                case '>':
+                    return true;
+            }
 
+            return false;
+        }
+        private void scintillaPublisher_UpdateUI(object sender, UpdateUIEventArgs e)
+        {
+            int caretPos = scintillaPublisher.CurrentPosition;
 
+            if (lastCaretPos != caretPos)
+            {
+                lastCaretPos = caretPos;
+                var bracePos1 = -1;
+                var bracePos2 = -1;
+
+                // Is there a brace to the left or right?
+                if (caretPos > 0 && IsBrace(scintillaPublisher.GetCharAt(caretPos - 1)))
+                    bracePos1 = (caretPos - 1);
+                else if (IsBrace(scintillaPublisher.GetCharAt(caretPos)))
+                    bracePos1 = caretPos;
+
+                if (bracePos1 >= 0)
+                {
+                    // Find the matching brace
+                    bracePos2 = scintillaPublisher.BraceMatch(bracePos1);
+                    if (bracePos2 == Scintilla.InvalidPosition)
+                        scintillaPublisher.BraceBadLight(bracePos1);
+                    else
+                        scintillaPublisher.BraceHighlight(bracePos1, bracePos2);
+                }
+                else
+                {
+                    // Turn off brace matching
+                    scintillaPublisher.BraceHighlight(Scintilla.InvalidPosition, Scintilla.InvalidPosition);
+                }
+            }
+        }
     }
 }
 

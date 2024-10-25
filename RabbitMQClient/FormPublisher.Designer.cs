@@ -63,7 +63,7 @@
             panelSendButton = new Panel();
             panelSendFile = new Panel();
             buttonSendFile = new Button();
-            scintilla = new ScintillaNET.Scintilla();
+            scintillaPublisher = new ScintillaNET.Scintilla();
             splitContainer1 = new SplitContainer();
             panelTop.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -397,17 +397,18 @@
             buttonSendFile.UseVisualStyleBackColor = true;
             buttonSendFile.Click += buttonLoadFile_Click;
             // 
-            // scintilla
+            // scintillaPublisher
             // 
-            scintilla.AutocompleteListSelectedBackColor = Color.FromArgb(0, 120, 215);
-            scintilla.Dock = DockStyle.Fill;
-            scintilla.LexerName = null;
-            scintilla.Location = new Point(0, 0);
-            scintilla.Name = "scintilla";
-            scintilla.ScrollWidth = 164;
-            scintilla.Size = new Size(383, 441);
-            scintilla.TabIndex = 17;
-            scintilla.Text = "{\r\n\"greeting\" : \"Hello World :-)\"\r\n} ";
+            scintillaPublisher.AutocompleteListSelectedBackColor = Color.FromArgb(0, 120, 215);
+            scintillaPublisher.Dock = DockStyle.Fill;
+            scintillaPublisher.LexerName = null;
+            scintillaPublisher.Location = new Point(0, 0);
+            scintillaPublisher.Name = "scintillaPublisher";
+            scintillaPublisher.ScrollWidth = 164;
+            scintillaPublisher.Size = new Size(383, 441);
+            scintillaPublisher.TabIndex = 17;
+            scintillaPublisher.Text = "{\r\n\"greeting\" : \"Hello World :-)\"\r\n} ";
+            scintillaPublisher.UpdateUI += scintillaPublisher_UpdateUI;
             // 
             // splitContainer1
             // 
@@ -418,7 +419,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(scintilla);
+            splitContainer1.Panel1.Controls.Add(scintillaPublisher);
             // 
             // splitContainer1.Panel2
             // 
@@ -494,7 +495,7 @@
         private ToolStripMenuItem ExplorerNoSsltoolStripMenuItem;
         private TextBox textBoxVhost;
         private Label labelVhost;
-        private ScintillaNET.Scintilla scintilla;
+        private ScintillaNET.Scintilla scintillaPublisher;
         private TextBox textBoxApiPort;
         private Label labelApiPort;
         private SplitContainer splitContainer1;
