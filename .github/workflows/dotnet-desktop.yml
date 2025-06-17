@@ -1,0 +1,42 @@
+name: Build & Release .NET App
+
+on:
+  push:
+    tags:
+      - 'v*' # z.B. v1.0.0
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x' # oder 7.0.x / 6.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Publish App
+        run: |
+          dotnet publish -c Release -o publish_output
+
+      - name: Zip Output
+        run: Compress-Archive -Path publish_output/* -DestinationPath MyApp.zip
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: MyApp.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
