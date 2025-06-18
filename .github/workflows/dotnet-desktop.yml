@@ -42,7 +42,7 @@ jobs:
       - name: Check if tag exists
         id: check_tag
         run: |
-          if git rev-parse "refs/tags/${{ github.event.inputs.tag }}" >/dev/null 2>&1; then
+          if (git rev-parse "refs/tags/${{ github.event.inputs.tag }}" >/dev/null 2>&1); then
             echo "Tag exists"
             echo "tag_exists=true" >> $GITHUB_OUTPUT
           else
