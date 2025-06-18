@@ -147,6 +147,7 @@ namespace RabbitMQClient
                 JsonFileConfigHandler jfch = new JsonFileConfigHandler(ofd.FileName);
                 config = jfch.ReadConfig<PublisherConfig>();
                 SetProperties(config);
+                ChangeFormTitle(ofd.SafeFileName);
             }
         }
 
@@ -237,9 +238,9 @@ namespace RabbitMQClient
             }
         }
 
-        private void ChangeFormTitle()
+        private void ChangeFormTitle(string fileName = null)
         {
-            this.Text = $"Publisher | {textBoxExchange.Text} | {textBoxRoutingKey.Text}";
+            this.Text = $"Publisher | {textBoxExchange.Text} | {textBoxRoutingKey.Text} | profile:<{fileName}>";
         }
 
         private void SetProperties(PublisherConfig config)

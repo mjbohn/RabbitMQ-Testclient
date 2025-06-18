@@ -262,6 +262,7 @@ namespace RabbitMQClient
                 JsonFileConfigHandler jfch = new JsonFileConfigHandler(ofd.FileName);
                 config = jfch.ReadConfig<ConsumerConfig>();
                 SetProperties(config);
+                ChangeFormTitle(ofd.SafeFileName);
             }
         }
 
@@ -323,9 +324,9 @@ namespace RabbitMQClient
             ChangeFormTitle();
         }
 
-        private void ChangeFormTitle()
+        private void ChangeFormTitle(string fileName = null)
         {
-            this.Text = $"Consumer | {textBoxServer.Text} | {textBoxQueue.Text} | ";
+            this.Text = $"Consumer | {textBoxServer.Text} | {textBoxQueue.Text} | profile:<{fileName}> ";
         }
 
         private void checkBoxAutoAck_CheckedChanged(object sender, EventArgs e)
