@@ -13,6 +13,6 @@ jobs:
     uses: mjbohn/GithubWorkflows/.github/workflows/dotnet-build-and-release-win.yml@main
     with:
       tag: ${{ inputs.tag }}
-      project_path: 'src/RMQ-Client'
+      project_path: 'RabbitMQClient'
       zip_name: 'RMQ-Client.zip'
       configuration: 'Release'
