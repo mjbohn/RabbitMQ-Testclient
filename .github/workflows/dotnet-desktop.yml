@@ -7,9 +7,8 @@ on:
   workflow_dispatch:
     inputs:
       tags:
-        description: 'Test scenario tags'
-        required: false
-        type: boolean
+        description: 'Tag für Release (z. B. v1.2.3)'
+        required: true
   
 jobs:
   build:
