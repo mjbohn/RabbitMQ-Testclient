@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # wichtig, um alle Tags abrufen zu können
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -42,7 +44,8 @@ jobs:
       - name: Check if tag exists
         id: check_tag
         run: |
-          if (git rev-parse "refs/tags/${{ github.event.inputs.tag }}" >/dev/null 2>&1); then
+          if (git rev-parse "refs/tags/${{ github.event.inputs.tag }}" >/dev/null 2>&1) 
+          then
             echo "Tag exists"
             echo "tag_exists=true" >> $GITHUB_OUTPUT
           else
