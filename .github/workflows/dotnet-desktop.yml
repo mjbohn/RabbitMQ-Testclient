@@ -60,12 +60,17 @@ jobs:
           git config user.email "github-actions@github.com"
           git tag ${{ github.event.inputs.tag }}
           git push origin ${{ github.event.inputs.tag }}
-      
+
+      - name: Wait briefly to ensure GitHub sees the tag
+        if: env.tag_created == 'true'
+        run: sleep 5
+        
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.inputs.tag }}
           name: Release ${{ github.event.inputs.tag }}
           files: MyApp.zip
+          target_commitish: ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
